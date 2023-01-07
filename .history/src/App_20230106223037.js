@@ -9,9 +9,9 @@ function App() {
     <>
       <NavBar />
       <About />
+      <Contacts />
       <Projects />
       <Setup />
-      <Contacts />
     </>
   );
 }
