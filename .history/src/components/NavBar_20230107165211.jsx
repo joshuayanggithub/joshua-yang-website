@@ -1,6 +1,5 @@
 import React from "react";
 import {AiOutlineMenu} from 'react-icons/ai'
-import Button from './Button'
 
 const NavBar = () => {
   const links = [
@@ -11,22 +10,20 @@ const NavBar = () => {
   ]
 
   return (
-    <div class="md:flex bg-sasskyblue w-full p-2 justify-between items-center">
+    <div class="flex bg-blue-300 w-full p-2 justify-between items-center">
       <div>
-        <AiOutlineMenu size={50}></AiOutlineMenu>
+        <AiOutlineMenu size={30}></AiOutlineMenu>
       </div>
 
       <ul class="md:flex gap-20 p-3">
         {
-          links.map((link) => 
-            <li key={link.id}>
-              <a href='#About' class="text-3xl text-white px-5 hover:bg-sasnavyblue duration-300 uppercase font-button my-3">{link.name}</a>
+          links.map((links) => 
+            <li>
+              <a href='#About' class="text-3xl text-white px-5">{links.name}</a>
             </li>
           )
         }
       </ul>
-
-      <Button> Email Me </Button>
 
     </div>
   );

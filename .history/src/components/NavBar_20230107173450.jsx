@@ -11,7 +11,7 @@ const NavBar = () => {
   ]
 
   return (
-    <div class="md:flex bg-sasskyblue w-full p-2 justify-between items-center">
+    <div class="flex bg-sasskyblue w-full p-2 justify-between items-center">
       <div>
         <AiOutlineMenu size={50}></AiOutlineMenu>
       </div>
@@ -20,13 +20,13 @@ const NavBar = () => {
         {
           links.map((link) => 
             <li key={link.id}>
-              <a href='#About' class="text-3xl text-white px-5 hover:bg-sasnavyblue duration-300 uppercase font-button my-3">{link.name}</a>
+              <a href='#About' class="text-3xl text-white px-5 hover:bg-sasnavyblue duration-300 uppercase font-button">{link.name}</a>
             </li>
           )
         }
       </ul>
 
-      <Button> Email Me </Button>
+      <Button> text="Email Me" </Button>
 
     </div>
   );

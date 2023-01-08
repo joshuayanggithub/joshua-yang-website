@@ -21,15 +21,7 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
-    extend: {
-      colors: {
-        'sasblack':'#5D5C61',
-        'sasgrey': '#938e93',
-        'sasskyblue': '#7395AE',
-        'sasnavyblue': '#557A95',
-        'sasgold':'#B1A296',
-      }
-    },
+    extend: {},
     fontFamily: {
       button: ['Lato',],
       body: ['Prata',],

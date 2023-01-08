@@ -23,11 +23,11 @@ module.exports = {
     },
     extend: {
       colors: {
-        'sasblack':'#5D5C61',
-        'sasgrey': '#938e93',
-        'sasskyblue': '#7395AE',
-        'sasnavyblue': '#557A95',
-        'sasgold':'#B1A296',
+        sasblack:'#5D5C61',
+        sasgrey: '#379683',
+        sasskyblue: '#7395AE',
+        sasnavyblue: '#557A95',
+        sasgold:'#B1A296',
       }
     },
     fontFamily: {
