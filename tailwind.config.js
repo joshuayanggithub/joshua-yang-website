@@ -31,8 +31,8 @@ module.exports = {
       }
     },
     fontFamily: {
-      button: ['Lato',],
-      body: ['Prata',],
+      navheader: ['Lato',],
+      pageheader: ['Prata',],
     },
   },
   plugins: [],
