@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
 import {BsMailbox2} from 'react-icons/bs'
 import { IconContext } from "react-icons"
+import Button from './Button'
 
 const NavBar = () => {
   const [nav, setNav] = useState(true) //react hooks!
@@ -36,7 +37,7 @@ const NavBar = () => {
             {
               links.map((link) => 
                 <li key={link.id} class="">
-                  <a href='#About' class="text-2xl text-black p-3 hover:font-bold hover:text-gray-500 duration-300 font-navheader">{link.name}</a>
+                  <Link to='/' class="text-2xl text-black p-3 hover:font-bold hover:text-gray-500 duration-300 font-navheader">{link.name}</Link>
                 </li>
               )
             }

@@ -8,10 +8,9 @@ import About from './components/About';
 function App() {
   return (
     <>
-      <NavBar />
+      
       <Home />
       <Projects />
-      <About />
       <Setup />
       <Contacts />
     </>

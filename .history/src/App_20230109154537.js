@@ -3,7 +3,7 @@ import Home from "./components/Home";
 import Contacts from "./components/Contacts";
 import Setup from "./components/Setup";
 import Projects from "./components/Projects";
-import About from './components/About';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -11,7 +11,6 @@ function App() {
       <NavBar />
       <Home />
       <Projects />
-      <About />
       <Setup />
       <Contacts />
     </>

@@ -11,7 +11,6 @@ function App() {
       <NavBar />
       <Home />
       <Projects />
-      <About />
       <Setup />
       <Contacts />
     </>

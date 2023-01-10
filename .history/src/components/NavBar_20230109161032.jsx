@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
 import {BsMailbox2} from 'react-icons/bs'
 import { IconContext } from "react-icons"
+import Button from './Button'
 
 const NavBar = () => {
   const [nav, setNav] = useState(true) //react hooks!
