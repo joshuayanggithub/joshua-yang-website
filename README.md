@@ -4,7 +4,7 @@ This was a 3-day project where I learned html, React and ES6 JS, and tailwind al
 
 # Demo
 
-[Home page](/public/demos/homepagelanding.gif)
+![Home page](/public/demos/homepagelanding.gif)
 
 # Bugs
 
