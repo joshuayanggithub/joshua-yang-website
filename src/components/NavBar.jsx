@@ -12,7 +12,7 @@ const NavBar = () => {
 
   const links = [
     {'id': 1, 'name': 'About'},
-    {'id': 2, 'name': 'Projects'}, 
+    {'id': 2, 'name': 'Goals'}, 
     {'id': 3, 'name': 'Setup'},
     {'id': 4, 'name': 'Links'}
   ]
