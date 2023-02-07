@@ -4,7 +4,7 @@ import {SiCodeforces, SiSpotify} from 'react-icons/si'
 
 const Contacts = () => {
   return (
-    <div class="mx-5 px-4">
+    <div id="Links" class="mx-5 px-4">
       <h1 class="text-3xl font-pageheader ">Contact Me</h1>
       <div class="flex items-center justify-between">
         <img src="/imgs/soccer_fallon.jpg" class=" h-1/3 w-1/2"/>

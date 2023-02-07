@@ -29,14 +29,14 @@ const NavBar = () => {
     <div class="fixed w-full flex items-center"> {/*md:flex flex-row w-full justify-between items-center mx-auto */}
       
       <div class="md:flex align-center my-0 mx-auto justify-between items-center w-full p-5">
-        <a href="#About" class="align-center duration-300 font-pageheader text-black hover:font-bold hover:text-gray-500 text-3xl p-5">Joshua Yang.</a>
+        <a href="#Home" class="align-center duration-300 font-pageheader text-black hover:font-bold hover:text-gray-500 text-3xl p-5">Joshua Yang.</a>
         {/*rounded-full transition-shadow ease-in-out duration-300 shadow-none hover:shadow-2xl*/}
         <div class="p-5 md:flex gap-8 items-center">
           <ul class="hidden md:flex gap-10">
             {
               links.map((link) => 
                 <li key={link.id} class="">
-                  <a href='#About' class="text-2xl text-black p-3 hover:font-bold hover:text-gray-500 duration-300 font-navheader">{link.name}</a>
+                  <a href={'#' + link.name} class="scroll-smooth text-2xl text-black p-3 hover:font-bold hover:text-gray-500 duration-300 font-navheader">{link.name}</a>
                 </li>
               )
             }

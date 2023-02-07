@@ -2,7 +2,7 @@ import React from 'react'
 
 const Goals = () => {
   return (
-    <div class="my-4">
+    <div id="Goals" class="my-4 scroll-smooth">
       <p class="indent-10 text-gray-600 text-xl">
       </p>
       {/* <h1 class="text-black text-4xl font-pageheader">Goals</h1> */}
