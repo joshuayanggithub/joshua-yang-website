@@ -18,56 +18,60 @@ const NavBar = () => {
   ]
 
   const closeButton = (
-    <div class="hover:text-bold hover:text-gray-500"><AiOutlineClose size={40}/> </div>
+    <div class="hover:text-bold hover:text-gray-300"><AiOutlineClose size={40}/> </div>
   )
 
   const menuButton = (
-    <div class="hover:text-bold hover:text-gray-500"><AiOutlineMenu  size={40} ></AiOutlineMenu></div>
+    <div class="hover:text-bold hover:text-gray-300"><AiOutlineMenu  size={40} /></div>
   )
 
   return (
-    <div class="fixed w-full flex items-center"> {/*md:flex flex-row w-full justify-between items-center mx-auto */}
+    <div class="fixed w-full flex items-center">
       
-      <div class="md:flex align-center my-0 mx-auto justify-between items-center w-full p-5">
-        <a href="#Home" class="align-center duration-300 font-pageheader text-black hover:font-bold hover:text-gray-200 text-3xl p-5">Joshua Yang.</a>
-        {/*rounded-full transition-shadow ease-in-out duration-300 shadow-none hover:shadow-2xl*/}
-        <div class="p-5 md:flex gap-8 items-center">
+      <div class="md:flex mx-auto justify-between items-center w-full p-5">
+        
+        <a href="#Home" class="align-center duration-300 font-fancyheader text-black hover:font-bold hover:text-gray-200 text-3xl m-3">Joshua Yang.</a>
+
+        <div class="md:flex gap-6 items-center">
           <ul class="hidden md:flex gap-10">
             {
               links.map((link) => 
                 <li key={link.id} class="">
-                  <a href={'#' + link.name} class="scroll-smooth text-2xl text-black p-3 hover:font-bold hover:text-gray-200 duration-300 font-navheader">{link.name}</a>
+                  <a href={'#' + link.name} class="text-2xl text-black hover:font-bold hover:text-gray-200 duration-300 font-normalheader">{link.name}</a>
                 </li>
               )
             }
           </ul>
+
           <a href="mailto: jyangftw@gmail.com">
-            <div class="hidden md:flex hover:text-bold hover:text-gray-500">
-              <IconContext.Provider value={{ className: "shared-class", size: 40, fontWeight: "bold", }}> {/*Why do I have to use IconContext to work nvm???*/}
-                <>
-                  <BsMailbox2 /> 
-                </>
-              </IconContext.Provider>
+            <div class="hidden md:flex hover:text-bold hover:text-gray-200">
+              <BsMailbox2 size = {40}/>
             </div>
           </a>
+
         </div>
+
       </div>
 
-      <div class = "p-4 mx-1" onClick={toggleNav}> {/* flex md:hidden*/}
-        {nav ? menuButton: closeButton}
+      <div class = "m-4 hover:cursor-pointer" onClick={toggleNav}>
+        {/*nav ? menuButton: closeButton*/}
+        {menuButton}
       </div>
 
-      <div class={!nav ? 'fixed left-0 top-0 w-[30%] h-full border-r bg-gray-500 bg-opacity-80 border-r-gray-200 ease-in-out duration-500' : "fixed  ease-in-out duration-500 left-[-100%] "}>
-        <h1 class="font-pageheader text-5xl font-bold text-black m-10">JY</h1>
+      <div class={!nav ? 'fixed left-0 top-0 w-full h-full bg-gray-100  ease-in-out duration-500' : "fixed  ease-in-out duration-500 left-[-100%] "}>
+        <h1 class="font-normalheader text-5xl font-bold text-black m-10">JY</h1>
         <ul class="p-4">
           {
             links.map((link) => 
-              <li key={link.id} class="p-4 border-b border-b-gray-400">
-                <a href='#About' class="text-2xl text-black p-3 hover:font-bold hover:text-gray-500 duration-300 font-navheader">{link.name}</a>
+              <li key={link.id} class="p-4">
+                <a href={'#' + link.name} class="text-2xl text-black p-3 hover:font-bold hover:text-gray-500 duration-300 font-normalheader">{link.name}</a>
               </li>
             )
           }
         </ul>
+        <div class = {!nav ? "ease-in-out duration-600 fixed top-0 right-0 hover:cursor-pointer": "hidden"} onClick={toggleNav}>
+          {closeButton}
+        </div>
       </div>
 
       

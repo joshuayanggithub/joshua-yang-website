@@ -31,8 +31,8 @@ module.exports = {
       }
     },
     fontFamily: {
-      navheader: ['Lato',],
-      pageheader: ['Prata',],
+      normalheader: ['Lato',],
+      fancyheader: ['Prata',],
       cursive:['Lobster'],
     },
   },
