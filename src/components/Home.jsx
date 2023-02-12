@@ -10,19 +10,20 @@ const Home = () => {
         
           <motion.div class="absolute left-0 flex-col justify-start"
           animate={{ x: 100 }} 
-          transition={{ ease: "easeOut", duration: 0.2 }}
+          transition={{ ease: "easeOut", duration: 0.4 }}
           >
 
-            <motion.h1 class="m-5 p-1 uppercase text-8xl font-normalheader hover:font-semibold  hover:cursor-pointer ease-out duration-300 text-black" 
+            <motion.h1 class="m-5 p-1 uppercase text-8xl font-apple hover:font-semibold  hover:cursor-pointer ease-out duration-300 text-black" 
               animate={{ x: 100 }} 
-              transition={{ ease: "easeOut", duration: 0.2 }}
+              transition={{ ease: "easeOut", duration: 0.4 }}
               >
               Joshua
             </motion.h1>
 
-            <motion.div class="m-5 p-1 uppercase text-8xl font-normalheader hover:font-semibold  hover:cursor-pointer ease-out duration-300 text-black" animate={{ x: 100 }} >
+            <motion.div class="m-5 p-1 uppercase text-8xl  hover:font-semibold  hover:cursor-pointer ease-out duration-300 text-black" animate={{ x: 100 }} >
               Yang
             </motion.div>
+
           </motion.div>
 
           <motion.img src="/imgs/MyselfCartoon.png" class="absolute right-0 h-4/5"

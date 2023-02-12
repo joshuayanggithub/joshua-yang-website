@@ -6,7 +6,6 @@ const About = () => {
   return  (
     <>
         <div id="About" class = "flex">
-
           <div class="left-0 flex-col">
             <motion.h1 class="p-1 m-4 uppercase text-8xl font-bold font-fancyheader"
             whileInView={{x:100}}
