@@ -1,6 +1,5 @@
 import React from 'react'
 import { motion, spring, useDragControls } from "framer-motion";
-import {Typed} from 'react-typed'
 
 const Home = () => {
   const landingPageSentences= [
