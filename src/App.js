@@ -1,9 +1,6 @@
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
-import Contacts from "./components/Contacts";
-import Setup from "./components/Setup";
-import About from './components/About';
-import Goals from "./components/Goals";
+import About from "./components/About";
 
 function App() {
   return (
@@ -11,9 +8,6 @@ function App() {
       <NavBar />
       <Home />
       <About />
-      <Goals />
-      <Setup />
-      <Contacts />
     </>
   );
 }

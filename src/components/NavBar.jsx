@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
 import {BsMailbox2} from 'react-icons/bs'
-import { IconContext } from "react-icons"
+import { motion, useScroll} from "framer-motion";
 
 const NavBar = () => {
   const [nav, setNav] = useState(true) //react hooks!
@@ -25,9 +25,14 @@ const NavBar = () => {
     <div class="hover:text-bold hover:text-gray-300"><AiOutlineMenu  size={40} /></div>
   )
 
+  const { scrollYProgress } = useScroll();
+
   return (
     <div class="fixed w-full flex items-center">
-      
+
+      <motion.div class="fixed top-0 left-0 bottom-0 h-1 bg-black" style={{ scaleY: scrollYProgress }} />  
+
+
       <div class="md:flex mx-auto justify-between items-center w-full p-5">
         
         <a href="#Home" class="align-center duration-300 font-fancyheader text-black hover:font-bold hover:text-gray-200 text-3xl m-3">Joshua Yang.</a>
@@ -58,7 +63,7 @@ const NavBar = () => {
         {menuButton}
       </div>
 
-      <div class={!nav ? 'fixed left-0 top-0 w-full h-full bg-gray-100  ease-in-out duration-500' : "fixed  ease-in-out duration-500 left-[-100%] "}>
+      <div class={!nav ? 'fixed left-0 top-0 w-full h-full bg-gray-100  ease-in-out duration-500' : "fixed w-full h-full ease-in-out duration-500 left-[-100%] "}>
         <h1 class="font-normalheader text-5xl font-bold text-black m-10">JY</h1>
         <ul class="p-4">
           {
