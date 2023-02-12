@@ -34,6 +34,7 @@ module.exports = {
       normalheader: ['Lato',],
       fancyheader: ['Prata',],
       cursive:['Lobster'],
+      fancybody:['Cormorant Garamond'],
     },
   },
   plugins: [],
