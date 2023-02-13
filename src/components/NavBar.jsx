@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
 import {BsMailbox2} from 'react-icons/bs'
-import { motion, useScroll} from "framer-motion";
+import { motion, useScroll, useSpring} from "framer-motion";
 
 const NavBar = () => {
   const [nav, setNav] = useState(true) //react hooks!
@@ -26,11 +26,13 @@ const NavBar = () => {
   )
 
   const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress)
+
 
   return (
     <div class="fixed w-full flex items-center">
 
-      <motion.div class="fixed origin-top-left top-0 left-0 right-0 h-2 bg-black" style={{ scaleX: scrollYProgress }} />  
+      <motion.div class="fixed origin-top-left top-0 left-0 right-0 h-2 bg-black" style={{ scaleX: scaleX }} />  
 
 
       <div class="md:flex mx-auto justify-between items-center w-full p-5">
