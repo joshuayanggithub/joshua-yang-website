@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <>
-        <div id="Home" class="h-screen flex flex-row items-center bg-gray-100 gap-36">
+        <div id="Home" class="z-10 h-screen flex flex-row items-center bg-gray-100 gap-36">
 
           <motion.div class="w-1/2"
             animate={{ x: 100 }} 
@@ -22,9 +22,6 @@ const Home = () => {
             {landingPageSentences.map((phrase, line) => (
 
               <motion.div class="inline-block"
-                transition={{
-                  delay: 0.5, duration:0.5,
-                }}
               >
 
                 {phrase.sentence.split(" ").map( (word, ind) => (
@@ -34,11 +31,8 @@ const Home = () => {
                     initial={{opacity:0,translateX:-100}}
                     animate={{opacity:1, translateX:100}}
                     transition={{
-                      duration: 0.3, 
+                      duration: 1, 
                       delay:line*0.3+ind*0.2, 
-                      type: 'spring',
-                      damping: 12,
-                      stiffness: 100,
                     }}
                   >
                     {word}
