@@ -10,14 +10,21 @@ function App() {
   const [LoadingScreenDone, setLoadingScreenDone] = useState(false);
 
   useEffect ( () => {
-    setTimeout( () => setLoadingScreenDone(true), 10000);
+    setTimeout( () => setLoadingScreenDone(true), 3000);
   }
     , []
   );
 
   return (
     <>
-      {LoadingScreenDone ? <Home /> : <LoadingScreen />}
+      {!LoadingScreenDone ? <LoadingScreen isDone={!LoadingScreenDone}/> : 
+        <>
+          <NavBar />
+          <Home />
+          <About />
+          <Footer />
+        </>
+      }
     </>
 )
 }

@@ -1,27 +1,66 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion,AnimatePresence } from "framer-motion";
 
-const LoadingScreen = () => {
-  const loadingPageWords= [
-    {sentence: "Joshua", id:1},
-    {sentence: "Yang.", id:2},
-  ];
+const container = {
+  hidden: {opacity: 0},
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    }
+  },
+};
+
+const word = {
+  hidden: {
+    y:-20,
+    opacity: 0
+  },
+  visible: {
+    x:100,
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut",
+    }
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      ease: "easeInOut",
+    }
+  }
+};
+
+const loadingText = "Joshua Yang.";
+const loadingChars = Array.from(loadingText);
+
+const LoadingScreen = ({isDone}) => {
 
   return (
-    <>
-      <div class= "absolute text-center" 
-      >
-        {loadingPageWords.map( (word, id) => (
-          <motion.span class="mr-5"
-            animate = {{x:100}}
-            transition ={{duration:1.5}}
-          >
-          word.sentence
-          </motion.span>
-        )
-        )}
-      </div>
-    </>
+    <AnimatePresence>
+      {isDone && <div class= "h-screen flex items-center justify-center"> 
+        <motion.div class="text-6xl"
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >  
+          {
+            loadingChars.map( (char, index) =>
+              <motion.span
+              class=""
+              key={index}
+              variants={word}
+              >
+                {char}
+              </motion.span>
+            )
+          }
+        </motion.div>
+      </div>}
+    </AnimatePresence>
   )
 }
 
