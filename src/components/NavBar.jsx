@@ -68,7 +68,7 @@ const NavBar = () => {
         
       </div>
 
-      <div class={!nav ? 'absolute z-50 left-0 top-0 min-w-full min-h-full bg-gray-200 duration-500' : "absolute w-full h-full ease-in-out duration-500 left-[-100%] "}>
+      <div class={!nav ? 'fixed z-50 left-0 top-0 min-w-full min-h-full bg-gray-200 duration-500' : "absolute w-full h-full ease-in-out duration-500 left-[-100%] "}>
         <h1 class="font-normalheader text-5xl font-bold text-black m-10 bg-gray-200">JY</h1>
         <ul class="p-4 w-full bg-gray-200">
           {

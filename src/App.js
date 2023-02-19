@@ -10,7 +10,7 @@ function App() {
   const [LoadingScreenDone, setLoadingScreenDone] = useState(false);
 
   useEffect ( () => {
-    setTimeout( () => setLoadingScreenDone(true), 3000);
+    setTimeout( () => setLoadingScreenDone(true), 0);
   }
     , []
   );
