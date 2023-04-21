@@ -17,7 +17,7 @@ const AnimatedLetters = ({line}) => {
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.03, delayChildren: 0.04, ease: "easeIn"
+        staggerChildren: 0.06, delayChildren: 0.04, ease: "easeIn"
       },
     },
   };
@@ -29,7 +29,7 @@ const AnimatedLetters = ({line}) => {
     },
     hidden: {
       opacity: 0,
-      y:100,
+      y:200,
     },
   };
 

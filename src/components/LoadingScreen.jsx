@@ -6,7 +6,7 @@ const container = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.04,
       delayChildren: 0.2,
     }
   },
@@ -41,7 +41,7 @@ const LoadingScreen = ({isDone}) => {
   return (
     <AnimatePresence>
       {isDone && <div class= "h-screen flex items-center justify-center"> 
-        <motion.div class="text-6xl"
+        <motion.div class="text-6xl font-fancybody"
           variants={container}
           initial="hidden"
           animate="visible"
