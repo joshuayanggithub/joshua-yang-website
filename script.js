@@ -57,3 +57,13 @@ const logo = document.querySelector(".logo");
 const title = document.querySelector(".title");
 
 
+window.addEventListener('scroll',trackScroll);
+
+function trackScroll() {
+  let vpY = document.documentElement.scrollHeight;
+  let offset = window.innerHeight;
+  let curY = window.scrollY;
+  // console.log(curY + " " + (vpY-offset));
+  let percentScroll = (curY/(vpY-offset));
+  console.log(percentScroll);
+}
