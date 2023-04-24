@@ -1,3 +1,10 @@
 #vscode specific
 .vscode
-.css.map
+styles.css.map
+styles.scss
+
+#might delete in the future
+.gitignore
+
+#random operating system
+.DS_Store
