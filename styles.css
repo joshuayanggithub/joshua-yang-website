@@ -32,7 +32,7 @@ body {
   justify-content: center;
 }
 
-.loader > span {
+.loading > span {
   display: inline-block;
   opacity: 0;
   transition: 1s;
@@ -40,9 +40,20 @@ body {
   transform: translateY(-400px);
 }
 
-.loader > span.fade {
+.loading > span.merged {
   opacity: 1;
   transform: translateY(0%);
+}
+
+.loader > span {
+  display: inline-block;
+  opacity: 0;
+  transition: 1s;
+  transition: cubic-bezier(0.6, 0.01, -0.05, 0.95);
+}
+
+.loader > span.fade {
+  opacity: 1;
 }
 
 h2 {
@@ -65,9 +76,9 @@ header {
   align-items: center;
 }
 
-.me {
+.image-container > .me {
   height: 80vh;
-  filter: blur();
+  filter: url(#noise);
 }
 
 /*
