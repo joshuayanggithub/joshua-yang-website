@@ -60,10 +60,16 @@ const title = document.querySelector(".title");
 window.addEventListener('scroll',trackScroll);
 
 function trackScroll() {
-  let vpY = document.documentElement.scrollHeight;
-  let offset = window.innerHeight;
-  let curY = window.scrollY;
-  // console.log(curY + " " + (vpY-offset));
-  let percentScroll = (curY/(vpY-offset));
-  console.log(percentScroll);
+  let documentHeight = document.documentElement.scrollHeight; //total document height
+  let vpOffset = window.innerHeight; //viewport height
+  let elementOffset = document.querySelector('.scroll-tracker').offsetHeight; //element height
+  let curY = window.scrollY; //only gets top of vp height so we get offset
+
+  // console.log(curY + " " + (vpOffset) + " " + documentHeight);
+  let percentScroll = ((curY/(documentHeight-vpOffset)));
+  let pixelScroll = percentScroll*vpOffset;
+  let pixelScrollMax = vpOffset - elementOffset; //so I can still see the bottom of the tracker
+  let finalTrackValue = Math.min(pixelScroll,pixelScrollMax);
+  console.log(finalTrackValue);
+  document.querySelector('.scroll-tracker').style["top"] =  finalTrackValue + "px";
 }

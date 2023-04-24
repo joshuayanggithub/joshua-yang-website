@@ -89,4 +89,12 @@ header {
   font-weight: 250;
   font-size: var(--h3-font-size);
   padding: 0.125rem 0;
+}
+
+.scroll-tracker {
+  position: fixed;
+  left: 0;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(transparent, white, transparent);
 }/*# sourceMappingURL=styles.css.map */
