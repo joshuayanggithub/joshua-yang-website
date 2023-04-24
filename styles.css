@@ -10,6 +10,10 @@ html {
   color: white;
 }
 
+body {
+  overscroll-behavior-y: none;
+}
+
 .loader-container {
   font-family: ambroise, serif;
   font-style: normal;
