@@ -12,6 +12,14 @@ html {
 
 body {
   overscroll-behavior-y: none;
+  /*Remove ScrollBar Entirely!*/
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+body::-webkit-scrollbar { /* WebKit */
+  display: none;
 }
 
 .loader-container {
@@ -104,8 +112,20 @@ header {
 
 .scroll-tracker {
   position: fixed;
+  background: linear-gradient(transparent, white, transparent);
+}
+.scroll-tracker.one {
   left: 0;
   width: 2px;
   height: 100px;
-  background: linear-gradient(transparent, white, transparent);
+}
+.scroll-tracker.two {
+  top: 0;
+  height: 2px;
+  width: 100px;
+}
+.scroll-tracker.three {
+  right: 0;
+  width: 2px;
+  height: 100px;
 }/*# sourceMappingURL=styles.css.map */
