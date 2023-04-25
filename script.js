@@ -1,10 +1,18 @@
 //LOADING ANIMATION
 const loaderText = document.querySelector(".loader");
 
-createBannerSpans(loaderText)
-// animateMergeInGroup(loaderText)
+//Start Initial Loader Screen
+createBannerSpans(loaderText);
+animateFadeIn(loaderText, 11, "span");
+setTimeout(removeLoader, 1500);
 
-function createBannerSpans(querySelector) {
+function removeLoader() {
+  const loaderContainer = document.querySelector(".loader-container");
+  loaderContainer.remove()
+}
+
+//IMPORTANT ANIMATION FUNCTIONS FOR MODULARITY
+function createBannerSpans(querySelector) { //convert h1 or text container to inline elements
   const querySelectorContent = querySelector.textContent;
   const splitText = querySelectorContent.split("");
   querySelector.innerHTML = "";
@@ -17,93 +25,81 @@ function createBannerSpans(querySelector) {
   }
 }
 
-let index = 0;
-const seconds = 100;
-const decreasingInterval = []
-for (let i=0; i<11; ++i) {
-  decreasingInterval.push(seconds + Math.log2((i+1))*seconds );
+function animateFadeIn(querySelector, stopLength, elementType) {
+  const seconds = 100;
+  timer = setInterval(animateFadeInIndividual, seconds, querySelector, stopLength, elementType);
+  return;
 }
-console.log(decreasingInterval);
-timer = setInterval(animateFadeInIndividual, seconds, loaderText, 11);
 
-// function animateMergeInGroup(querySelector) {
+function animateFadeInIndividual(querySelector, stopLength, elementType) {
+  const element = querySelector.querySelectorAll(elementType + ":not(.fade)")[0]; //thank god to not selectors
+  if (element == null) {
+    console.log("Animated Fade Group Finished");
+    clearInterval(timer);
+    timer = null;
+    return;
+  }
+  element.classList.add("fade");
+}
+
+function animateMergeIn(querySelector, stopLength, elementType) {
+  const seconds = 100;
+  timer = setInterval(animateMergeInIndividual, seconds, querySelector, stopLength, elementType);
+  return;
+}
+
+function animateMergeInIndividual(querySelector, stopLength, elementType) {
+  const element = querySelector.querySelectorAll(elementType + ":not(.merged)")[0]; //thank god to not selectors
+  if (element == null) {
+    console.log("Animated Merge Group Finished");
+    clearInterval(timer);
+    timer = null;
+    return;
+  }
+  element.classList.add("merged");
+}
+
+// setTimeout(animateBody, 1500);
+
+// //After Initial Load-In
+
+// const logo = document.querySelector(".logo");
+// const title = document.querySelector(".title");
+// const navBar = document.querySelector(".menu");
+
+// function animateBody() {
 //   index = 0;
-//   const seconds = 50 * Math.log2(index);
-//   console.log(seconds);
-//   timer = setInterval(animateMergeInIndividual, seconds, querySelector);
+//   createBannerSpans(title);
+//   console.log(title);
+//   timer = setInterval(animateMergeInIndividual, 20, title, 11);
+
 // }
 
-function animateFadeInIndividual(querySelector, stopLength) {
-  const span = querySelector.querySelectorAll('span')[index];
-  console.log(typeof(span));
-  console.log(span);
-  span.classList.add("fade");
-  ++index;
-  if (index == stopLength) {
-    clearInterval(timer);
-    timer = null;
-  }
-}
+// window.addEventListener('scroll',trackScroll);
 
-function animateMergeInIndividual(querySelector, stopLength) {
-  const span = querySelector.querySelectorAll('span')[index];
-  console.log(typeof(span));
-  console.log(span);
-  span.classList.add("merged");
-  ++index;
-  if (index == stopLength) {
-    clearInterval(timer);
-    timer = null;
-  }
-}
+// function trackScroll() {
+//   let documentHeight = document.documentElement.scrollHeight; //total document height
+//   let documentWidth = document.documentElement.scrollWidth; 
 
-function removeLoader() {
-  const loaderContainer = document.querySelector(".loader-container");
-  loaderContainer.remove()
-}
+//   let vpHeight = window.innerHeight; //viewport height
+//   let vpWidth = window.innerHeight; //viewport width
 
-setTimeout(removeLoader, 1500);
-setTimeout(animateBody, 1500);
+//   let elementHeight = document.querySelector('.scroll-tracker').offsetHeight; //element height
+//   let elementWidth = document.querySelector('.scroll-tracker').offsetWidth; //element width
 
-//After Initial Load-In
+//   let curY = window.scrollY; //only gets top of vp height so we get offset
 
-const logo = document.querySelector(".logo");
-const title = document.querySelector(".title");
-const navBar = document.querySelector(".menu");
+//   console.log(curY + " " + (vpHeight) + " " + documentHeight);
+//   let percentScrolled = ((curY/(documentHeight-vpHeight)));
 
-function animateBody() {
-  index = 0;
-  createBannerSpans(title);
-  console.log(title);
-  timer = setInterval(animateMergeInIndividual, 20, title, 11);
+//   let pixelScrolledVertical = percentScrolled*vpHeight;
+//   let pixelScrolledVerticalMax = vpHeight - elementHeight; //so I can still see the bottom of the tracker
 
-}
+//   let finalTrackerHeight = Math.min(pixelScrolledVertical,pixelScrolledVerticalMax);
 
-window.addEventListener('scroll',trackScroll);
+//   console.log(finalTrackerHeight);
+//   document.querySelectorAll('.scroll-tracker')[0].style["top"] = finalTrackerHeight + "px";
+//   document.querySelectorAll('.scroll-tracker')[1].style["left"] = finalTrackValue + "px";
+//   document.querySelectorAll('.scroll-tracker')[2].style["top"] = finalTrackerHeight + "px";
 
-function trackScroll() {
-  let documentHeight = document.documentElement.scrollHeight; //total document height
-  let documentWidth = document.documentElement.scrollWidth; 
-
-  let vpHeight = window.innerHeight; //viewport height
-  let vpWidth = window.innerHeight; //viewport width
-
-  let elementHeight = document.querySelector('.scroll-tracker').offsetHeight; //element height
-  let elementWidth = document.querySelector('.scroll-tracker').offsetWidth; //element width
-
-  let curY = window.scrollY; //only gets top of vp height so we get offset
-
-  console.log(curY + " " + (vpHeight) + " " + documentHeight);
-  let percentScrolled = ((curY/(documentHeight-vpHeight)));
-
-  let pixelScrolledVertical = percentScrolled*vpHeight;
-  let pixelScrolledVerticalMax = vpHeight - elementHeight; //so I can still see the bottom of the tracker
-
-  let finalTrackerHeight = Math.min(pixelScrolledVertical,pixelScrolledVerticalMax);
-
-  console.log(finalTrackerHeight);
-  document.querySelectorAll('.scroll-tracker')[0].style["top"] = finalTrackerHeight + "px";
-  document.querySelectorAll('.scroll-tracker')[1].style["left"] = finalTrackValue + "px";
-  document.querySelectorAll('.scroll-tracker')[2].style["top"] = finalTrackerHeight + "px";
-
-}
+// }
