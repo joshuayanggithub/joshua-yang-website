@@ -2,13 +2,15 @@
 const loaderText = document.querySelector(".loader");
 
 //Start Initial Loader Screen
+document.querySelector("main").style["display"] = "none";
 createBannerSpans(loaderText);
 animateFadeIn(loaderText, 11, "span");
-setTimeout(removeLoader, 1500);
+setTimeout(FinishLoader, 1500);
 
-function removeLoader() {
+function FinishLoader() {
   const loaderContainer = document.querySelector(".loader-container");
-  loaderContainer.remove()
+  loaderContainer.remove();
+  document.querySelector("main").style["display"] = "initial";
 }
 
 //IMPORTANT ANIMATION FUNCTIONS FOR MODULARITY
