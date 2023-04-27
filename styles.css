@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap");
 * {
   --primary-color: black;
-  --h1-size: 10vw;
+  --title-size: 10vw;
   --h3-font-size: clamp(0.5rem, 3vw, 1.125rem);
 }
 
@@ -16,6 +16,7 @@ body {
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
+  margin: 0;
 }
 
 body::-webkit-scrollbar { /* WebKit */
@@ -26,7 +27,7 @@ body::-webkit-scrollbar { /* WebKit */
   font-family: ambroise, serif;
   font-style: normal;
   font-weight: 500;
-  font-size: var(--h1-size);
+  font-size: var(--title-size);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -62,6 +63,16 @@ body::-webkit-scrollbar { /* WebKit */
 
 .loader > span.fade {
   opacity: 1;
+  transition: 1s;
+  transition: cubic-bezier(0.6, 0.01, -0.05, 0.95);
+}
+
+.loader > span.fadeOut {
+  opacity: 0;
+}
+
+.loader > span.moveRight {
+  transform: translateX(300px);
 }
 
 h2 {
@@ -87,6 +98,9 @@ header {
 .image-container > .me {
   height: 80vh;
   filter: url(#noise);
+  padding: 10px;
+  border: 0.125rem solid;
+  border-color: white;
 }
 
 /*
@@ -128,4 +142,13 @@ header {
   right: 0;
   width: 2px;
   height: 100px;
+}
+
+.blob {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  transform: translate(-50%, -50%);
 }/*# sourceMappingURL=styles.css.map */

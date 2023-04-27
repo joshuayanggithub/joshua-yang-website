@@ -5,7 +5,27 @@ const loaderText = document.querySelector(".loader");
 document.querySelector("main").style["display"] = "none";
 createBannerSpans(loaderText);
 animateFadeIn(loaderText, 11, "span");
-setTimeout(FinishLoader, 1500);
+
+//Joshua Yang
+console.log(loaderText.children);
+
+let removeIndex = 6;
+setTimeout(
+  () => {
+    let loop = setInterval( () => {
+      loaderText.children[removeIndex].classList.add("fadeOut");
+      removeIndex--;
+      if (removeIndex <= 0) {
+        clearInterval(loop);
+        loaderText.children[0].classList.add("moveRight");
+        return;
+      }
+    }, 100);
+  },
+  1500
+);
+
+setTimeout(FinishLoader, 3000);
 
 function FinishLoader() {
   const loaderContainer = document.querySelector(".loader-container");
@@ -61,47 +81,67 @@ function animateMergeInIndividual(querySelector, stopLength, elementType) {
   element.classList.add("merged");
 }
 
-// setTimeout(animateBody, 1500);
+setTimeout(animateBody, 1500);
 
-// //After Initial Load-In
+//After Initial Load-In
 
-// const logo = document.querySelector(".logo");
-// const title = document.querySelector(".title");
-// const navBar = document.querySelector(".menu");
+const logo = document.querySelector(".logo");
+const title = document.querySelector(".title");
+const navBar = document.querySelector(".menu");
 
-// function animateBody() {
-//   index = 0;
-//   createBannerSpans(title);
-//   console.log(title);
-//   timer = setInterval(animateMergeInIndividual, 20, title, 11);
+function animateBody() {
+  index = 0;
+  createBannerSpans(title);
+  console.log(title);
+  timer = setInterval(animateMergeInIndividual, 20, title, 11);
 
+}
+
+window.addEventListener('scroll',trackScroll);
+
+function trackScroll() {
+  let documentHeight = document.documentElement.scrollHeight; //total document height
+  let documentWidth = document.documentElement.scrollWidth; 
+
+  let vpHeight = window.innerHeight; //viewport height
+  let vpWidth = window.innerHeight; //viewport width
+
+  let elementHeight = document.querySelector('.scroll-tracker').offsetHeight; //element height
+  let elementWidth = document.querySelector('.scroll-tracker').offsetWidth; //element width
+
+  let curY = window.scrollY; //only gets top of vp height so we get offset
+
+  console.log(curY + " " + (vpHeight) + " " + documentHeight);
+  let percentScrolled = ((curY/(documentHeight-vpHeight)));
+
+  let pixelScrolledVertical = percentScrolled*vpHeight;
+  let pixelScrolledVerticalMax = vpHeight - elementHeight; //so I can still see the bottom of the tracker
+
+  let finalTrackerHeight = Math.min(pixelScrolledVertical,pixelScrolledVerticalMax);
+
+  console.log(finalTrackerHeight);
+  document.querySelectorAll('.scroll-tracker')[0].style["top"] = finalTrackerHeight + "px";
+  document.querySelectorAll('.scroll-tracker')[1].style["left"] = finalTrackValue + "px";
+  document.querySelectorAll('.scroll-tracker')[2].style["top"] = finalTrackerHeight + "px";
+
+}
+
+let soundTrack = document.querySelector(".soundtrack");
+
+// setTimeout(playTropical, 1500);
+
+// function playTropical() {
+//   soundTrack.play();
 // }
 
-// window.addEventListener('scroll',trackScroll);
+const trackMouse = (e) => {
+  let blob = document.querySelector(".blob");
+  let x = e.pageX;
+  let y = e.pageY;
+  blob.style["left"] =x + "px";
+  blob.style["top"] =y + "px";
+};
 
-// function trackScroll() {
-//   let documentHeight = document.documentElement.scrollHeight; //total document height
-//   let documentWidth = document.documentElement.scrollWidth; 
+document.addEventListener('mousemove', trackMouse);
 
-//   let vpHeight = window.innerHeight; //viewport height
-//   let vpWidth = window.innerHeight; //viewport width
 
-//   let elementHeight = document.querySelector('.scroll-tracker').offsetHeight; //element height
-//   let elementWidth = document.querySelector('.scroll-tracker').offsetWidth; //element width
-
-//   let curY = window.scrollY; //only gets top of vp height so we get offset
-
-//   console.log(curY + " " + (vpHeight) + " " + documentHeight);
-//   let percentScrolled = ((curY/(documentHeight-vpHeight)));
-
-//   let pixelScrolledVertical = percentScrolled*vpHeight;
-//   let pixelScrolledVerticalMax = vpHeight - elementHeight; //so I can still see the bottom of the tracker
-
-//   let finalTrackerHeight = Math.min(pixelScrolledVertical,pixelScrolledVerticalMax);
-
-//   console.log(finalTrackerHeight);
-//   document.querySelectorAll('.scroll-tracker')[0].style["top"] = finalTrackerHeight + "px";
-//   document.querySelectorAll('.scroll-tracker')[1].style["left"] = finalTrackValue + "px";
-//   document.querySelectorAll('.scroll-tracker')[2].style["top"] = finalTrackerHeight + "px";
-
-// }
