@@ -6,7 +6,7 @@ document.querySelector("main").style["display"] = "none";
 
 const svgLoadingText = document.querySelectorAll("#svg-loading-text>path"); //the mask in svg is annoying
 for (let i=0; i<svgLoadingText.length; ++i) {
-  console.log(svgLoadingText[i].getTotalLength());
+  // console.log(svgLoadingText[i].getTotalLength());
   let length = svgLoadingText[i].getTotalLength();
   svgLoadingText[i].style["stroke-dasharray"] = length;
   svgLoadingText[i].style["stroke-dashoffset"] = length;
@@ -23,26 +23,8 @@ function listener(event) {
   document.querySelector("#svg-loading-text mask").style["fill"] = "white";
 }
 
-//Joshua Yang
-// console.log(loaderText.children);
-
-// let removeIndex = 6;
-// setTimeout(
-//   () => {
-//     let loop = setInterval( () => {
-//       loaderText.children[removeIndex].classList.add("fadeOut");
-//       removeIndex--;
-//       if (removeIndex <= 0) {
-//         clearInterval(loop);
-//         loaderText.children[0].classList.add("moveRight");
-//         return;
-//       }
-//     }, 100);
-//   },
-//   1500
-// );
-
-setTimeout(FinishLoader, 30000000);
+//finish loading screen and animate body
+setTimeout(FinishLoader, 0);
 
 function FinishLoader() {
   const loaderContainer = document.querySelector(".loader-container");
@@ -64,23 +46,6 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
   }
 }
 
-function animateFadeIn(querySelector, stopLength, elementType) {
-  const seconds = 100;
-  timer = setInterval(animateFadeInIndividual, seconds, querySelector, stopLength, elementType);
-  return;
-}
-
-function animateFadeInIndividual(querySelector, stopLength, elementType) {
-  const element = querySelector.querySelectorAll(elementType + ":not(.fade)")[0]; //thank god to not selectors
-  if (element == null) {
-    console.log("Animated Fade Group Finished");
-    clearInterval(timer);
-    timer = null;
-    return;
-  }
-  element.classList.add("fade");
-}
-
 function animateMergeIn(querySelector, stopLength, elementType) {
   const seconds = 100;
   timer = setInterval(animateMergeInIndividual, seconds, querySelector, stopLength, elementType);
@@ -88,7 +53,7 @@ function animateMergeIn(querySelector, stopLength, elementType) {
 }
 
 function animateMergeInIndividual(querySelector, stopLength, elementType) {
-  const element = querySelector.querySelectorAll(elementType + ":not(.merged)")[0]; //thank god to not selectors
+  const element = querySelector.querySelectorAll(elementType + ":not(.merged)")[0]; //thank god to not selectors, select all non merged
   if (element == null) {
     console.log("Animated Merge Group Finished");
     clearInterval(timer);
@@ -97,10 +62,10 @@ function animateMergeInIndividual(querySelector, stopLength, elementType) {
   }
   element.classList.add("merged");
 }
+//END OF ANIMATIONS
 
-setTimeout(animateBody, 3000000);
-
-//After Initial Load-In
+//LOAD IN BODY
+setTimeout(animateBody, 0);
 
 const logo = document.querySelector(".logo");
 const title = document.querySelector(".title");
@@ -111,7 +76,6 @@ function animateBody() {
   createBannerSpans(title);
   console.log(title);
   timer = setInterval(animateMergeInIndividual, 20, title, 11);
-
 }
 
 window.addEventListener('scroll',trackScroll);
@@ -142,23 +106,5 @@ function trackScroll() {
   document.querySelectorAll('.scroll-tracker')[2].style["top"] = finalTrackerHeight + "px";
 
 }
-
-let soundTrack = document.querySelector(".soundtrack");
-
-// setTimeout(playTropical, 1500);
-
-// function playTropical() {
-//   soundTrack.play();
-// }
-
-const trackMouse = (e) => {
-  let blob = document.querySelector(".blob");
-  let x = e.pageX;
-  let y = e.pageY;
-  blob.style["left"] =x + "px";
-  blob.style["top"] =y + "px";
-};
-
-document.addEventListener('mousemove', trackMouse);
 
 
