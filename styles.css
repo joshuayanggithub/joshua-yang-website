@@ -17,6 +17,7 @@ body {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   margin: 0;
+  position: relative;
 }
 
 body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
@@ -128,4 +129,44 @@ header {
   right: 0;
   width: 2px;
   height: 100px;
-} /*# sourceMappingURL=styles.css.map */
+} 
+#mouse-trailer {
+  position: fixed;
+  background-color: white;
+  z-index: 2000;
+  height: 100px;
+  width: 100px;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: linear-gradient(to right, transparent, rgb(238, 238, 210), rgb(246, 248, 212));
+  opacity: 0.4;
+  filter: blur(200px);
+  animation: blob-distort 20s infinite;
+  pointer-events: none;
+}
+
+@keyframes blob-distort {
+  0% {
+    rotate: 0deg;
+  }
+  60% {
+    scale: 1 1.1;
+  }
+  100% {
+    rotate: 359deg;
+  }
+}
+.slider {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.slider-image {
+  aspect-ratio: 0.6;
+  height: 500px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}/*# sourceMappingURL=styles.css.map */

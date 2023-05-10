@@ -45,7 +45,6 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
     querySelector.appendChild(element);
   }
 }
-
 //END OF ANIMATIONS
 
 //LOAD IN BODY
@@ -60,12 +59,13 @@ function onTick() {
   span.classList.add('fade');
   console.log("added");
   char++;
-  if (char == splitText.length) {
+  if (char == 11) {
     clearInterval(timer);
     return;
   }
 }
 
+//SCROLLING FUNCTIONS
 window.addEventListener('scroll',trackScroll);
 
 function trackScroll() {
@@ -94,3 +94,20 @@ function trackScroll() {
 }
 
 
+//MOUSE TRACKER
+window.onpointermove = event => {
+  let x = event.clientX;
+  let y = event.clientY;
+
+  console.log(x + " " + y);
+
+  let mouseTrailer = document.querySelector("#mouse-trailer");
+  console.log(mouseTrailer);
+  // mouseTrailer.style["left"] = x + "px";
+  // mouseTrailer.style["top"] = y + "px";
+
+  mouseTrailer.animate({
+    left: `${x}px`,
+    top: `${y}px`
+  }, { duration: 1400, fill: "forwards" });
+}
