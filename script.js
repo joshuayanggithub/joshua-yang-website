@@ -1,31 +1,48 @@
 //LOADING ANIMATION
 const loaderText = document.querySelector(".loader");
 
-//Start Initial Loader Screen
+// //Start Initial Loader Screen
 document.querySelector("main").style["display"] = "none";
-createBannerSpans(loaderText);
-animateFadeIn(loaderText, 11, "span");
+
+const svgLoadingText = document.querySelectorAll("#svg-loading-text>path"); //the mask in svg is annoying
+for (let i=0; i<svgLoadingText.length; ++i) {
+  console.log(svgLoadingText[i].getTotalLength());
+  let length = svgLoadingText[i].getTotalLength();
+  svgLoadingText[i].style["stroke-dasharray"] = length;
+  svgLoadingText[i].style["stroke-dashoffset"] = length;
+  // svgLoadingText[i].classList.add("draw");
+  svgLoadingText[i].style["animation"] = "draw-letters 2s linear forwards";
+  svgLoadingText[i].addEventListener("animationend", listener, false);
+}
+
+//fill in white - for some reason, also need to make svg mask element white for this shi to work
+const animationDone = document.querySelector("#svg-loading-text>path");
+animationDone.addEventListener("animationend", listener, false);
+
+function listener(event) {
+  document.querySelector("#svg-loading-text mask").style["fill"] = "white";
+}
 
 //Joshua Yang
-console.log(loaderText.children);
+// console.log(loaderText.children);
 
-let removeIndex = 6;
-setTimeout(
-  () => {
-    let loop = setInterval( () => {
-      loaderText.children[removeIndex].classList.add("fadeOut");
-      removeIndex--;
-      if (removeIndex <= 0) {
-        clearInterval(loop);
-        loaderText.children[0].classList.add("moveRight");
-        return;
-      }
-    }, 100);
-  },
-  1500
-);
+// let removeIndex = 6;
+// setTimeout(
+//   () => {
+//     let loop = setInterval( () => {
+//       loaderText.children[removeIndex].classList.add("fadeOut");
+//       removeIndex--;
+//       if (removeIndex <= 0) {
+//         clearInterval(loop);
+//         loaderText.children[0].classList.add("moveRight");
+//         return;
+//       }
+//     }, 100);
+//   },
+//   1500
+// );
 
-setTimeout(FinishLoader, 3000);
+setTimeout(FinishLoader, 30000000);
 
 function FinishLoader() {
   const loaderContainer = document.querySelector(".loader-container");
@@ -81,7 +98,7 @@ function animateMergeInIndividual(querySelector, stopLength, elementType) {
   element.classList.add("merged");
 }
 
-setTimeout(animateBody, 1500);
+setTimeout(animateBody, 3000000);
 
 //After Initial Load-In
 

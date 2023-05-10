@@ -19,21 +19,35 @@ body {
   margin: 0;
 }
 
-body::-webkit-scrollbar { /* WebKit */
+body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
   display: none;
 }
 
 .loader-container {
-  font-family: ambroise, serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: var(--title-size);
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+#svg-loading-text {
+  width: 50%;
+  animation: draw-letters-fill 0.5s ease-in forwards 2s;
+}
+
+@keyframes draw-letters {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes draw-letters-fill {
+  from {
+    fill: transparent;
+  }
+  to {
+    fill: white;
+  }
+}
 .loader {
   overflow: hidden;
   display: flex;
@@ -151,4 +165,23 @@ header {
   background-color: white;
   position: absolute;
   transform: translate(-50%, -50%);
+  background: rgb(255, 255, 255);
+  background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(0, 0, 0) 86%);
+  filter: blur();
+  animation: blob-rotate 3s ease-in-out infinite;
+}
+
+@keyframes blob-rotate {
+  0% {
+    rotate: 30deg;
+  }
+  10% {
+    rotate: 45deg;
+  }
+  50% {
+    rotate: 200deg;
+  }
+  80% {
+    rotate: 360deg;
+  }
 }/*# sourceMappingURL=styles.css.map */
