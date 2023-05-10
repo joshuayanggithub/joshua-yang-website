@@ -48,19 +48,21 @@ body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
     fill: white;
   }
 }
-.loading-title-container {
+.title {
+  margin: 0;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .title span {
+  opacity: 0;
+  transition: all 1s ease-out;
+  transform: translateY(-200px);
   display: inline-block;
+}
+
+span.fade {
   opacity: 1;
-  transition: 1s;
-  transition: cubic-bezier(0.6, 0.01, -0.05, 0.95);
-  transform: translateY(400px);
+  transform: translateY(0px);
 }
 
 h2 {
@@ -68,7 +70,6 @@ h2 {
   font-style: normal;
   font-weight: 500;
   font-size: clamp(1.5rem, 4vw, 4rem);
-  margin: 0;
 }
 
 header {
@@ -124,12 +125,6 @@ header {
 }
 
 .scroll-tracker.two {
-  top: 0;
-  height: 2px;
-  width: 100px;
-}
-
-.scroll-tracker.three {
   right: 0;
   width: 2px;
   height: 100px;

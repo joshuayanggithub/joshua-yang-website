@@ -32,7 +32,7 @@ function FinishLoader() {
   document.querySelector("main").style["display"] = "initial";
 }
 
-//IMPORTANT ANIMATION FUNCTIONS FOR MODULARITY
+// //IMPORTANT ANIMATION FUNCTIONS FOR MODULARITY
 function createBannerSpans(querySelector) { //convert h1 or text container to inline elements
   const querySelectorContent = querySelector.textContent;
   const splitText = querySelectorContent.split("");
@@ -46,36 +46,24 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
   }
 }
 
-function animateMergeIn(querySelector, stopLength, elementType) {
-  const seconds = 100;
-  timer = setInterval(animateMergeInIndividual, seconds, querySelector, stopLength, elementType);
-  return;
-}
-
-function animateMergeInIndividual(querySelector, stopLength, elementType) {
-  const element = querySelector.querySelectorAll(elementType + ":not(.merged)")[0]; //thank god to not selectors, select all non merged
-  if (element == null) {
-    console.log("Animated Merge Group Finished");
-    clearInterval(timer);
-    timer = null;
-    return;
-  }
-  element.classList.add("merged");
-}
 //END OF ANIMATIONS
 
 //LOAD IN BODY
-setTimeout(animateBody, 0);
-
-const logo = document.querySelector(".logo");
 const title = document.querySelector(".title");
-const navBar = document.querySelector(".menu");
+createBannerSpans(title);
 
-function animateBody() {
-  index = 0;
-  createBannerSpans(title);
-  console.log(title);
-  timer = setInterval(animateMergeInIndividual, 20, title, 11);
+let char = 0;
+let timer = setInterval(onTick, 30);
+
+function onTick() {
+  const span = title.querySelectorAll('span')[char];
+  span.classList.add('fade');
+  console.log("added");
+  char++;
+  if (char == splitText.length) {
+    clearInterval(timer);
+    return;
+  }
 }
 
 window.addEventListener('scroll',trackScroll);
@@ -102,9 +90,7 @@ function trackScroll() {
 
   console.log(finalTrackerHeight);
   document.querySelectorAll('.scroll-tracker')[0].style["top"] = finalTrackerHeight + "px";
-  document.querySelectorAll('.scroll-tracker')[1].style["left"] = finalTrackValue + "px";
-  document.querySelectorAll('.scroll-tracker')[2].style["top"] = finalTrackerHeight + "px";
-
+  document.querySelectorAll('.scroll-tracker')[1].style["top"] = finalTrackerHeight + "px";
 }
 
 
