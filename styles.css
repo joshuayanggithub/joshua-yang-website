@@ -53,11 +53,12 @@ body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
 .title {
   margin: 0;
   overflow: hidden;
+  transition: all 1s ease-in-out;
 }
 
 .title:hover {
-  transition-delay: 200ms;
-  font-style: italic;
+  transition: all 1s ease-in-out;
+  transform: skew(-20deg);
 }
 
 .title span {
@@ -101,6 +102,8 @@ header {
   transform: translate(200px);
   rotate: 10deg;
   opacity: 0.3;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .image-container > .me.animated {
   transform: translate(0px);
@@ -201,6 +204,23 @@ header {
     rotate: 359deg;
   }
 }
+#about {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 250;
+  text-align: center;
+  width: 40%;
+  margin: auto;
+  margin-top: 2rem;
+  line-height: 1.5rem;
+}
+
+footer {
+  font-family: "Josefin Sans", sans-serif;
+}
+footer h4 {
+  font-weight: 250;
+}
+
 .slider {
   display: flex;
   flex-direction: row;
