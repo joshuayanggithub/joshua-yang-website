@@ -10,7 +10,6 @@ for (let i=0; i<svgLoadingText.length; ++i) {
   let length = svgLoadingText[i].getTotalLength();
   svgLoadingText[i].style["stroke-dasharray"] = length;
   svgLoadingText[i].style["stroke-dashoffset"] = length;
-  // svgLoadingText[i].classList.add("draw");
   svgLoadingText[i].style["animation"] = "draw-letters 2s linear forwards";
   svgLoadingText[i].addEventListener("animationend", listener, false);
 }
@@ -48,20 +47,47 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
 //END OF ANIMATIONS
 
 //LOAD IN BODY
-const title = document.querySelector(".title");
-createBannerSpans(title);
+setTimeout(animateBody, 0);
 
-let char = 0;
-let timer = setInterval(onTick, 30);
+function animateBody () {
+  const title = document.querySelector(".title");
+  createBannerSpans(title);
 
-function onTick() {
-  const span = title.querySelectorAll('span')[char];
-  span.classList.add('fade');
-  console.log("added");
-  char++;
-  if (char == 11) {
-    clearInterval(timer);
-    return;
+  let char = 0;
+  let timer = setInterval(onTick, 30);
+
+  function onTick() {
+    const span = title.querySelectorAll('span')[char];
+    span.classList.add('fade');
+    console.log("added");
+    char++;
+    if (char == 11) {
+      clearInterval(timer);
+      return;
+    }
+  }
+
+  const img = document.querySelector(".me");
+  setTimeout(animateImage, 20);
+
+  function animateImage() {
+    img.classList.add("animated");
+  }
+
+  setTimeout(animateMenu, 20);
+
+  function animateMenu() {
+    const list = document.querySelectorAll(".menu-item");
+    for (let i=0; i<list.length; ++i) {
+      list[i].classList.add("animated");
+    }
+  }
+
+  setTimeout(animateLogo, 20);
+
+  function animateLogo() {
+    const logo = document.querySelector("#logo");
+    logo.classList.add("animated");
   }
 }
 

@@ -10,6 +10,9 @@
 html {
   background-color: black;
   color: white;
+
+  scroll-behavior: smooth;
+
 }
 
 body {
@@ -21,6 +24,7 @@ body {
   margin: 0;
 
   position: relative;
+
 }
 
 body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
@@ -61,6 +65,11 @@ body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
     overflow: hidden;
 }
 
+.title:hover {
+    transition-delay: 200ms;
+    font-style: italic;
+}
+
 .title span {
     opacity: 0;
     transition: all 1s ease-out;
@@ -99,6 +108,17 @@ header {
   padding: 10px;
   border: 0.125rem solid;
   border-color: white;
+
+  transition: all 1s ease-out;
+  transform: translate(200px);
+  rotate: 10deg;
+  opacity: 0.3;
+
+  &.animated {
+    transform: translate(0px);
+    rotate: 0deg;
+    opacity: 1;
+  }
 }
 
 /*
@@ -106,6 +126,16 @@ header {
 */
 #logo {
   height: 10vw;
+  transform: translateY(-100px);
+  rotate: -10deg;
+  opacity: 0.3;
+  transition: all 1s ease-in;
+
+  &.animated {
+    transform: translate(0px);
+    rotate: 0deg;
+    opacity: 1;
+  } 
 }
 
 #menu {
@@ -120,6 +150,26 @@ header {
   font-weight: 250;
   font-size: var(--h3-font-size);
   padding: 0.125rem 0;
+
+  transform: translate(200px);
+  rotate: -20deg;
+  transition: all 1s ease-out;
+  &.animated {
+    transform: translate(0px);
+    rotate: 0deg;
+  }
+}
+
+.menu-item:nth-child(1) {
+    transition-delay: 10ms;
+}
+
+.menu-item:nth-child(2) {
+    transition-delay: 100ms;
+}
+
+.menu-item:nth-child(3) {
+    transition-delay: 300ms;
 }
 
 .scroll-tracker {
@@ -188,4 +238,6 @@ header {
     aspect-ratio: 0.6;
     height: 500px;
     object-fit: cover;
+
+    cursor: pointer;
 }
