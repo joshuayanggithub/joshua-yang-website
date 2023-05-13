@@ -219,18 +219,4 @@ footer {
 }
 footer h4 {
   font-weight: 250;
-}
-
-.slider {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-.slider-image {
-  aspect-ratio: 0.6;
-  height: 500px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  cursor: pointer;
 }/*# sourceMappingURL=styles.css.map */

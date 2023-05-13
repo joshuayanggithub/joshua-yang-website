@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,700&display=swap');
+
+body {
+    background-color: black;
+    color: white;
+
+    position: relative;
+}
+.slider {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    
+    height: 100vh;
+    width: 100vw;
+    overflow-x: scroll;
+
+    align-items: center;
+}
+
+.slider:hover .slider-image {
+    opacity: 0.6;
+}
+
+.slider:hover .slider-image:hover {
+    opacity: 1;
+}
+
+.slider-image {
+    aspect-ratio: 0.5;
+    height: 500px;
+    object-fit: cover;
+
+    object-position: 100% 50%;
+    
+
+    cursor: pointer;
+
+    transition: all 300ms ease-out;
+}
+
+.slider-image-container {
+    display: flex;
+
+    align-items: center;
+    flex-direction: column;
+}
+
+.slider-image-container:hover > .slider-image-caption {
+    opacity: 1;
+}
+
+.slider-image-container:hover > .slider-image-title {
+    opacity: 1;
+}
+
+.slider-image-caption {
+    opacity: 0;
+    width: 100%;
+
+    display: flex;
+
+    margin: 0;
+
+    align-content: center;
+    justify-content: space-between;
+}
+
+.slider-image-caption h5 {
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 100;
+    font-size: 1rem;
+
+    margin: 2px;
+}
+
+.slider-image-title {
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 400;
+    font-size: 2.625rem;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: 0;
+}
+
+.slider-counter {
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 100;
+    font-size: 1rem;
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.slider-image.clicked {
+    aspect-ratio: 2;
+    scale: 1.2;
+
+}
+
+.mouse-trailer {
+    position: absolute;
+
+
+    border-radius: 50%;
+    border: solid #FFF;
+    border-width: 1px;
+
+    z-index: 2000;
+
+    height: 50px;
+    width: 50px;
+
+    pointer-events: none;
+
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    
+    border-radius: 50%;
+}

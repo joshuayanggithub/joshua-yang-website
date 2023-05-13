@@ -252,20 +252,5 @@ footer {
     }
 }
 
-//SLIDER
-.slider {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    
-}
-
-.slider-image {
-    aspect-ratio: 0.6;
-    height: 500px;
-    object-fit: cover;
-
-    cursor: pointer;
-}
 
 
