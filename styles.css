@@ -219,4 +219,39 @@ footer {
 }
 footer h4 {
   font-weight: 250;
+}
+
+#phrases {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quotes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#phrases {
+  margin-top: 8rem;
+  background: white;
+  height: 65vh;
+  color: black;
+}
+
+#phrases .quotes > h3 {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 300;
+  font-size: 1.125rem;
+}
+
+#phrases .start-phrase {
+  font-family: ambroise, serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 4rem;
+  margin: auto;
+  width: 80vw;
 }/*# sourceMappingURL=styles.css.map */

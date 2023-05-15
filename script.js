@@ -23,7 +23,7 @@ function listener(event) {
 }
 
 //finish loading screen and animate body
-setTimeout(FinishLoader, 3000);
+setTimeout(FinishLoader, 0);
 
 function FinishLoader() {
   const loaderContainer = document.querySelector(".loader-container");
@@ -47,7 +47,7 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
 //END OF ANIMATIONS
 
 //LOAD IN BODY
-setTimeout(animateBody, 3000);
+setTimeout(animateBody, 0);
 
 function animateBody () {
   const title = document.querySelector(".title");
@@ -137,3 +137,5 @@ window.onpointermove = event => {
     top: `${y}px`
   }, { duration: 1400, fill: "forwards" });
 }
+
+//
