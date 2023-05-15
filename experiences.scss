@@ -1,79 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,700&display=swap');
-
 body {
     background-color: black;
     color: white;
-
     position: relative;
+    box-sizing: border-box;
+    margin: 0;
 }
-.slider {
+.slider {    
     display: flex;
-    flex-direction: row;
-    gap: 10px;
-    
     height: 100vh;
     width: 100vw;
-    overflow-x: scroll;
-
+    // overflow-x: scroll;
     align-items: center;
+    transition: all 1s ease-in-out;
+    position: relative;
 }
-
-.slider:hover .slider-image {
-    opacity: 0.6;
+.slider-image-containers {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
+    gap: 20px;
 }
-
-.slider:hover .slider-image:hover {
-    opacity: 1;
+.slider-image-container {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 200ms ease-out;
 }
-
 .slider-image {
     aspect-ratio: 0.5;
     height: 500px;
     object-fit: cover;
-
     object-position: 100% 50%;
-    
-
     cursor: pointer;
-
-    transition: all 300ms ease-out;
+    transition: all 200ms ease-out;
 }
-
-.slider-image-container {
-    display: flex;
-
-    align-items: center;
-    flex-direction: column;
-}
-
-.slider-image-container:hover > .slider-image-caption {
-    opacity: 1;
-}
-
-.slider-image-container:hover > .slider-image-title {
-    opacity: 1;
-}
-
 .slider-image-caption {
     opacity: 0;
     width: 100%;
-
     display: flex;
-
     margin: 0;
-
     align-content: center;
     justify-content: space-between;
 }
-
 .slider-image-caption h5 {
     font-family: "Josefin Sans", sans-serif;
     font-weight: 100;
     font-size: 1rem;
-
     margin: 2px;
 }
-
 .slider-image-title {
     font-family: "Josefin Sans", sans-serif;
     font-weight: 400;
@@ -83,6 +61,42 @@ body {
     opacity: 0;
 }
 
+.slider-image-containers:hover .slider-image:not(:hover){
+    opacity: 0.4;
+}
+.slider-image:hover{
+    opacity: 1;
+}
+.slider.clicked .slider-image:not(.clicked) {
+    opacity: 0.2;
+}
+.slider-image.clicked {
+    transition: all 200ms ease-in-out;
+    aspect-ratio: auto;
+    object-fit: none;
+    object-fit: contain;
+    height: 80vh;
+
+}
+.slider-image-containers.clicked {
+    gap: 20px;
+    transition: all 200ms ease-in-out;
+}
+
+.slider-image-container.slider-image-caption {
+    opacity: 0;
+}
+.slider-image-container .slider-image-title {
+    opacity: 0;
+}
+
+.slider-image-container.clicked .slider-image-caption {
+    opacity: 1;
+}
+.slider-image-container.clicked .slider-image-title {
+    opacity: 1;
+}
+
 .slider-counter {
     font-family: "Josefin Sans", sans-serif;
     font-weight: 100;
@@ -90,12 +104,6 @@ body {
 
     display: flex;
     justify-content: center;
-
-}
-
-.slider-image.clicked {
-    aspect-ratio: 2;
-    scale: 1.2;
 
 }
 
@@ -120,3 +128,4 @@ body {
     
     border-radius: 50%;
 }
+
