@@ -22,7 +22,7 @@ function listener(event) {
 }
 
 //finish loading screen and animate body
-setTimeout(FinishLoader, 300000);
+setTimeout(FinishLoader, 0);
 
 function FinishLoader() {
   const loaderContainer = document.querySelector(".loader-container");
@@ -46,24 +46,26 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
 //END OF ANIMATIONS
 
 //LOAD IN BODY
-setTimeout(animateBody, 30000);
+setTimeout(animateBody, 0);
 
 function animateBody () {
   const title = document.querySelector(".title");
   createBannerSpans(title);
 
-  let char = 0;
-  let timer = setInterval(onTick, 30);
+  const menuItems = document.querySelector("#menu").children;
+  // createBannerSpans(menuItems[0]); createBannerSpans(menuItems[1]); createBannerSpans(menuItems[2]);
 
-  function onTick() {
-    const span = title.querySelectorAll('span')[char];
-    span.classList.add('fade');
-    console.log("added");
-    char++;
-    if (char == 11) {
+  let timer = setInterval(onTick, 30, title);
+
+  function onTick(selector) {
+    // console.log(selector);
+    const span = selector.querySelectorAll("span:not(.fade)")[0];
+    console.log(span);
+    if (span== undefined) {
       clearInterval(timer);
       return;
     }
+    span.classList.add('fade');
   }
 
   const img = document.querySelector(".me");

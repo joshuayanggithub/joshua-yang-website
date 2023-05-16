@@ -1,8 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap");
+@font-face {
+  font-family: DubielPlain;
+  src: url(/fonts/Dubiel.ttf);
+}
 * {
   --primary-color: black;
   --title-size: 10vw;
   --h3-font-size: clamp(0.5rem, 3vw, 1.125rem);
+  --h2-font-size: clamp(1.875rem, 5vw, 5rem);
 }
 
 html {
@@ -53,11 +58,11 @@ body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
 .title {
   margin: 0;
   overflow: hidden;
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .title:hover {
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
   transform: skew(-20deg);
 }
 
@@ -68,16 +73,16 @@ body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
   display: inline-block;
 }
 
-span.fade {
+.title span.fade {
   opacity: 1;
   transform: translateY(0px);
 }
 
 h2 {
-  font-family: ambroise, serif;
+  font-family: DubielPlain;
   font-style: normal;
   font-weight: 500;
-  font-size: clamp(1.5rem, 4vw, 4rem);
+  font-size: var(--h2-font-size);
 }
 
 header {
@@ -86,40 +91,18 @@ header {
   justify-content: space-between;
 }
 
-.image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.image-container > .me {
-  height: 80vh;
-  filter: url(#noise);
-  padding: 10px;
-  border: 0.125rem solid;
-  border-color: white;
-  transition: all 1s ease-out;
-  transform: translate(200px);
-  rotate: 10deg;
-  opacity: 0.3;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.image-container > .me.animated {
-  transform: translate(0px);
-  rotate: 0deg;
-  opacity: 1;
-}
-
 /*
 <a href="https://www.vecteezy.com/free-vector/j">J Vectors by Vecteezy</a>
 */
+#logo-container {
+  overflow: hidden;
+}
+
 #logo {
-  height: 10vw;
-  transform: translateY(-100px);
-  rotate: -10deg;
-  opacity: 0.3;
-  transition: all 1s ease-in;
+  height: clamp(5rem, 10vw, 7rem);
+  transform: translateY(-250px);
+  opacity: 0;
+  transition: all 0.8s ease-out;
 }
 #logo.animated {
   transform: translate(0px);
@@ -140,8 +123,7 @@ header {
   font-size: var(--h3-font-size);
   padding: 0.125rem 0;
   transform: translate(200px);
-  rotate: -20deg;
-  transition: all 1s ease-out;
+  transition: all 0.5s ease-out;
 }
 .menu-item.animated {
   transform: translate(0px);
@@ -158,6 +140,29 @@ header {
 
 .menu-item:nth-child(3) {
   transition-delay: 300ms;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container > .me {
+  height: 80vh;
+  filter: url(#noise);
+  padding: 10px;
+  border: 0.125rem solid;
+  border-color: white;
+  transition: all 1s ease-out;
+  transform: translateY(-70px);
+  opacity: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.image-container > .me.animated {
+  transform: translate(0px);
+  opacity: 1;
 }
 
 .scroll-tracker {
