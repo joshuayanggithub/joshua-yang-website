@@ -22,7 +22,7 @@ function listener(event) {
 }
 
 //finish loading screen and animate body
-setTimeout(FinishLoader, 0);
+setTimeout(FinishLoader, 3200);
 
 function FinishLoader() {
   const loaderContainer = document.querySelector(".loader-container");
@@ -46,7 +46,7 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
 //END OF ANIMATIONS
 
 //LOAD IN BODY
-setTimeout(animateBody, 0);
+setTimeout(animateBody, 3200);
 
 function animateBody () {
   const title = document.querySelector(".title");
@@ -124,25 +124,25 @@ function trackScroll() {
   document.querySelectorAll('.scroll-tracker')[1].style["top"] = finalTrackerHeight + "px";
 
   //QUOTES
-  let phrases = document.querySelector('#phrases');
-  let containerCenter = phrases.getBoundingClientRect().top + phrases.getBoundingClientRect().height/2;
-  console.log(containerCenter);
+  // let phrases = document.querySelector('#phrases');
+  // let containerCenter = phrases.getBoundingClientRect().top + phrases.getBoundingClientRect().height/2;
+  // console.log(containerCenter);
   
-  if (Math.abs(containerCenter - window.innerHeight/2) < 20) {
-    console.log("YES");//enter parallax
-    startParallax = true;
-    startParallaxPos = containerCenter;
-  }
+  // if (Math.abs(containerCenter - window.innerHeight/2) < 20) {
+  //   console.log("YES");//enter parallax
+  //   startParallax = true;
+  //   startParallaxPos = containerCenter;
+  // }
 
-  if (startParallax) {
-    document.querySelector("start-phrase").style["position"] = "absolute";
-    document.querySelector("start-phrase").style["left"] =  `50%`;
-    document.querySelector("start-phrase").style["top"] =  `50%`;
-    document.querySelector("start-phrase").style["transform"] =  `translate(-50%,-50%)`;
-    if (containerCenter - startParallaxPos < 100) {
-      document.querySelector("start-phrase").tra
-    }
-  }
+  // if (startParallax) {
+  //   document.querySelector("start-phrase").style["position"] = "absolute";
+  //   document.querySelector("start-phrase").style["left"] =  `50%`;
+  //   document.querySelector("start-phrase").style["top"] =  `50%`;
+  //   document.querySelector("start-phrase").style["transform"] =  `translate(-50%,-50%)`;
+  //   if (containerCenter - startParallaxPos < 100) {
+  //     document.querySelector("start-phrase").tra
+  //   }
+  // }
 }
 
 
