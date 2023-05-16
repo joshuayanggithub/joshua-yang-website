@@ -96,6 +96,7 @@ function animateBody () {
 window.addEventListener('scroll',trackScroll);
 
 function trackScroll() {
+  //SCROLL TRACKER
   let documentHeight = document.documentElement.scrollHeight; //total document height
   let documentWidth = document.documentElement.scrollWidth; 
 
@@ -118,6 +119,9 @@ function trackScroll() {
   console.log(finalTrackerHeight);
   document.querySelectorAll('.scroll-tracker')[0].style["top"] = finalTrackerHeight + "px";
   document.querySelectorAll('.scroll-tracker')[1].style["top"] = finalTrackerHeight + "px";
+
+  //QUOTES
+  console.log(document.querySelector(".phrases"))
 }
 
 

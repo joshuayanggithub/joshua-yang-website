@@ -12,6 +12,7 @@
   --title-size: 10vw;
   --h3-font-size: clamp(0.5rem, 3vw, 1.125rem);
   --h2-font-size: clamp(1.875rem, 5vw, 5rem);
+  --p-font-size: clamp(0.5rem, 3vw, 1.125rem);
 }
 html {
   background-color: black;
@@ -58,6 +59,9 @@ body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
   }
 }
 
+header {
+    padding: 1rem;
+}
 //LOADING TITLE
 .title {
     margin: 0;
@@ -99,7 +103,7 @@ header {
     overflow: hidden;
 }
 #logo {
-  height: clamp(5rem,10vw,7rem);
+  height: clamp(3.5rem,10vw,7rem);
   transform: translateY(-250px);
   opacity: 0;
   transition: all 0.8s ease-out;
@@ -116,7 +120,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem 2rem;
+  padding: 1vh 2vw;
 }
 .menu-item {
   font-family: "Josefin Sans", sans-serif;
@@ -128,9 +132,7 @@ header {
   transition: all 0.5s ease-out;
   &.animated {
     transform: translate(0px);
-    rotate: 0deg;
   }
-
 }
 
 .menu-item:nth-child(1) {
@@ -148,25 +150,47 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-  }
-  .image-container > .me {
+    flex-direction: column;
+}
+
+.image-container > .me {
     height: 80vh;
     filter: url(#noise);
-    padding: 10px;
-    border: 0.125rem solid;
+    padding: 1vh;
+    border: 0.5vh solid;
     border-color: white;
-  
+
     transition: all 1s ease-out;
     transform: translateY(-70px);
     opacity: 0;
     object-fit: cover;
-  
+
     &.animated {
-      transform: translate(0px);
-      opacity: 1;
+        transform: translate(0px);
+        opacity: 1;
     }
-  }
+}
+//About
+#about {
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 250;
+    font-size: var(--p-font-size);
+    text-align: center;
+    width: 40%;
+    margin: auto;
+    margin-top: 2rem;
+
+    line-height: 1.5rem;
+}
+@media screen and (max-width: 992px) {
+    .image-container > .me {
+        width: 60vw;
+        height: 60vh;
+    }       
+    #about {
+        width: 60vw;
+    }
+}
 
 //SCROLLING
 .scroll-tracker {
@@ -221,19 +245,6 @@ header {
     }
 }
 
-//About
-#about {
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 250;
-  
-    text-align: center;
-    width: 40%;
-    margin: auto;
-    margin-top: 2rem;
-
-    line-height: 1.5rem;
-}
-
 //footer
 footer {
     font-family: "Josefin Sans", sans-serif;
@@ -259,7 +270,8 @@ footer {
 #phrases {
     margin-top: 8rem;
     background: white;
-    height: 65vh;
+    height: 60vh;
+    padding: 2rem;
 
     color: black;
 }
@@ -270,11 +282,12 @@ footer {
     font-size: 1.125rem;
 }
 
-#phrases .start-phrase {
-    font-family: ambroise, serif;
+#phrases .start-phrase, .middle-phrase, .end-phrase {
+    font-family: DubielPlain;
+
+    font-size: var(--h2-font-size);
     font-style: normal;
     font-weight: 300;
-    font-size: 4rem;
 
     margin: auto;
     width: 80vw;
