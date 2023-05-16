@@ -1,10 +1,9 @@
-//LOADING ANIMATION
-const loaderText = document.querySelector(".loader");
-
-// //Start Initial Loader Screen
+//Start Initial Loader Screen
 document.querySelector("main").style["display"] = "none";
 
 const svgLoadingText = document.querySelectorAll("#svg-loading-text>path"); //the mask in svg is annoying
+console.log(svgLoadingText);
+
 for (let i=0; i<svgLoadingText.length; ++i) {
   // console.log(svgLoadingText[i].getTotalLength());
   let length = svgLoadingText[i].getTotalLength();
@@ -23,7 +22,7 @@ function listener(event) {
 }
 
 //finish loading screen and animate body
-setTimeout(FinishLoader, 0);
+setTimeout(FinishLoader, 300000);
 
 function FinishLoader() {
   const loaderContainer = document.querySelector(".loader-container");
@@ -47,7 +46,7 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
 //END OF ANIMATIONS
 
 //LOAD IN BODY
-setTimeout(animateBody, 0);
+setTimeout(animateBody, 30000);
 
 function animateBody () {
   const title = document.querySelector(".title");

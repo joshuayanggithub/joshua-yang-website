@@ -3,7 +3,6 @@ const sliderContainers = document.querySelector(".slider-image-containers");
 
 const images = document.querySelectorAll(".slider-image");
 
-
 slider.addEventListener("scroll", function() {
   console.log(images.scrollLeft);
 
@@ -20,19 +19,13 @@ slider.addEventListener("scroll", function() {
 window.addEventListener("pointermove", function(e) {
   let x = e.clientX;
   let y = e.clientY;
-
-  // console.log(x + " " + y);
-
   const mouseTrailer = document.querySelector(".mouse-trailer");
-
   mouseTrailer.animate({
     left: `${x}px`,
     top: `${y}px`
-  }, { duration: 1400, fill: "forwards" });
+  }, { duration: 900, fill: "forwards" });
 
 });
-
-
 
 for (let img of images) {
   console.log(img);
@@ -48,7 +41,6 @@ for (let img of images) {
       img.classList.remove("clicked");
       imgContainer.classList.remove("clicked");
       sliderContainers.classList.remove("clicked");
-      console.log("remove clicks");
     }
     else {
       for (let img of images) {
@@ -60,7 +52,6 @@ for (let img of images) {
       img.classList.add("clicked");
       imgContainer.classList.add("clicked");
       sliderContainers.classList.add("clicked");
-      console.log("clicked");
 
       setTimeout(img.scrollIntoView({
         behavior: 'smooth',
