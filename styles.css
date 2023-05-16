@@ -220,7 +220,7 @@ header {
   border-radius: 50%;
   background: linear-gradient(to right, transparent, rgb(238, 238, 210), rgb(246, 248, 212));
   opacity: 0.4;
-  filter: blur(200px);
+  filter: blur(23px);
   animation: blob-distort 20s infinite;
   pointer-events: none;
 }
