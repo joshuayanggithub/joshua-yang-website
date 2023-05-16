@@ -2,7 +2,7 @@
 document.querySelector("main").style["display"] = "none";
 
 const svgLoadingText = document.querySelectorAll("#svg-loading-text>path"); //the mask in svg is annoying
-console.log(svgLoadingText);
+// console.log(svgLoadingText);
 
 for (let i=0; i<svgLoadingText.length; ++i) {
   // console.log(svgLoadingText[i].getTotalLength());
@@ -60,7 +60,7 @@ function animateBody () {
   function onTick(selector) {
     // console.log(selector);
     const span = selector.querySelectorAll("span:not(.fade)")[0];
-    console.log(span);
+    // console.log(span);
     if (span== undefined) {
       clearInterval(timer);
       return;
@@ -95,6 +95,9 @@ function animateBody () {
 //SCROLLING FUNCTIONS
 window.addEventListener('scroll',trackScroll);
 
+let startParallax = false;
+let startParallaxPos = -2;
+
 function trackScroll() {
   //SCROLL TRACKER
   let documentHeight = document.documentElement.scrollHeight; //total document height
@@ -108,7 +111,7 @@ function trackScroll() {
 
   let curY = window.scrollY; //only gets top of vp height so we get offset
 
-  console.log(curY + " " + (vpHeight) + " " + documentHeight);
+  // console.log(curY + " " + (vpHeight) + " " + documentHeight);
   let percentScrolled = ((curY/(documentHeight-vpHeight)));
 
   let pixelScrolledVertical = percentScrolled*vpHeight;
@@ -116,12 +119,30 @@ function trackScroll() {
 
   let finalTrackerHeight = Math.min(pixelScrolledVertical,pixelScrolledVerticalMax);
 
-  console.log(finalTrackerHeight);
+  // console.log(finalTrackerHeight);
   document.querySelectorAll('.scroll-tracker')[0].style["top"] = finalTrackerHeight + "px";
   document.querySelectorAll('.scroll-tracker')[1].style["top"] = finalTrackerHeight + "px";
 
   //QUOTES
-  console.log(document.querySelector(".phrases"))
+  let phrases = document.querySelector('#phrases');
+  let containerCenter = phrases.getBoundingClientRect().top + phrases.getBoundingClientRect().height/2;
+  console.log(containerCenter);
+  
+  if (Math.abs(containerCenter - window.innerHeight/2) < 20) {
+    console.log("YES");//enter parallax
+    startParallax = true;
+    startParallaxPos = containerCenter;
+  }
+
+  if (startParallax) {
+    document.querySelector("start-phrase").style["position"] = "absolute";
+    document.querySelector("start-phrase").style["left"] =  `50%`;
+    document.querySelector("start-phrase").style["top"] =  `50%`;
+    document.querySelector("start-phrase").style["transform"] =  `translate(-50%,-50%)`;
+    if (containerCenter - startParallaxPos < 100) {
+      document.querySelector("start-phrase").tra
+    }
+  }
 }
 
 
@@ -133,7 +154,6 @@ window.onpointermove = event => {
   console.log(x + " " + y);
 
   let mouseTrailer = document.querySelector("#mouse-trailer");
-  console.log(mouseTrailer);
   // mouseTrailer.style["left"] = x + "px";
   // mouseTrailer.style["top"] = y + "px";
 
