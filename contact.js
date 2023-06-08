@@ -11,3 +11,4 @@ window.addEventListener('resize', function() {
   finger.style["height"] = headerheight*0.8 + "px";
 }
 );
+
