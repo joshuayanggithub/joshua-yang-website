@@ -22,7 +22,7 @@ function listener(event) {
 }
 
 //finish loading screen and animate body
-setTimeout(FinishLoader, 3200);
+setTimeout(FinishLoader, 0);
 
 function FinishLoader() {
   const loaderContainer = document.querySelector(".loader-container");
@@ -46,7 +46,7 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
 //END OF ANIMATIONS
 
 //LOAD IN BODY
-setTimeout(animateBody, 3200);
+setTimeout(animateBody, 0);
 
 function animateBody () {
   const title = document.querySelector(".title");
@@ -163,4 +163,18 @@ window.onpointermove = event => {
   }, { duration: 1400, fill: "forwards" });
 }
 
-//
+//MENU BAR
+const menu = document.querySelector("#menu");
+const menuOverlay = document.querySelector("#menu-overlay");
+console.log(menu);
+menu.addEventListener("mouseover", menuHover);
+
+function menuHover() {
+  console.log("hovered");
+  if (menuOverlay.classList.length > 1) {
+    menuOverlay.classList.remove("show");
+  }
+  else {
+    menuOverlay.classList.add("show");
+  }
+}
