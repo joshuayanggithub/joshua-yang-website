@@ -17,7 +17,7 @@ body {
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0px;
+  margin: 2% 0;
 }
 
 #contact-container {
