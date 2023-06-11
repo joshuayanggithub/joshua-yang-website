@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap");
+
+@font-face {
+    font-family: DubielPlain;
+    src: url(/fonts/Dubiel.ttf);
+}
+
+//all my comments got deleted because .gitignore settings were shit, but whatever
+//GLOBAL
+* {
+  --primary-color: black;
+  --title-size: 10vw;
+  --h3-font-size: clamp(0.5rem, 3vw, 1.125rem);
+  --h2-font-size: clamp(1.875rem, 5vw, 5rem);
+  --h6-font-size: clamp(0.375rem, 1.8vw, 0.875rem);
+  --h7-font-size: clamp(0.25rem, 1vw, 0.5rem);
+  --p-font-size: clamp(0.5rem, 3vw, 1.125rem);
+}
+html {
+  background-color: black;
+  color: white;
+  scroll-behavior: smooth;
+}
+body {
+  overscroll-behavior-y: none;
+  /*Remove ScrollBar Entirely!*/
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  margin: 0;
+
+  position: relative; 
+
+}
+body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
+  display: none;
+}

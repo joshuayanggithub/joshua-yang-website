@@ -18,7 +18,6 @@ body {
   flex-direction: column;
   height: 100vh;
   box-sizing: border-box;
-  justify-content: space-between;
   padding-bottom: 5%;
 }
 
@@ -217,4 +216,4 @@ a {
   font-weight: 250;
   font-size: clamp(0.5rem, 3vw, 1.125rem);
   padding: 0.125rem 0;
-}/*# sourceMappingURL=contact.css.map */
+}
