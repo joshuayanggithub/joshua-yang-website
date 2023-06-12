@@ -95,9 +95,6 @@ function animateBody () {
 //SCROLLING FUNCTIONS
 window.addEventListener('scroll',trackScroll);
 
-let startParallax = false;
-let startParallaxPos = -2;
-
 function trackScroll() {
   //SCROLL TRACKER
   let documentHeight = document.documentElement.scrollHeight; //total document height
@@ -121,28 +118,7 @@ function trackScroll() {
 
   // console.log(finalTrackerHeight);
   document.querySelectorAll('.scroll-tracker')[0].style["top"] = finalTrackerHeight + "px";
-  document.querySelectorAll('.scroll-tracker')[1].style["top"] = finalTrackerHeight + "px";
-
-  //QUOTES
-  // let phrases = document.querySelector('#phrases');
-  // let containerCenter = phrases.getBoundingClientRect().top + phrases.getBoundingClientRect().height/2;
-  // console.log(containerCenter);
-  
-  // if (Math.abs(containerCenter - window.innerHeight/2) < 20) {
-  //   console.log("YES");//enter parallax
-  //   startParallax = true;
-  //   startParallaxPos = containerCenter;
-  // }
-
-  // if (startParallax) {
-  //   document.querySelector("start-phrase").style["position"] = "absolute";
-  //   document.querySelector("start-phrase").style["left"] =  `50%`;
-  //   document.querySelector("start-phrase").style["top"] =  `50%`;
-  //   document.querySelector("start-phrase").style["transform"] =  `translate(-50%,-50%)`;
-  //   if (containerCenter - startParallaxPos < 100) {
-  //     document.querySelector("start-phrase").tra
-  //   }
-  // }
+  document.querySelectorAll('.scroll-tracker')[1].style["top"] = finalTrackerHeight + "px"; 
 }
 
 
@@ -151,7 +127,7 @@ window.onpointermove = event => {
   let x = event.clientX;
   let y = event.clientY;
 
-  console.log(x + " " + y);
+  // console.log(x + " " + y);
 
   let mouseTrailer = document.querySelector("#mouse-trailer");
   // mouseTrailer.style["left"] = x + "px";
@@ -161,20 +137,4 @@ window.onpointermove = event => {
     left: `${x}px`,
     top: `${y}px`
   }, { duration: 1400, fill: "forwards" });
-}
-
-//MENU BAR
-const menu = document.querySelector("#menu");
-const menuOverlay = document.querySelector("#menu-overlay");
-console.log(menu);
-menu.addEventListener("mouseover", menuHover);
-
-function menuHover() {
-  console.log("hovered");
-  if (menuOverlay.classList.length > 1) {
-    menuOverlay.classList.remove("show");
-  }
-  else {
-    menuOverlay.classList.add("show");
-  }
 }

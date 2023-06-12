@@ -1,3 +1,5 @@
+@use "variables" as g;
+
 //LOADING SCREEN
 .loader-container {
   height: 100vh;
@@ -23,112 +25,16 @@
   }
 }
 
-header {
-    padding: 1rem;
-}
-//LOADING TITLE
-.title {
-    margin: 0;
-    overflow: hidden; //instead of container h1 is used as container
-    transition: all 0.5s ease-in-out;
-}
-.title:hover {
-    transition: all 0.5s ease-in-out;
-    transform: skew(-20deg);
-}
-.title span {
-    opacity: 0;
-    transition: all 1s ease-out;
-    transform: translateY(-200px);
-    display: inline-block;
-}
-.title span.fade {
-    opacity: 1;
-    transform: translateY(0px);
-}
-
-//headers
-h2 {
-  font-family: DubielPlain;
-  font-style: normal;
-  font-weight: 500;
-  font-size: var(--h2-font-size);
-}
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/*
-<a href="https://www.vecteezy.com/free-vector/j">J Vectors by Vecteezy</a>
-*/
-#logo-container {
-    overflow: hidden;
-}
-#logo {
-  height: clamp(3.5rem,10vw,7rem);
-  transform: translateY(-250px);
-  opacity: 0;
-  transition: all 0.8s ease-out;
-
-  &.animated {
-    transform: translate(0px);
-    rotate: 0deg;
-    opacity: 1;
-  } 
-}
-
-//MENU
-a {
-    text-decoration: none;
-    color: white;
-}
-
-#menu-overlay {
-    z-index: 5000;
-    background-color: black;
-    position: fixed;
+section {
+    height: 90vh;
     width: 100%;
-    height: 100%;
 
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.3s ease-out;
-}
+    margin: 2vh 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-#menu-overlay .show {
-    visibility: visible;
-    opacity: 1;
-}
-
-#menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1vh 2vw;
-}
-.menu-item {
-  font-family: "Josefin Sans", sans-serif;
-  font-weight: 250;
-  font-size: var(--h3-font-size);
-  padding: 0.125rem 0;
-
-  transform: translate(200px);
-  transition: all 0.5s ease-out;
-  &.animated {
-    transform: translate(0px);
-  }
-}
-
-.menu-item:nth-child(1) {
-    transition-delay: 10ms;
-}
-.menu-item:nth-child(2) {
-    transition-delay: 100ms;
-}
-.menu-item:nth-child(3) {
-    transition-delay: 300ms;
+    padding-bottom: 2vh;
 }
 
 //HERO IMAGE
@@ -137,12 +43,14 @@ a {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
 }
 
 .image-container > .me {
-    height: 80vh;
+    height: 60vh;
+    width: 30%;
+    aspect-ratio: 1;
     filter: url(#noise);
-    padding: 1vh;
     border: 0.5vh solid;
     border-color: white;
 
@@ -156,11 +64,13 @@ a {
         opacity: 1;
     }
 }
-//About
+
+//About text
 #about {
     font-family: "Josefin Sans", sans-serif;
     font-weight: 250;
-    font-size: var(--p-font-size);
+    font-size: g.$p;
+
     text-align: center;
     width: 40%;
     margin: auto;
@@ -169,12 +79,12 @@ a {
     line-height: 1.5rem;
 }
 @media screen and (max-width: 992px) {
+
     .image-container > .me {
-        width: 60vw;
-        height: 60vh;
-    }       
+        width: 80vw;
+    }
     #about {
-        width: 60vw;
+        width: 90%;
     }
 }
 
@@ -237,52 +147,13 @@ footer {
     h4 {
         font-weight: 250; 
     }
-}
-
-//quotes
-#phrases {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-//floating image
-.quotes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#phrases {
-    margin-top: 8rem;
-    background: white;
-    height: 60vh;
-    padding: 2rem;
-
-    color: black;
-}
-
-#phrases .quotes > h3 {
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 300;
-    font-size: 1.125rem;
-}
-
-#phrases .start-phrase, .middle-phrase, .end-phrase {
-    font-family: DubielPlain;
-
-    font-size: var(--h2-font-size);
-    font-style: normal;
-    font-weight: 300;
-
-    margin: auto;
-    width: 80vw;
+    margin-top: 10vh;
 }
 
 h6 {
     font-family: "Josefin Sans", sans-serif;
     font-weight: 300;
-    font-size: var(--h6-font-size);
+    font-size: g.$h6;
     margin: 0;
 }
 
@@ -305,5 +176,5 @@ footer .copyright {
 }
 
 h7 {
-    font-size: var(--h7-font-size);
+    font-size: g.$h7;
 }

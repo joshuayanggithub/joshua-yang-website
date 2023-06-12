@@ -23,115 +23,14 @@
     fill: white;
   }
 }
-header {
-  padding: 1rem;
-}
-
-.title {
-  margin: 0;
-  overflow: hidden;
-  transition: all 0.5s ease-in-out;
-}
-
-.title:hover {
-  transition: all 0.5s ease-in-out;
-  transform: skew(-20deg);
-}
-
-.title span {
-  opacity: 0;
-  transition: all 1s ease-out;
-  transform: translateY(-200px);
-  display: inline-block;
-}
-
-.title span.fade {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
-h2 {
-  font-family: DubielPlain;
-  font-style: normal;
-  font-weight: 500;
-  font-size: var(--h2-font-size);
-}
-
-header {
+section {
+  height: 90vh;
+  width: 100%;
+  margin: 2vh 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-/*
-<a href="https://www.vecteezy.com/free-vector/j">J Vectors by Vecteezy</a>
-*/
-#logo-container {
-  overflow: hidden;
-}
-
-#logo {
-  height: clamp(3.5rem, 10vw, 7rem);
-  transform: translateY(-250px);
-  opacity: 0;
-  transition: all 0.8s ease-out;
-}
-#logo.animated {
-  transform: translate(0px);
-  rotate: 0deg;
-  opacity: 1;
-}
-
-a {
-  text-decoration: none;
-  color: white;
-}
-
-#menu-overlay {
-  z-index: 5000;
-  background-color: black;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s ease-out;
-}
-
-#menu-overlay .show {
-  visibility: visible;
-  opacity: 1;
-}
-
-#menu {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  padding: 1vh 2vw;
-}
-
-.menu-item {
-  font-family: "Josefin Sans", sans-serif;
-  font-weight: 250;
-  font-size: var(--h3-font-size);
-  padding: 0.125rem 0;
-  transform: translate(200px);
-  transition: all 0.5s ease-out;
-}
-.menu-item.animated {
-  transform: translate(0px);
-}
-
-.menu-item:nth-child(1) {
-  transition-delay: 10ms;
-}
-
-.menu-item:nth-child(2) {
-  transition-delay: 100ms;
-}
-
-.menu-item:nth-child(3) {
-  transition-delay: 300ms;
+  padding-bottom: 2vh;
 }
 
 .image-container {
@@ -142,9 +41,10 @@ a {
 }
 
 .image-container > .me {
-  height: 80vh;
+  height: 60vh;
+  width: 30%;
+  aspect-ratio: 1;
   filter: url(#noise);
-  padding: 1vh;
   border: 0.5vh solid;
   border-color: white;
   transition: all 1s ease-out;
@@ -161,7 +61,7 @@ a {
 #about {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 250;
-  font-size: var(--p-font-size);
+  font-size: clamp(0.5rem, 3vw, 1.125rem);
   text-align: center;
   width: 40%;
   margin: auto;
@@ -171,11 +71,10 @@ a {
 
 @media screen and (max-width: 992px) {
   .image-container > .me {
-    width: 60vw;
-    height: 60vh;
+    width: 80vw;
   }
   #about {
-    width: 60vw;
+    width: 90%;
   }
 }
 .scroll-tracker {
@@ -224,51 +123,16 @@ a {
 }
 footer {
   font-family: "Josefin Sans", sans-serif;
+  margin-top: 10vh;
 }
 footer h4 {
   font-weight: 250;
 }
 
-#phrases {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.quotes {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#phrases {
-  margin-top: 8rem;
-  background: white;
-  height: 60vh;
-  padding: 2rem;
-  color: black;
-}
-
-#phrases .quotes > h3 {
-  font-family: "Josefin Sans", sans-serif;
-  font-weight: 300;
-  font-size: 1.125rem;
-}
-
-#phrases .start-phrase, .middle-phrase, .end-phrase {
-  font-family: DubielPlain;
-  font-size: var(--h2-font-size);
-  font-style: normal;
-  font-weight: 300;
-  margin: auto;
-  width: 80vw;
-}
-
 h6 {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 300;
-  font-size: var(--h6-font-size);
+  font-size: clamp(0.375rem, 1.8vw, 0.875rem);
   margin: 0;
 }
 
@@ -287,5 +151,5 @@ footer .links {
 }
 
 h7 {
-  font-size: var(--h7-font-size);
+  font-size: clamp(0.25rem, 1vw, 0.5rem);
 }

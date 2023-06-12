@@ -20,8 +20,6 @@
     <link rel="icon" type="image/x-icon" href="/images/icons/favicon.ico">
   </head>
 
- 
-
   <body>
 
     <div class="loader-container">
@@ -74,7 +72,7 @@
 
     </div>
 
-    <header class="header">
+    <nav class="header">
       <div class="logo-container">
         <a href="/"><img alt="JY Logo" src="/media/images/Logo/JY.png" id="logo"></a>
       </div>
@@ -82,16 +80,21 @@
         <h2 class="title">Joshua&nbspYang</h2>
       </div>
       <div id="menu">
-        <a class="menu-item" href="/about.html">About</a>
-        <a class="menu-item" href="/experiences.html">Experiences</a>
-        <a class="menu-item" href="/contact.html">Contacts</a>
+        <div class="hamburger">
+          <div class="hamburger-line"></div>
+        </div>
+        <a class="menu-item" href="/about.html">Menu</a>
       </div>
-    </header>
+    </nav>
+
+    <hr>
+
+    <section>
 
     <div class="image-container">
       <img class="me" id="me" alt="me" src="/media/images/Hero/SF_T&R.JPG">
       <p id="about">
-        I am a 16 year old from the Bay, Cali, born and raised. I play soccer, code, engineer, and run in my free time. Recently I've been building some arduino projects and developing on the web. On the side, you might find me playing soccer or biking. 
+        I am a 17 year old from the Bay Area, born and raised. I play soccer, code, engineer, and run in my free time. Recently I've been building some arduino projects and developing on the web. On the side, you might find me playing soccer or biking. 
       </p>
     </div> 
 
@@ -127,6 +130,8 @@
       </defs>
     </svg>
 
+  </section>
+
     <footer>
       <div class="copyright">
         <h6>©2022-2023 Licensed By Joshua Yang</h6>
@@ -145,5 +150,6 @@
 
   </body>
   <script src="/scripts/script.js"></script>
+  <script src="/scripts/global.js"></script>
   <script src="https://kit.fontawesome.com/e0dd0fb448.js" crossorigin="anonymous"></script>
 </html>
