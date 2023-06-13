@@ -1,3 +1,4 @@
+$h1: clamp(1.5rem, 1.5rem + 5vw, 5rem);
 
 $h2: clamp(1rem, 1rem + 1vw, 3rem);
 $h3: clamp(0.5rem, 3vw, 1.125rem);
@@ -7,3 +8,5 @@ $p: clamp(0.5rem, 3vw, 1.125rem);
 
 $margin: calc(8px + 1.5625vw);
 $logo: clamp(0.5rem, 0.5rem + 1vw, 1.5rem);
+
+$bezier: cubic-bezier(.46,.54,.78,.13);

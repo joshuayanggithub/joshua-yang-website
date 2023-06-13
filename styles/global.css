@@ -104,12 +104,13 @@ a {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 100000;
 }
 
 .hamburger-line {
   display: flex;
-  align-items: end;
-  justify-content: end;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
 .hamburger-line, .hamburger-line::before, .hamburger-line::after {
@@ -154,4 +155,72 @@ a {
 .hamburger.open .hamburger-line::after {
   transform: rotate(45deg);
   width: 70%;
+}
+
+aside.open {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: block;
+  background-color: black;
+  z-index: 10000;
+  height: 100vh;
+  width: 100vw;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+aside.open a {
+  text-decoration: none;
+  font-family: DubielPlain, sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 1.5rem + 5vw, 5rem);
+  font-weight: 100;
+  transition: 0.5s cubic-bezier(0.46, 0.54, 0.78, 0.13);
+  margin: auto;
+}
+
+aside {
+  display: none;
+  opacity: 0;
+  transition: 0.8s ease-in-out;
+}
+aside img {
+  opacity: 0;
+  transition: 0.5s linear;
+}
+
+.menu-column:hover > img {
+  transition: 0.5s linear;
+  opacity: 1;
+}
+
+.menu-column:hover > a {
+  transition: 0.5s linear;
+  transform: skew(-10deg);
+  color: rgb(233, 232, 232);
+}
+
+.menu-column {
+  display: flex;
+  justify-content: space-between;
+  height: 20%;
+  width: 50vw;
+  max-width: 80%;
+}
+.menu-column img {
+  height: 70%;
+}
+
+aside {
+  overflow-y: hidden;
+  z-index: -1000;
+}
+
+footer.open {
+  display: none;
 }
