@@ -18,28 +18,27 @@ html {
   background-color: black;
   color: white;
   scroll-behavior: smooth;
+  width: 100vw;
+
+  box-sizing: border-box;
 }
 
 body {
-    overflow-x: none;
-  overscroll-behavior-y: none;
-  /*Remove ScrollBar Entirely!*/
-  overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  margin: 0;
+    // overflow-x: none;
+    // overscroll-behavior-y: none;
+    // /*Remove ScrollBar Entirely!*/
+    // overflow-y: scroll;
+    // scrollbar-width: none; /* Firefox */
+    // -ms-overflow-style: none; /* Internet Explorer 10+ */
+    margin: 0;
+    box-sizing: border-box;
 
-  position: relative; 
-
+    position: relative; 
 }
+
 body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
   display: none;
 }
-
-// hr {
-//     color: white;
-//     border: 0.5px solid white;
-// }
 
 //navbar
 nav {
@@ -67,8 +66,7 @@ nav {
 }
 #logo {
     height: g.$logo;
-    transform: translateY(-250px);
-    opacity: 0;
+    opacity: 1;
     transition: all 0.8s ease-out;
 
     &.animated {

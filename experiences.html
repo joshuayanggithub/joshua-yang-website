@@ -2,17 +2,45 @@
 <html lang="en">
   
 <head>
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KEW3ZB0PPY"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+ 
+     gtag('config', 'G-KEW3ZB0PPY');
+   </script>
+   
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Joshua Yang.</title>
+
   <link rel="stylesheet" href="/styles/experiences.css" />
   <link rel="stylesheet" href="/styles/global.css" />
+  <link rel="icon" type="image/x-icon" href="/media/images/icons/favicon.ico">
 </head>
 
 <body>
-  <div class="mouse-trailer">
-  </div>
+  <!-- <div class="mouse-trailer">
+  </div> -->
+
+  <nav class="header">
+    <div class="logo-container">
+      <a href="/"><img alt="JY Logo" src="/media/images/Logo/JY.png" id="logo"></a>
+    </div>
+    <div class="loading-title-container">
+      <h2 class="title">Joshua&nbspYang</h2>
+    </div>
+    <div id="menu">
+      <div class="hamburger">
+        <div class="hamburger-line"></div>
+      </div>
+      <!-- <a class="menu-item" href="/about.html">Menu</a> -->
+    </div>
+  </nav>
+  <hr>
   
   <div class="slider">
     <div class="slider-image-containers">
@@ -56,22 +84,41 @@
           </div>
         </div>
         <div class="slider-image-container">
-          <img class="slider-image" src="/images/Slider/Philly.JPG">
+          <img class="slider-image" src="/media/images/Slider/Philly.JPG">
         </div>
         <div class="slider-image-container">
-          <img class="slider-image" src="/images/Slider/Rain.JPG">
+          <img class="slider-image" src="/media/images/Slider/Rain.JPG">
         </div>
         <div class="slider-image-container">
-          <img class="slider-image" src="/images/Slider/SFBridge.JPG">
+          <img class="slider-image" src="/media/images/Slider/SFBridge.JPG">
         </div>
         <div class="slider-image-container">
-          <img class="slider-image" src="/images/Slider/soccer_fallon.JPG">
+          <img class="slider-image" src="/media/images/Slider/soccer_fallon.JPG">
         </div>
         <div class="slider-image-container">
-          <img class="slider-image" src="/images/Slider/skiday.JPG">
+          <img class="slider-image" src="/media/images/Slider/skiday.JPG">
         </div>
     </div>
   </div>
+
+  <aside class="overlay">
+    <div class="menu-column horiz">
+      <img src="/media/images/Menu/blurredme.JPG">
+      <a href="/about.html">about</a>
+    </div>
+    <div class="menu-column vert">
+      <a href="/experiences.html"> experiences </a>
+      <img src="/media/images/Menu/sunsettx.JPG">
+    </div>
+    <div class="menu-column horiz">
+      <img src="/media/images/Menu/chess.JPG">
+      <a href="/contact.html"> contact</a>
+    </div>
+    <div class="menu-column horiz">
+      <a href="/"> home </a>
+      <img src="/media/images/Menu/path.JPG">
+    </div>
+  </aside>
   
   <!-- <div class="slider-counter">
     <span>1&nbsp;</span>
@@ -79,5 +126,8 @@
     <span>12</span>
   </div> -->
   <script src="/scripts/slider.js"></script>
+  <script src="/scripts/global.js"></script>
+</body>
+</html>
 </body>
 </html>

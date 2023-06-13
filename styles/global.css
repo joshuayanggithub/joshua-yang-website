@@ -13,16 +13,13 @@ html {
   background-color: black;
   color: white;
   scroll-behavior: smooth;
+  width: 100vw;
+  box-sizing: border-box;
 }
 
 body {
-  overflow-x: none;
-  overscroll-behavior-y: none;
-  /*Remove ScrollBar Entirely!*/
-  overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
   margin: 0;
+  box-sizing: border-box;
   position: relative;
 }
 
@@ -53,8 +50,7 @@ nav h2 {
 
 #logo {
   height: clamp(0.5rem, 0.5rem + 1vw, 1.5rem);
-  transform: translateY(-250px);
-  opacity: 0;
+  opacity: 1;
   transition: all 0.8s ease-out;
 }
 #logo.animated {

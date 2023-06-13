@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KEW3ZB0PPY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-KEW3ZB0PPY');
+  </script>
+
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Joshua Yang .</title>
+  <title>Joshua Yang.</title>
+
   <link rel="stylesheet" href="/styles/contact.css" />
   <link rel="stylesheet" href="/styles/global.css" />
+  <link rel="icon" type="image/x-icon" href="/media/images/icons/favicon.ico">
 </head>
 <body>
 
-  <header class="header">
+  <nav class="header">
     <div class="logo-container">
       <a href="/"><img alt="JY Logo" src="/media/images/Logo/JY.png" id="logo"></a>
     </div>
@@ -18,11 +30,12 @@
       <h2 class="title">Joshua&nbspYang</h2>
     </div>
     <div id="menu">
-      <a class="menu-item" href="/about.html">About</a>
-      <a class="menu-item" href="">Experiences</a>
-      <a class="menu-item" href="/contact.html">Contacts</a>
+      <div class="hamburger">
+        <div class="hamburger-line"></div>
+      </div>
+      <!-- <a class="menu-item" href="/about.html">Menu</a> -->
     </div>
-  </header>
+  </nav>
 
   <section id="contact-container">
     <div class="contact left">
@@ -78,7 +91,28 @@
       
     
   </section>
+
+  <aside class="overlay">
+    <div class="menu-column horiz">
+      <img src="/media/images/Menu/blurredme.JPG">
+      <a href="/about.html">about</a>
+    </div>
+    <div class="menu-column vert">
+      <a href="/experiences.html"> experiences </a>
+      <img src="/media/images/Menu/sunsettx.JPG">
+    </div>
+    <div class="menu-column horiz">
+      <img src="/media/images/Menu/chess.JPG">
+      <a href="/contact.html"> contact</a>
+    </div>
+    <div class="menu-column horiz">
+      <a href="/"> home </a>
+      <img src="/media/images/Menu/path.JPG">
+    </div>
+  </aside>
+
 </body>
 <script src="https://kit.fontawesome.com/e0dd0fb448.js" crossorigin="anonymous"></script>
 <script src="/scripts/contact.js"></script>
+<script src="/scripts/global.js"></script>
 </html>

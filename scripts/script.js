@@ -52,8 +52,6 @@ function animateBody () {
   const title = document.querySelector(".title");
   createBannerSpans(title);
 
-  const menuItems = document.querySelector("#menu").children;
-  // createBannerSpans(menuItems[0]); createBannerSpans(menuItems[1]); createBannerSpans(menuItems[2]);
 
   let timer = setInterval(onTick, 30, title);
 
@@ -75,21 +73,6 @@ function animateBody () {
     img.classList.add("animated");
   }
 
-  setTimeout(animateMenu, 20);
-
-  function animateMenu() {
-    const list = document.querySelectorAll(".menu-item");
-    for (let i=0; i<list.length; ++i) {
-      list[i].classList.add("animated");
-    }
-  }
-
-  setTimeout(animateLogo, 20);
-
-  function animateLogo() {
-    const logo = document.querySelector("#logo");
-    logo.classList.add("animated");
-  }
 }
 
 //SCROLLING FUNCTIONS
