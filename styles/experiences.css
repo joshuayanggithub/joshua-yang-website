@@ -24,7 +24,7 @@
 }
 
 .slider-image {
-  aspect-ratio: 0.5;
+  aspect-ratio: 0.55;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;

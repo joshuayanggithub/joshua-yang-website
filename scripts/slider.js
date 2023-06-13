@@ -12,8 +12,8 @@ slider.addEventListener("scroll", function() {
 
   for (img of slider.getElementsByClassName("slider-image")) {
     img.animate({
-      objectPosition: `-${scrollXPercent*w/2}px 50%`
-    }, { duration: 1000, fill: "forwards" });
+    objectPosition: `-${scrollXPercent*w/3}px 50%`
+    }, { duration: 1200, fill: "forwards" });
 
     // img.animate({
     //   transform: 'skew(-5deg)'
