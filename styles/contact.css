@@ -12,15 +12,6 @@ html {
   color: white;
 }
 
-body {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-  box-sizing: border-box;
-  padding-bottom: 5%;
-}
-
 #contact-container {
   display: flex;
   align-items: center;
@@ -134,86 +125,4 @@ input[type=submit] {
   outline: 0;
   width: 20%;
   cursor: pointer;
-}
-
-header {
-  padding: 1rem;
-}
-
-.title {
-  margin: 0;
-  overflow: hidden;
-  transition: all 0.5s ease-in-out;
-}
-
-.title:hover {
-  transition: all 0.5s ease-in-out;
-  transform: skew(-20deg);
-}
-
-.title span {
-  opacity: 0;
-  transition: all 1s ease-out;
-  display: inline-block;
-}
-
-.title {
-  font-family: DubielPlain;
-  font-style: normal;
-  font-weight: 500;
-  font-size: clamp(1.875rem, 5vw, 5rem);
-}
-
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-/*
-<a href="https://www.vecteezy.com/free-vector/j">J Vectors by Vecteezy</a>
-*/
-#logo-container {
-  overflow: hidden;
-}
-
-#logo {
-  height: clamp(3.5rem, 10vw, 7rem);
-  opacity: 1;
-}
-
-a {
-  text-decoration: none;
-  color: white;
-}
-
-#menu-overlay {
-  z-index: 5000;
-  background-color: black;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s ease-out;
-}
-
-#menu-overlay .show {
-  visibility: visible;
-  opacity: 1;
-}
-
-#menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1vh 2vw;
-}
-
-.menu-item {
-  font-family: "Josefin Sans", sans-serif;
-  font-weight: 250;
-  font-size: clamp(0.5rem, 3vw, 1.125rem);
-  padding: 0.125rem 0;
 }

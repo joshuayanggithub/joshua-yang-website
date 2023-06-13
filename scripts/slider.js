@@ -3,15 +3,21 @@ const sliderContainers = document.querySelector(".slider-image-containers");
 const images = document.querySelectorAll(".slider-image");
 
 slider.addEventListener("scroll", function() {
-  console.log(images.scrollLeft);
 
-  let scrollXPercent = slider.scrollLeft / (slider.scrollWidth - window.innerWidth) * 100;
+  let scrollXPercent = slider.scrollLeft / (slider.scrollWidth - window.innerWidth);
   console.log(scrollXPercent);
+
+  let w = slider.getElementsByClassName("slider-image")[0].offsetWidth;
+  console.log(w);
 
   for (img of slider.getElementsByClassName("slider-image")) {
     img.animate({
-      objectPosition: `${scrollXPercent}% 50%`
-    }, { duration: 500, fill: "forwards" });
+      objectPosition: `-${scrollXPercent*w/2}px 50%`
+    }, { duration: 1000, fill: "forwards" });
+
+    // img.animate({
+    //   transform: 'skew(-5deg)'
+    // }, { duration: 1000, fill: "forwards" });
   }
 });
 

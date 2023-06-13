@@ -9,17 +9,24 @@
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 html {
   background-color: black;
   color: white;
   scroll-behavior: smooth;
-  width: 100vw;
-  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  box-sizing: border-box;
+  overflow-x: none;
+  overscroll-behavior-y: none;
+  /*Remove ScrollBar Entirely!*/
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
   position: relative;
 }
 
@@ -176,7 +183,7 @@ aside.open a {
   text-transform: uppercase;
   font-size: clamp(1.5rem, 1.5rem + 5vw, 5rem);
   font-weight: 100;
-  transition: 0.5s cubic-bezier(0.46, 0.54, 0.78, 0.13);
+  transition: 0.5s ease-in-out;
   margin: auto;
 }
 
