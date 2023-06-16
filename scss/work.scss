@@ -1,0 +1,87 @@
+@use 'variables' as g;
+
+.statement {
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.statement-container {
+    width: 60%;
+    h1 {
+        font-family: DubielPlain;
+        font-weight: 100;
+        font-size: g.$banner;
+    }
+}
+
+.skill {
+    height: 100vh;
+    position: relative;
+
+    .image1, .image2 {
+        max-width: 40%;
+        position: absolute;
+    }
+
+    .image1 {
+        top: 50%;
+
+        transform: translate(0, -50%);
+    }
+
+    .image2 {
+        left: 100%;
+        top: 60%;
+        transform: translate(-100%, -50%);
+    }
+
+    img {
+        height: 40vh;
+        object-fit: cover;
+        aspect-ratio: 3/2;
+    }
+
+    h4 {
+        font-family: "Josefin Sans", sans-serif;
+        font-weight: 250;
+        font-size: g.$p;
+
+        width: 100%;
+    }
+}
+
+.table-of-contents {
+    position: fixed;
+
+    h3 {
+        font-family: DubielPlain;
+        font-weight: 100;
+        font-size: g.$h2; 
+        width: 25%;
+        text-align: center;
+    }
+
+    margin: auto;
+    display: flex;
+    width: 80vw;
+    height: 10vh;
+
+    top: 0;
+    left: 0;
+
+    .progress-box {
+        position: absolute;
+        border: 1px solid white;
+        width: 25%;
+        height: 100%;
+
+        // transform: translate(-50%,-50%);
+        top: 0%;
+        left: 0;
+    }
+}
+

@@ -1,0 +1,70 @@
+.statement {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statement-container {
+  width: 60%;
+}
+.statement-container h1 {
+  font-family: DubielPlain;
+  font-weight: 100;
+  font-size: clamp(2rem, 2rem + 6vw, 8rem);
+}
+
+.skill {
+  height: 100vh;
+  position: relative;
+}
+.skill .image1, .skill .image2 {
+  max-width: 40%;
+  position: absolute;
+}
+.skill .image1 {
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.skill .image2 {
+  left: 100%;
+  top: 60%;
+  transform: translate(-100%, -50%);
+}
+.skill img {
+  height: 40vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 3/2;
+}
+.skill h4 {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 250;
+  font-size: clamp(0.5rem, 3vw, 1.125rem);
+  width: 100%;
+}
+
+.table-of-contents {
+  position: fixed;
+  margin: auto;
+  display: flex;
+  width: 80vw;
+  height: 10vh;
+  top: 0;
+  left: 0;
+}
+.table-of-contents h3 {
+  font-family: DubielPlain;
+  font-weight: 100;
+  font-size: clamp(1rem, 1rem + 1vw, 3rem);
+  width: 25%;
+  text-align: center;
+}
+.table-of-contents .progress-box {
+  position: absolute;
+  border: 1px solid white;
+  width: 25%;
+  height: 100%;
+  top: 0%;
+  left: 0;
+}
