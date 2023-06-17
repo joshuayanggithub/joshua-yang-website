@@ -22,7 +22,7 @@ function listener(event) {
 }
 
 //finish loading screen and animate body
-setTimeout(FinishLoader, 0);
+setTimeout(FinishLoader, 3000);
 
 function FinishLoader() {
   const loaderContainer = document.querySelector(".loader-container");
@@ -46,7 +46,7 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
 //END OF ANIMATIONS
 
 //LOAD IN BODY
-setTimeout(animateBody, 0);
+setTimeout(animateBody, 3000);
 
 function animateBody () {
   const title = document.querySelector(".title");
@@ -75,49 +75,49 @@ function animateBody () {
 
 }
 
-//SCROLLING FUNCTIONS
-window.addEventListener('scroll',trackScroll);
+// //SCROLLING FUNCTIONS
+// window.addEventListener('scroll',trackScroll);
 
-function trackScroll() {
-  //SCROLL TRACKER
-  let documentHeight = document.documentElement.scrollHeight; //total document height
-  let documentWidth = document.documentElement.scrollWidth; 
+// function trackScroll() {
+//   //SCROLL TRACKER
+//   let documentHeight = document.documentElement.scrollHeight; //total document height
+//   let documentWidth = document.documentElement.scrollWidth; 
 
-  let vpHeight = window.innerHeight; //viewport height
-  let vpWidth = window.innerHeight; //viewport width
+//   let vpHeight = window.innerHeight; //viewport height
+//   let vpWidth = window.innerHeight; //viewport width
 
-  let elementHeight = document.querySelector('.scroll-tracker').offsetHeight; //element height
-  let elementWidth = document.querySelector('.scroll-tracker').offsetWidth; //element width
+//   let elementHeight = document.querySelector('.scroll-tracker').offsetHeight; //element height
+//   let elementWidth = document.querySelector('.scroll-tracker').offsetWidth; //element width
 
-  let curY = window.scrollY; //only gets top of vp height so we get offset
+//   let curY = window.scrollY; //only gets top of vp height so we get offset
 
-  // console.log(curY + " " + (vpHeight) + " " + documentHeight);
-  let percentScrolled = ((curY/(documentHeight-vpHeight)));
+//   // console.log(curY + " " + (vpHeight) + " " + documentHeight);
+//   let percentScrolled = ((curY/(documentHeight-vpHeight)));
 
-  let pixelScrolledVertical = percentScrolled*vpHeight;
-  let pixelScrolledVerticalMax = vpHeight - elementHeight; //so I can still see the bottom of the tracker
+//   let pixelScrolledVertical = percentScrolled*vpHeight;
+//   let pixelScrolledVerticalMax = vpHeight - elementHeight; //so I can still see the bottom of the tracker
 
-  let finalTrackerHeight = Math.min(pixelScrolledVertical,pixelScrolledVerticalMax);
+//   let finalTrackerHeight = Math.min(pixelScrolledVertical,pixelScrolledVerticalMax);
 
-  // console.log(finalTrackerHeight);
-  document.querySelectorAll('.scroll-tracker')[0].style["top"] = finalTrackerHeight + "px";
-  document.querySelectorAll('.scroll-tracker')[1].style["top"] = finalTrackerHeight + "px"; 
-}
+//   // console.log(finalTrackerHeight);
+//   document.querySelectorAll('.scroll-tracker')[0].style["top"] = finalTrackerHeight + "px";
+//   document.querySelectorAll('.scroll-tracker')[1].style["top"] = finalTrackerHeight + "px"; 
+// }
 
 
-//MOUSE TRACKER
-window.onpointermove = event => {
-  let x = event.clientX;
-  let y = event.clientY;
+// //MOUSE TRACKER
+// window.onpointermove = event => {
+//   let x = event.clientX;
+//   let y = event.clientY;
 
-  // console.log(x + " " + y);
+//   // console.log(x + " " + y);
 
-  let mouseTrailer = document.querySelector("#mouse-trailer");
-  // mouseTrailer.style["left"] = x + "px";
-  // mouseTrailer.style["top"] = y + "px";
+//   let mouseTrailer = document.querySelector("#mouse-trailer");
+//   // mouseTrailer.style["left"] = x + "px";
+//   // mouseTrailer.style["top"] = y + "px";
 
-  mouseTrailer.animate({
-    left: `${x}px`,
-    top: `${y}px`
-  }, { duration: 1400, fill: "forwards" });
-}
+//   mouseTrailer.animate({
+//     left: `${x}px`,
+//     top: `${y}px`
+//   }, { duration: 1400, fill: "forwards" });
+// }

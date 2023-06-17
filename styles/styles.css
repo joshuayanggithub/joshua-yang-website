@@ -26,11 +26,9 @@
 section {
   height: 90vh;
   width: 100%;
-  margin: 2vh 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 2vh;
 }
 
 .image-container {
@@ -40,24 +38,19 @@ section {
   flex-direction: column;
 }
 
-.image-container > .me {
-  height: 60vh;
-  width: 30%;
-  aspect-ratio: 1;
+.me {
+  height: 68vh;
+  width: 33%;
   filter: url(#noise);
-  border: 0.5vh solid;
-  border-color: white;
-  transition: all 1s ease-out;
   transform: translateY(-70px);
   opacity: 0;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.image-container > .me.animated {
+.me.animated {
   transform: translate(0px);
   opacity: 1;
 }
-
 #about {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 250;
