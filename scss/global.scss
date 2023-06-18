@@ -26,14 +26,14 @@ html {
 }
 
 body {
-    overflow-x: none;
-    overscroll-behavior-y: none;
-    /*Remove ScrollBar Entirely!*/
-    overflow-y: scroll;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    // overflow-x: none;
+    // overscroll-behavior-y: none;
+    // /*Remove ScrollBar Entirely!*/
+    // overflow-y: scroll;
+    // scrollbar-width: none; /* Firefox */
+    // -ms-overflow-style: none; /* Internet Explorer 10+ */
 
-    position: relative; 
+    // position: relative; 
 }
 
 body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
@@ -171,11 +171,11 @@ a {
     }
     .hamburger-line::before {
         transform: rotate(-45deg);
-        width: 70%;
+        width: 100%;
     }
     .hamburger-line::after {
         transform: rotate(45deg);
-        width: 70%;
+        width: 100%;
     }
 }
 
@@ -212,7 +212,7 @@ aside.open{
 
         transition: 0.5s ease-in-out;
 
-        margin: auto;
+        // margin: auto;
     }
 }
 
@@ -237,20 +237,44 @@ aside {
 
 .menu-column:hover > a {
     transition: 0.5s linear;
-    transform: skew(-10deg);
+    // transform: skew(-10deg);
     color: rgb(233, 232, 232);
 }
 
 .menu-column {
     display: flex;
-    justify-content: space-between;
-
+    gap: 5%;
     height: 20%;
-    width: 50vw;
+    width:60vw;
     max-width: 80%;
 
+    &.one {
+        justify-content: flex-end;
+        img {
+            transform: rotate(-4deg);
+        }
+    }
+    &.two {
+        justify-content: flex-start;
+        img {
+            transform: rotate(3deg);
+        }
+    }
+    &.three {
+        justify-content: flex-end;
+        img {
+            transform: rotate(-8deg);
+        }
+    }
+    &.four {
+        justify-content: flex-start;
+        img {
+            transform: rotate(5deg);
+        }
+    }
+
     img {
-        height: 70%;
+        height: 90%;
     }
 }
 

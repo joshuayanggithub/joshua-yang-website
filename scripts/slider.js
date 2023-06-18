@@ -29,10 +29,11 @@ slider.addEventListener("scroll", function() {
 //     left: `${x}px`,
 //     top: `${y}px`
 //   }, { duration: 900, fill: "forwards" });
-
 // });
 
-for (let img of images) {
+images.forEach((img, index) => {
+  img.style["left"] =  `${32*(index)}vmin`;
+
   img.addEventListener("click", function () {
   let imgContainer = img.parentElement;
   console.log(imgContainer);
@@ -49,4 +50,8 @@ for (let img of images) {
       }
       img.classList.add("clicked");
   }});
+} );
+
+for (let img of images) {
+  
 }
