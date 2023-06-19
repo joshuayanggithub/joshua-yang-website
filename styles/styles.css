@@ -8,7 +8,7 @@ body {
 
 #svg-loading-text {
   position: absolute;
-  z-index: 90000;
+  z-index: 100;
   animation: draw-letters-fill 0.5s ease-in forwards 2s;
 }
 
