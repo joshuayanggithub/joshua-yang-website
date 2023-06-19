@@ -3,7 +3,7 @@
   font-family: DubielPlain;
   src: url(/media/fonts/Dubiel.ttf);
 }
-* {
+*, body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@
 
 html, body {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 html {
@@ -20,16 +20,12 @@ html {
   scroll-behavior: smooth;
 }
 
-body::-webkit-scrollbar { /* WebKit for removing scrollbar*/
-  display: none;
-}
-
 nav {
+  height: calc(3vh + 6vmin);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1em;
-  height: 7vh;
+  padding: 3vmin;
 }
 nav h2 {
   font-family: DubielPlain;
@@ -41,19 +37,12 @@ nav h2 {
 /*
 <a href="https://www.vecteezy.com/free-vector/j">J Vectors by Vecteezy</a>
 */
-#logo-container {
-  overflow: hidden;
+.logo-container {
+  height: 100%;
 }
 
-#logo {
-  height: clamp(0.5rem, 0.5rem + 1vw, 1.5rem);
-  opacity: 1;
-  transition: all 0.8s ease-out;
-}
-#logo.animated {
-  transform: translate(0px);
-  rotate: 0deg;
-  opacity: 1;
+a, #logo {
+  height: 100%;
 }
 
 a {
@@ -65,29 +54,6 @@ a {
   height: 90%;
 }
 
-.title {
-  margin: 0;
-  overflow: hidden;
-  transition: all 0.5s ease-in-out;
-}
-
-.title:hover, #logo:hover {
-  transition: all 0.5s ease-in-out;
-  transform: skew(-20deg);
-}
-
-.title span {
-  opacity: 0;
-  transition: all 1s ease-out;
-  transform: translateY(-200px);
-  display: inline-block;
-}
-
-.title span.fade {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
 .hamburger {
   position: relative;
   height: 100%;
@@ -97,7 +63,7 @@ a {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 100000;
+  z-index: 9999999999999;
 }
 
 .hamburger-line {
@@ -107,22 +73,22 @@ a {
 }
 
 .hamburger-line, .hamburger-line::before, .hamburger-line::after {
-  height: 1.5px;
-  border-radius: 0.5px;
+  height: 1.1px;
+  border-radius: 0.2px;
   background-color: white;
   transition: 0.5s ease-in-out;
 }
 
 .hamburger-line {
-  width: 70%;
+  width: 50%;
 }
 
 .hamburger-line::before {
-  width: 55%;
+  width: 100%;
 }
 
 .hamburger-line::after {
-  width: 40%;
+  width: 70%;
 }
 
 .hamburger-line::before, .hamburger-line::after {

@@ -1,8 +1,44 @@
 //Start Initial Loader Screen
-document.querySelector("main").style["display"] = "none";
+window.addEventListener('load', onLoad, false);
 
+function onLoad() {
+
+let loadingAnimation = gsap.timeline();
+
+const svgText = document.querySelector("#svg-loading-text");
 const svgLoadingText = document.querySelectorAll("#svg-loading-text>path"); //the mask in svg is annoying
+let logo = document.querySelector("#logo");
+let hamburger = document.querySelector(".hamburger");
 // console.log(svgLoadingText);
+
+loadingAnimation.set(svgText, {
+  width: '50%',
+  top: '50%',
+  left: '50%',
+  // transform: 'translate(-50%,-50%)', replacement is xPercent!
+  xPercent: '-50',
+  yPercent: '-50',
+});
+loadingAnimation.to(svgText, 
+  {
+      height: '3vh',
+      yPercent: '0',
+      left: '50%',
+      top: '3vmin',
+      duration: '3',
+      ease: Expo.easeInOut,
+      delay: '3',
+  }
+);
+loadingAnimation.from(
+  ['#me', 'p', '.hamburger', '#logo'], 
+  {
+    opacity: '0',
+    y:'-100',
+    duration: '2',
+    ease: Expo.easeInOut,
+  },
+);
 
 for (let i=0; i<svgLoadingText.length; ++i) {
   // console.log(svgLoadingText[i].getTotalLength());
@@ -21,14 +57,6 @@ function listener(event) {
   document.querySelector("#svg-loading-text mask").style["fill"] = "white";
 }
 
-//finish loading screen and animate body
-setTimeout(FinishLoader, 3000);
-
-function FinishLoader() {
-  const loaderContainer = document.querySelector(".loader-container");
-  loaderContainer.remove();
-  document.querySelector("main").style["display"] = "initial";
-}
 
 // //IMPORTANT ANIMATION FUNCTIONS FOR MODULARITY
 function createBannerSpans(querySelector) { //convert h1 or text container to inline elements
@@ -46,34 +74,7 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
 //END OF ANIMATIONS
 
 //LOAD IN BODY
-setTimeout(animateBody, 3000);
 
-function animateBody () {
-  const title = document.querySelector(".title");
-  createBannerSpans(title);
-
-
-  let timer = setInterval(onTick, 30, title);
-
-  function onTick(selector) {
-    // console.log(selector);
-    const span = selector.querySelectorAll("span:not(.fade)")[0];
-    // console.log(span);
-    if (span== undefined) {
-      clearInterval(timer);
-      return;
-    }
-    span.classList.add('fade');
-  }
-
-  const img = document.querySelector(".me");
-  setTimeout(animateImage, 20);
-
-  function animateImage() {
-    img.classList.add("animated");
-  }
-
-}
 
 // //SCROLLING FUNCTIONS
 // window.addEventListener('scroll',trackScroll);
@@ -121,3 +122,4 @@ function animateBody () {
 //     top: `${y}px`
 //   }, { duration: 1400, fill: "forwards" });
 // }
+}

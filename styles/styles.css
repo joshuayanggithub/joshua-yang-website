@@ -1,12 +1,14 @@
-.loader-container {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+body {
+  position: relative;
+}
+
+.loading-title-container {
+  height: 100%;
 }
 
 #svg-loading-text {
-  width: 50%;
+  position: absolute;
+  z-index: 90000;
   animation: draw-letters-fill 0.5s ease-in forwards 2s;
 }
 
@@ -24,7 +26,6 @@
   }
 }
 section {
-  height: 90vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -42,14 +43,8 @@ section {
   height: 68vh;
   width: 33%;
   filter: url(#noise);
-  transform: translateY(-70px);
-  opacity: 0;
   -o-object-fit: cover;
      object-fit: cover;
-}
-.me.animated {
-  transform: translate(0px);
-  opacity: 1;
 }
 #about {
   font-family: "Josefin Sans", sans-serif;

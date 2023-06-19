@@ -1,3 +1,7 @@
+window.addEventListener('load', onLoad, false);
+
+function onLoad() {
+
 //MENU BAR
 const menu = document.querySelector("#menu");
 const footer = document.querySelector("footer");
@@ -20,3 +24,5 @@ burger.addEventListener('click', () => {
     opened = false;
   }
 })
+
+};
