@@ -30,14 +30,43 @@ loadingAnimation.to(svgText,
       delay: '3',
   }
 );
+loadingAnimation.from('#me',
+  {
+    height:'0',
+    duration: '1.5',
+    ease: Expo.easeInOut, 
+  },
+  "-=1",
+);
 loadingAnimation.from(
-  ['#me', 'p', '.hamburger', '#logo'], 
+  '.hamburger', 
+  {
+    opacity: '0',
+    x:'-100',
+    duration: '2',
+    ease: Expo.easeInOut,
+  },
+  "<"
+);
+loadingAnimation.from(
+  '#logo', 
+  {
+    opacity: '0',
+    x:'100',
+    duration: '2',
+    ease: Expo.easeInOut,
+  },
+  "<"
+);
+loadingAnimation.from(
+  'p', 
   {
     opacity: '0',
     y:'-100',
     duration: '2',
     ease: Expo.easeInOut,
   },
+  "<"
 );
 
 for (let i=0; i<svgLoadingText.length; ++i) {
