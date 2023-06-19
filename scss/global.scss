@@ -155,7 +155,7 @@ a {
 }
 
 //ACTUAL MENU
-aside.open{
+aside{
     position: fixed;
     width: 100%;
 	height: 100%;
@@ -165,7 +165,7 @@ aside.open{
     display: block;
 
     background-color: black;
-    z-index: 10000;
+    z-index: 1000;
 
     height: 100vh;
     width: 100vw;
@@ -185,22 +185,20 @@ aside.open{
         font-size: g.$h1;
         font-weight: 100;
 
-        transition: 0.5s ease-in-out;
-
         // margin: auto;
     }
 }
 
 aside {
-    display: none;
-    opacity: 0;
+    // display: none;
+    // opacity: 0;
 
-    transition: 0.8s ease-in-out;
+    // transition: 0.8s ease-in-out;
 
     img {
         opacity: 0;
         // transform: scale(0);
-        transition: 0.5s linear;
+        transition: 0.8s linear;
     } 
 }
 
@@ -211,7 +209,7 @@ aside {
 }
 
 .menu-column:hover > a {
-    transition: 0.5s linear;
+    transition: 0.8s linear;
     // transform: skew(-10deg);
     color: rgb(233, 232, 232);
 }
@@ -222,6 +220,8 @@ aside {
     height: 20%;
     width:60vw;
     max-width: 80%;
+
+    overflow: hidden;
 
     &.one {
         justify-content: flex-end;
@@ -253,11 +253,6 @@ aside {
     }
 }
 
-aside {
-    overflow-y: hidden;
-    z-index: -1000;
-
-}
 
 footer.open{
     display: none;

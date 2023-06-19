@@ -116,7 +116,7 @@ a {
   width: 100%;
 }
 
-aside.open {
+aside {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -124,7 +124,7 @@ aside.open {
   left: 0;
   display: block;
   background-color: black;
-  z-index: 10000;
+  z-index: 1000;
   height: 100vh;
   width: 100vw;
   opacity: 1;
@@ -133,23 +133,17 @@ aside.open {
   align-items: center;
   justify-content: center;
 }
-aside.open a {
+aside a {
   text-decoration: none;
   font-family: DubielPlain, sans-serif;
   text-transform: uppercase;
   font-size: clamp(1.5rem, 1.5rem + 5vw, 5rem);
   font-weight: 100;
-  transition: 0.5s ease-in-out;
 }
 
-aside {
-  display: none;
-  opacity: 0;
-  transition: 0.8s ease-in-out;
-}
 aside img {
   opacity: 0;
-  transition: 0.5s linear;
+  transition: 0.8s linear;
 }
 
 .menu-column:hover > img {
@@ -158,7 +152,7 @@ aside img {
 }
 
 .menu-column:hover > a {
-  transition: 0.5s linear;
+  transition: 0.8s linear;
   color: rgb(233, 232, 232);
 }
 
@@ -168,6 +162,7 @@ aside img {
   height: 20%;
   width: 60vw;
   max-width: 80%;
+  overflow: hidden;
 }
 .menu-column.one {
   justify-content: flex-end;
@@ -195,11 +190,6 @@ aside img {
 }
 .menu-column img {
   height: 90%;
-}
-
-aside {
-  overflow-y: hidden;
-  z-index: -1000;
 }
 
 footer.open {
