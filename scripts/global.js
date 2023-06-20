@@ -21,9 +21,9 @@ const menuOpenClose = gsap.timeline(
     }
 );
 
-menuOpenClose.from(aside,
+menuOpenClose.to(aside,
     {
-        height: '0%',
+        height: '100%',
         duration: 0.5,
     }
 );
