@@ -151,11 +151,6 @@ aside img {
   opacity: 1;
 }
 
-.menu-column:hover > a {
-  transition: 0.8s linear;
-  color: rgb(233, 232, 232);
-}
-
 .menu-column {
   display: flex;
   gap: 5%;
