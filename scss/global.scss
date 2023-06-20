@@ -257,3 +257,19 @@ aside {
 footer.open{
     display: none;
 }
+
+//temp
+.construction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    h1 {
+        font-family: DubielPlain;
+        font-weight: 100;
+        width: 80%;
+        text-align: center;
+        font-size: g.$h1;
+
+    }
+}

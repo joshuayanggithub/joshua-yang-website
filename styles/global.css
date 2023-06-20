@@ -190,3 +190,17 @@ aside img {
 footer.open {
   display: none;
 }
+
+.construction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+.construction h1 {
+  font-family: DubielPlain;
+  font-weight: 100;
+  width: 80%;
+  text-align: center;
+  font-size: clamp(1.5rem, 1.5rem + 5vw, 5rem);
+}
