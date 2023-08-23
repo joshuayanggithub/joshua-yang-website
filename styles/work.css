@@ -18,7 +18,8 @@
   height: 100vh;
   position: relative;
 }
-.skill .image1, .skill .image2 {
+.skill .image1,
+.skill .image2 {
   max-width: 40%;
   position: absolute;
 }

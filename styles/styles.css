@@ -81,34 +81,6 @@ section {
   width: 2px;
   height: 100px;
 } 
-#mouse-trailer {
-  position: fixed;
-  background-color: white;
-  z-index: 2000;
-  height: 100px;
-  width: 100px;
-  left: 50%;
-  top: 50%;
-  translate: -50% -50%;
-  border-radius: 50%;
-  background: linear-gradient(to right, transparent, rgb(238, 238, 210), rgb(246, 248, 212));
-  opacity: 0.4;
-  filter: blur(23px);
-  animation: blob-distort 20s infinite;
-  pointer-events: none;
-}
-
-@keyframes blob-distort {
-  0% {
-    rotate: 0deg;
-  }
-  60% {
-    scale: 1 1.1;
-  }
-  100% {
-    rotate: 359deg;
-  }
-}
 footer {
   font-family: "Josefin Sans", sans-serif;
   margin-top: 10vh;

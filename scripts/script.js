@@ -1,7 +1,4 @@
 //Start Initial Loader Screen
-window.addEventListener('load', onLoad, false);
-
-function onLoad() {
 
 let loadingAnimation = gsap.timeline();
 
@@ -12,64 +9,63 @@ let hamburger = document.querySelector(".hamburger");
 // console.log(svgLoadingText);
 
 loadingAnimation.set(svgText, {
-  width: '50%',
-  top: '50%',
-  left: '50%',
+  width: "50%",
+  top: "50%",
+  left: "50%",
   // transform: 'translate(-50%,-50%)', replacement is xPercent!
-  xPercent: '-50',
-  yPercent: '-50',
+  xPercent: "-50",
+  yPercent: "-50",
 });
-loadingAnimation.to(svgText, 
+loadingAnimation.to(svgText, {
+  height: "3vh",
+  yPercent: "0",
+  left: "50%",
+  top: "3vmin",
+  duration: "3",
+  ease: Expo.easeInOut,
+  delay: "3",
+});
+loadingAnimation.from(
+  "#me",
   {
-      height: '3vh',
-      yPercent: '0',
-      left: '50%',
-      top: '3vmin',
-      duration: '3',
-      ease: Expo.easeInOut,
-      delay: '3',
-  }
-);
-loadingAnimation.from('#me',
-  {
-    height:'0',
-    duration: '1.5',
-    ease: Expo.easeInOut, 
+    height: "0",
+    duration: "1.5",
+    ease: Expo.easeInOut,
   },
-  "-=1",
+  "-=1"
 );
 loadingAnimation.from(
-  '.hamburger', 
+  ".hamburger",
   {
-    opacity: '0',
-    x:'-100',
-    duration: '2',
+    opacity: "0",
+    x: "-100",
+    duration: "2",
     ease: Expo.easeInOut,
   },
   "<"
 );
 loadingAnimation.from(
-  '#logo', 
+  "#logo",
   {
-    opacity: '0',
-    x:'100',
-    duration: '2',
+    opacity: "0",
+    x: "100",
+    duration: "2",
     ease: Expo.easeInOut,
   },
   "<"
 );
 loadingAnimation.from(
-  'p', 
+  "p",
   {
-    opacity: '0',
-    y:'-100',
-    duration: '2',
+    opacity: "0",
+    y: "-100",
+    duration: "2",
     ease: Expo.easeInOut,
   },
   "<"
 );
 
-for (let i=0; i<svgLoadingText.length; ++i) {
+for (let i = 0; i < svgLoadingText.length; ++i) {
   // console.log(svgLoadingText[i].getTotalLength());
   let length = svgLoadingText[i].getTotalLength();
   svgLoadingText[i].style["stroke-dasharray"] = length;
@@ -86,14 +82,14 @@ function listener(event) {
   document.querySelector("#svg-loading-text mask").style["fill"] = "white";
 }
 
-
 // //IMPORTANT ANIMATION FUNCTIONS FOR MODULARITY
-function createBannerSpans(querySelector) { //convert h1 or text container to inline elements
+function createBannerSpans(querySelector) {
+  //convert h1 or text container to inline elements
   const querySelectorContent = querySelector.textContent;
   const splitText = querySelectorContent.split("");
   querySelector.innerHTML = "";
 
-  for (let i=0; i<splitText.length; ++i) {
+  for (let i = 0; i < splitText.length; ++i) {
     let element = document.createElement("span");
     let content = document.createTextNode(splitText[i]);
     element.appendChild(content);
@@ -104,14 +100,13 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
 
 //LOAD IN BODY
 
-
 // //SCROLLING FUNCTIONS
 // window.addEventListener('scroll',trackScroll);
 
 // function trackScroll() {
 //   //SCROLL TRACKER
 //   let documentHeight = document.documentElement.scrollHeight; //total document height
-//   let documentWidth = document.documentElement.scrollWidth; 
+//   let documentWidth = document.documentElement.scrollWidth;
 
 //   let vpHeight = window.innerHeight; //viewport height
 //   let vpWidth = window.innerHeight; //viewport width
@@ -131,9 +126,8 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
 
 //   // console.log(finalTrackerHeight);
 //   document.querySelectorAll('.scroll-tracker')[0].style["top"] = finalTrackerHeight + "px";
-//   document.querySelectorAll('.scroll-tracker')[1].style["top"] = finalTrackerHeight + "px"; 
+//   document.querySelectorAll('.scroll-tracker')[1].style["top"] = finalTrackerHeight + "px";
 // }
-
 
 // //MOUSE TRACKER
 // window.onpointermove = event => {
@@ -151,4 +145,3 @@ function createBannerSpans(querySelector) { //convert h1 or text container to in
 //     top: `${y}px`
 //   }, { duration: 1400, fill: "forwards" });
 // }
-}
