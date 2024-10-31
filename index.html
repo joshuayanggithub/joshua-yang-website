@@ -2,10 +2,7 @@
 <html lang="en">
   <head>
     <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-KEW3ZB0PPY"
-    ></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KEW3ZB0PPY"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -21,16 +18,9 @@
     <title>Joshua Yang.</title>
     <link rel="stylesheet" href="/styles/styles.css" />
     <link rel="stylesheet" href="/styles/global.css" />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="/media/images/icons/favicon.ico"
-    />
+    <link rel="icon" type="image/x-icon" href="/media/images/icons/favicon.ico" />
 
-    <script
-      src="https://kit.fontawesome.com/e0dd0fb448.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/e0dd0fb448.js" crossorigin="anonymous"></script>
 
     <!-- gsap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
@@ -49,35 +39,12 @@
 
       <nav class="header">
         <div class="logo-container">
-          <a href="/"
-            ><img alt="JY Logo" src="/media/images/Logo/JY.png" id="logo"
-          /></a>
+          <a href="/"><img alt="JY Logo" src="/media/images/Logo/JY.png" id="logo" /></a>
         </div>
         <div class="loading-title-container">
-          <svg
-            id="svg-loading-text"
-            width="1664"
-            height="308"
-            viewBox="0 0 1664 308"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <mask
-              id="path-1-outside-1_714_3"
-              maskUnits="userSpaceOnUse"
-              x="0.425781"
-              y="0.873047"
-              width="1663"
-              height="307"
-              fill="black"
-            >
-              <rect
-                fill="white"
-                x="0.425781"
-                y="0.873047"
-                width="1663"
-                height="307"
-              />
+          <svg id="svg-loading-text" width="1664" height="308" viewBox="0 0 1664 308" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="path-1-outside-1_714_3" maskUnits="userSpaceOnUse" x="0.425781" y="0.873047" width="1663" height="307" fill="black">
+              <rect fill="white" x="0.425781" y="0.873047" width="1663" height="307" />
               <path
                 d="M142.059 1.87305V6.00391H104.422V198.869C104.422 216.8 97.2617 230.967 82.9414 241.371C74.4349 247.613 64.429 250.734 52.9238 250.734C49.4355 250.734 43.1628 250.245 34.1055 249.266C21.7435 247.797 12.2272 240.514 5.55664 227.418C2.80273 221.971 1.42578 215.974 1.42578 209.426C1.42578 202.633 2.80273 196.727 5.55664 191.709C9.5957 184.671 15.7155 181.152 23.916 181.152C32.8509 181.152 38.8789 185.038 42 192.811C42.7344 195.075 43.1016 197.462 43.1016 199.971C43.1016 204.071 41.847 207.712 39.3379 210.895C35.4212 215.546 30.403 218.055 24.2832 218.422C22.1413 218.422 19.7852 218.055 17.2148 217.32C15.6237 216.953 13.9714 216.219 12.2578 215.117C10.6055 213.954 9.35091 213.036 8.49414 212.363C7.51497 213.404 7.02539 215.178 7.02539 217.688C7.02539 220.319 8.27995 224.205 10.7891 229.346C16.7253 241.096 28.0163 246.971 44.6621 246.971C50.7207 246.726 57.1159 245.012 63.8477 241.83C70.5794 238.587 73.9453 234.67 73.9453 230.08V6.00391H39.3379V1.87305H142.059Z"
               />
@@ -182,46 +149,22 @@
 
       <section>
         <div class="image-container">
-          <img
-            class="me"
-            id="me"
-            alt="me"
-            src="/media/images/Hero/SF_T&R.JPG"
-          />
+          <img class="me" id="me" alt="me" src="/media/images/Hero/SF_T&R.JPG" />
           <p id="about">
-            I am a 17 year old from the Bay Area, born and raised. I play
-            soccer, code, engineer, and run in my free time. Recently I've been
-            building some arduino projects and developing on the web. On the
-            side, you might find me playing soccer or biking.
+            I am a 18 year old from California! I enjoy fitness, soccer, travel. Recently I've been learning how to camp and go backpacking and am trying to start some cool projects in my free time.
+            It's difficult to say what will happen in the next four years, but I've learned to enjoy the process.
           </p>
         </div>
 
         <svg style="position: absolute; height: 0">
           <defs>
             <filter id="noise">
-              <feTurbulence
-                baseFrequency="0.7,0.8"
-                seed="0"
-                type="fractalNoise"
-                result="static"
-              >
-                <animate
-                  attributeName="seed"
-                  values="0;20"
-                  dur="500ms"
-                  repeatCount="indefinite"
-                  begin="me.mouseenter"
-                />
+              <feTurbulence baseFrequency="0.7,0.8" seed="0" type="fractalNoise" result="static">
+                <animate attributeName="seed" values="0;20" dur="500ms" repeatCount="indefinite" begin="me.mouseenter" />
               </feTurbulence>
 
               <feDisplacementMap in="SourceGraphic" in2="static">
-                <animate
-                  attributeName="scale"
-                  values="0;20;0"
-                  dur="500ms"
-                  repeatCount="1"
-                  begin="me.mouseenter"
-                />
+                <animate attributeName="scale" values="0;20;0" dur="500ms" repeatCount="1" begin="me.mouseenter" />
               </feDisplacementMap>
             </filter>
           </defs>
