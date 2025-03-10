@@ -46,10 +46,137 @@
     </div>
   </nav>
  
-  <div class="construction">
-    <h1> For now, this page is under construction... Here are some <u><a href="https://docs.google.com/document/d/1ySXqEMzqanM8sKbe7C0sYdRiEMN6E-7fotWKDzR3H3Y/edit?tab=t.0">projects </a></u>
+  <div class="experiences">
+    <div class="intro">
+      <div class="about-me">
+        <h1>Joshua Yang</h1>
+        
+        <p>I am a first year B.S. in Computer Engineering student at Carnegie Mellon University. </p>
+
+        <p>Currently I am involved in Carnegie Mellon Racing's driverless subteam and hoping to start a research apprenticeship at Robotics Institute this summer.</p>
+
+        <p>I'm most interested in exploring software problems related to AI and Robotics, but have dealt with other hardware projects too.</p>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/thejoshuayang/">LinkedIn</a> /
+          <a href="https://github.com/joshuayanggithub" target="_blank">GitHub</a> /
+          <a href="mailto:joshuaya@andrew.cmu.edu" target="_blank">joshuaya [at] andrew.cmu.edu</a>
+        </div>
+        
+      </div>
+      <div class="me-div-wrapper">
+        <img src="/media/images/Experiences/selfie.JPG" class="me" id="me">
+        <svg style="position: absolute; height: 0">
+          <defs>
+            <filter id="noise">
+              <feTurbulence baseFrequency="0.7,0.8" seed="0" type="fractalNoise" result="static">
+                <animate attributeName="seed" values="0;20" dur="500ms" repeatCount="indefinite" begin="me.mouseenter" />
+              </feTurbulence>
+
+              <feDisplacementMap in="SourceGraphic" in2="static">
+                <animate attributeName="scale" values="0;20;0" dur="500ms" repeatCount="1" begin="me.mouseenter" />
+              </feDisplacementMap>
+            </filter>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="projects">
+      <h2>Projects</h2>
+
+      <p>Here are some projects I've done <i>related to my current interests</i> and may be continuing to work on:</p>
+
+      <i><u><h3>Software</h3></u></i>
       
-    </h1>
+      <div class="showcase">
+
+        <div class="project">
+          <img src="media/images/Experiences/Projects/rviz_slam.png">
+          <div class="description">
+            <div class="project-about">
+              <h3 class="project-name">2D Lidar SLAM with ROS</h3>
+              <h3>Personal Project</h3>
+              <div class="links">
+                <!-- <a href="">GitHub</a> /
+                <a href="">Doc</a> / 
+                <a href="">Video</a> -->
+              </div>
+            </div>
+            <p> Implemented 2D SLAM using LiDar on open-source robot (variation of Turtlebot3) in simulation through Gazebo. This course relied heavily on pre-existing ROS2 packages (i.e. Nav2 for SLAM and ros2_control for controls) which heavily limited understanding, so I'm currently attempting to re-implement as many features (i.e. EKF and sensor fusion) from scratch. Only when I'm finished can I implement this on the actual hardware</p>
+          </div>
+        </div>
+
+        <div class="project">
+          <img src="media/images/Experiences/Projects/pacman.png">
+          <div class="description">
+            <div class="project-about">
+              <h3 class="project-name">Search-Based Agents</h3>
+              <h3>Coursework</h3>
+              <div class="links">
+                <!-- <a href="">GitHub (private)</a> /
+                <a href="">Doc</a> / 
+                <a href="">Video</a> -->
+              </div>
+            </div>
+            <p>To design an agent for the player in classic video game Pacman, we wrote an evaluation function and performed mini-max with alpha-beta pruning and bounded lookahead at an arbitrary depth to search for a winning path</p>
+          </div>
+        </div>                
+        
+        <div class="project">
+          <img src="media/images/Experiences/Projects/iSAM2.png">
+          <div class="description">
+            <div class="project-about">
+              <h3 class="project-name">iSAM2 Optimization for CMR 24a Car</h3>
+              <h3>Club</h3>
+              <div class="links">
+                <!-- <a href="">GitHub (private)</a> /
+                <a href="">Doc</a> / 
+                <a href="">Video</a> -->
+              </div>
+            </div>
+            <p>My project through the semester was a simple optimization function to our current implementation of iSAM2 algorithm, which estimates the car pose based on landmark positions of cones outlining the race track. From storing a cone cache of newly observed cones during data association, there can be a new step to be "more sure" of what cones are new or existing cones based on estimated poses. Without proper track testing, this was all tested through rosbags. </p>
+          </div>
+        </div> 
+      </div>
+
+      <i><u><h3>Hardware</h3></u></i>
+
+      <div class="showcase">
+        <div class="project">
+          <img src="media/images/Experiences/Projects/9919.png">
+          <div class="description">
+            <div class="project-about">
+              <h3 class="project-name">FRC Robot</h3>
+              <h3>Club</h3>
+              <div class="links">
+                <!-- <a href="">GitHub (private)</a> /
+                <a href="">Doc</a> / 
+                <a href="">Video</a> -->
+              </div>
+            </div>
+            <p>Led the design, fabrication, assembly, and programming of a improved version of the open-source "everybot" for FRC competition in 2023's Charged Up game. The main changes were an omnidirectional drivetrain and lowered positioning of our 4-bar linkage arm. This helped develop my elementary mechanical knowledge that would be beneficial for smaller hardware-related projects</p>
+          </div>
+        </div> 
+
+        <div class="project">
+          <img src="media/images/Experiences/Projects/fpv.JPG">
+          <div class="description">
+            <div class="project-about">
+              <h3 class="project-name">FPV Drone</h3>
+              <h3>Personal</h3>
+              <div class="links">
+                <!-- <a href="">GitHub (private)</a> /
+                <a href="">Doc</a> / 
+                <a href="">Video</a> -->
+              </div>
+            </div>
+            <p>A simple wiring, assembly, and installation for a quadcopter FPV drone. This was preliminary in case I ever wanted to design and build my own fixed-wing drone one day. </p>
+          </div>
+        </div> 
+      </div>
+
+
+    </div>
   </div>
 
   <aside class="overlay">
