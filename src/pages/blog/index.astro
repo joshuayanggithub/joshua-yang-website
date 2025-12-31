@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = await Astro.glob('../blog/*.{md,mdx}');
+const sortedPosts = posts.sort((a, b) => 
+  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+);
+---
+
+<BaseLayout title="Blog | Joshua Yang" bodyClass="blog-wide with-sidebar" showSidebar={true}>
+  <header>
+    <p class="last-updated"><a href="/">← back</a></p>
+    <h1>blog</h1>
+  </header>
+
+  <main>
+    <section id="blog-list">
+      {sortedPosts.length === 0 ? (
+        <p>No posts yet. Check back soon!</p>
+      ) : (
+        <ul class="post-list">
+          {sortedPosts.map((post) => (
+            <li class="post-item">
+              <div class="post-row">
+                <span class="post-date">{post.frontmatter.date}</span>
+                <a href={post.url}>{post.frontmatter.title}</a>
+              </div>
+              {post.frontmatter.description && (
+                <p class="post-description">{post.frontmatter.description}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Joshua Yang</p>
+  </footer>
+</BaseLayout>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .post-item {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .post-row {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .post-date {
+    color: #888;
+    font-size: 0.85rem;
+    flex: 0 0 120px;
+    text-align: left;
+  }
+  
+  .post-item a {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  .post-description {
+    color: #666;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+</style>

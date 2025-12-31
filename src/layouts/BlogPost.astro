@@ -1,0 +1,71 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={frontmatter.title + " | Joshua Yang"} bodyClass="blog-wide with-sidebar" showSidebar={true}>
+  <header>
+    <p class="back-link"><a href="/">← back</a></p>
+    <h1>{frontmatter.title}</h1>
+    <div class="post-meta">
+      <span class="post-date">created: {frontmatter.created ?? frontmatter.date}</span>
+      {frontmatter.updated && <span class="post-updated">last updated: {frontmatter.updated}</span>}
+    </div>
+  </header>
+
+  <main>
+    <article class="blog-post">
+      <slot />
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Joshua Yang</p>
+  </footer>
+</BaseLayout>
+
+<style>
+  .post-meta {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    align-items: flex-start;
+  }
+
+  .post-date,
+  .post-updated {
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 0;
+  }
+
+  .back-link a {
+    font-size: 1.05rem;
+  }
+  
+  .blog-post {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 0 4rem;
+    line-height: 1.7;
+  }
+  
+  .blog-post :global(h2) {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .blog-post :global(pre) {
+    background: #f5f5f5;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+  
+  .blog-post :global(code) {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+  }
+</style>

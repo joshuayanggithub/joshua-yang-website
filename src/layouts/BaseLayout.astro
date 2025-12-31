@@ -1,0 +1,57 @@
+---
+import Sidebar from '../components/Sidebar.astro';
+
+export interface Props {
+  title?: string;
+  bodyClass?: string;
+  showSidebar?: boolean;
+}
+
+const { title = "Joshua Yang", bodyClass, showSidebar = false } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles/new-styles.css" />
+    <link rel="icon" type="image/svg+xml" href="/media/images/Icons/favicon.svg" />
+    <link rel="alternate icon" href="/media/images/Icons/favicon.ico" />
+    <!-- MathJax 3.x for interactive LaTeX rendering -->
+    <script>
+      window.MathJax = {
+        loader: {
+          load: ['[tex]/ams']
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          processEnvironments: true,
+          packages: { '[+]': ['ams'] }
+        },
+        options: {
+          enableMenu: true,
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+
+  <body class={bodyClass}>
+    <div id="mouse-trailer"></div>
+    {showSidebar ? (
+      <>
+        <Sidebar />
+        <slot />
+      </>
+    ) : (
+      <slot />
+    )}
+    <script is:inline src="/new-script.js"></script>
+  </body>
+</html>

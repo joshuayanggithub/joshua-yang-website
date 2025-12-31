@@ -1,0 +1,66 @@
+---
+// Sidebar used for navigation + "connect" links.
+const posts = await Astro.glob('../pages/blog/*.{md,mdx}');
+const sortedPosts = posts
+  .filter((p) => p?.frontmatter?.title)
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.date || 0).getTime() -
+      new Date(a.frontmatter.date || 0).getTime()
+  );
+
+const recentPosts = sortedPosts.slice(0, 6);
+const currentPath = Astro.url?.pathname || '';
+---
+
+<aside class="site-sidebar" aria-label="Sidebar">
+  <nav class="sidebar-section" aria-label="Blog links">
+    <h3 class="sidebar-title">blog</h3>
+    <p class="sidebar-note">
+      <em><a href="https://www.swyx.io/learn-in-public" target="_blank" rel="noreferrer">learning in public</a> is good — keeping</em><br />
+      <em> myself accountable by documenting the process every month.</em>
+    </p>
+    <ul class="sidebar-list">
+      {recentPosts.map((post) => (
+        <li class="sidebar-item">
+          <a class:active={currentPath === post.url} href={post.url}>
+            <span class="sidebar-link-title">{post.frontmatter.title}</span>
+            {post.frontmatter.date && <span class="sidebar-link-date">{post.frontmatter.date}</span>}
+          </a>
+        </li>
+      ))}
+      <li class="sidebar-item sidebar-item-muted">
+        <a class:active={currentPath === '/blog/'} href="/blog/">all posts →</a>
+      </li>
+    </ul>
+  </nav>
+
+  <nav class="sidebar-section" aria-label="Connect links">
+    <h3 class="sidebar-title">connect with me!</h3>
+    <ul class="sidebar-list connect-list">
+      <li class="sidebar-item">
+        <a href="https://twitter.com/realjoshuayang" target="_blank" rel="noreferrer">
+          <img class="icon" src="/media/icons/twitter.svg" alt="" /> @realjoshuayang
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="https://github.com/joshuayanggithub" target="_blank" rel="noreferrer">
+          <img class="icon" src="/media/icons/github.svg" alt="" /> GitHub
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="https://linkedin.com/in/thejoshuayang" target="_blank" rel="noreferrer">
+          <img class="icon" src="/media/icons/linkedin.png" alt="" /> LinkedIn
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="mailto:joshuayang@cmu.edu" class="email-link">
+          <img class="icon" src="/media/icons/email.svg" alt="" />
+          <span class="email-text" data-email="joshuayang@cmu.edu"></span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>
+
+
