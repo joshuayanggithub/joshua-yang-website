@@ -354,7 +354,7 @@ function normalizeMarkdownForAstro(src) {
       continue;
     }
     if (inFence) continue;
-    
+
     // Match callout/blockquote lines: starts with > (possibly with leading spaces)
     const calloutMatch = line.match(/^(\s*>+\s?)/);
     if (calloutMatch) {

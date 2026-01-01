@@ -19,27 +19,6 @@ const { title = "Joshua Yang", bodyClass, showSidebar = false } = Astro.props;
     <link rel="stylesheet" href="/styles/new-styles.css" />
     <link rel="icon" type="image/svg+xml" href="/media/images/Icons/favicon.svg" />
     <link rel="alternate icon" href="/media/images/Icons/favicon.ico" />
-    <!-- MathJax 3.x for interactive LaTeX rendering -->
-    <script>
-      window.MathJax = {
-        loader: {
-          load: ['[tex]/ams', '[tex]/cancel']
-        },
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']],
-          processEscapes: true,
-          processEnvironments: true,
-          packages: { '[+]': ['ams', 'cancel'] }
-        },
-        options: {
-          enableMenu: true,
-          ignoreHtmlClass: 'tex2jax_ignore',
-          processHtmlClass: 'tex2jax_process'
-        }
-      };
-    </script>
-    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
 
   <body class={bodyClass}>
@@ -53,5 +32,27 @@ const { title = "Joshua Yang", bodyClass, showSidebar = false } = Astro.props;
       <slot />
     )}
     <script is:inline src="/new-script.js"></script>
+    
+    <!-- MathJax 3.x for LaTeX rendering -->
+    <script is:inline>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          macros: {
+            cancel: ['\\enclose{updiagonalstrike}{#1}', 1],
+            bcancel: ['\\enclose{downdiagonalstrike}{#1}', 1],
+            xcancel: ['\\enclose{updiagonalstrike,downdiagonalstrike}{#1}', 1],
+            boldsymbol: ['\\pmb{#1}', 1],
+            bm: ['\\pmb{#1}', 1]
+          }
+        },
+        options: {
+          enableMenu: true
+        }
+      };
+    </script>
+    <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
   </body>
 </html>
