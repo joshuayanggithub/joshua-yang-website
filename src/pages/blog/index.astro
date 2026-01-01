@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const posts = await Astro.glob('../blog/*.{md,mdx}');
 const sortedPosts = posts.sort((a, b) => 
-  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+  new Date(b.frontmatter.updated || b.frontmatter.date).getTime() - new Date(a.frontmatter.updated || a.frontmatter.date).getTime()
 );
 ---
 

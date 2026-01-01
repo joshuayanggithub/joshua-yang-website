@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import remarkMath from 'remark-math';
+import remarkObsidianCallout from 'remark-obsidian-callout';
 
 /**
  * Convert `remark-math` output nodes (`math-inline` / `math-display`) back into
@@ -97,7 +98,7 @@ export default defineConfig({
   integrations: [mdx()],
   markdown: {
     // Parse `$...$` and `$$...$$` as math so underscores don't become emphasis.
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [remarkMath, remarkObsidianCallout],
     // Convert math nodes back to delimiters for client-side MathJax rendering.
     rehypePlugins: [rehypeMathToTexDelimiters],
   },

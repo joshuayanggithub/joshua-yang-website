@@ -334,6 +334,38 @@ function normalizeMarkdownForAstro(src) {
     lines[i] = line.replace(/^\t+/g, (m) => "   ".repeat(m.length));
   }
 
+  // Pass 1.5: normalize tabs inside callouts/blockquotes (after the > prefix)
+  // Obsidian uses tabs for nested lists inside callouts: "> \t- nested"
+  // Convert to spaces: "> - nested" with proper indentation
+  inFence = false;
+  fence = "";
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const fenceMatch = line.match(/^(\s*)(```+|~~~+)/);
+    if (fenceMatch) {
+      const token = fenceMatch[2];
+      if (!inFence) {
+        inFence = true;
+        fence = token;
+      } else if (token.startsWith(fence)) {
+        inFence = false;
+        fence = "";
+      }
+      continue;
+    }
+    if (inFence) continue;
+    
+    // Match callout/blockquote lines: starts with > (possibly with leading spaces)
+    const calloutMatch = line.match(/^(\s*>+\s?)/);
+    if (calloutMatch) {
+      const prefix = calloutMatch[1];
+      const rest = line.slice(prefix.length);
+      // Convert tabs to 2 spaces in the content after >
+      const normalizedRest = rest.replace(/\t/g, "  ");
+      lines[i] = prefix + normalizedRest;
+    }
+  }
+
   // Pass 2: fix numbered list continuations
   // Obsidian allows continuation lines with minimal indent; remark needs 3+ spaces
   inFence = false;

@@ -23,14 +23,14 @@ const { title = "Joshua Yang", bodyClass, showSidebar = false } = Astro.props;
     <script>
       window.MathJax = {
         loader: {
-          load: ['[tex]/ams']
+          load: ['[tex]/ams', '[tex]/cancel']
         },
         tex: {
           inlineMath: [['$', '$'], ['\\(', '\\)']],
           displayMath: [['$$', '$$'], ['\\[', '\\]']],
           processEscapes: true,
           processEnvironments: true,
-          packages: { '[+]': ['ams'] }
+          packages: { '[+]': ['ams', 'cancel'] }
         },
         options: {
           enableMenu: true,
