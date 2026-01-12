@@ -93,7 +93,7 @@ header {
 }
 
 header h1 {
-  font-size: 2.5rem;
+  font-size: 1rem;
   font-weight: 400;
   margin: 0;
   letter-spacing: -0.02em;
@@ -194,20 +194,33 @@ li {
 /* Projects Section */
 .project-item {
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
   margin-bottom: 2.5rem;
-  align-items: flex-start;
 }
 
 .project-year {
-  flex-shrink: 0;
-  width: 60px;
   color: var(--text-dim);
   font-size: 0.95rem;
-  padding-top: 2px;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
 }
 
 .project-content {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.project-media {
+  flex-shrink: 0;
+  width: 200px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 3px 3px 9px var(--border-color);
+  object-fit: cover;
+}
+
+.project-text {
   flex: 1;
   display: flex;
   flex-direction: column;

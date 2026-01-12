@@ -49,12 +49,12 @@ body {
 
 /* Sidebar (left gutter; does not shift main content, so annotations on the right stay clear) */
 :root {
-  --page-max: 800px;
-  --sidebar-anchor-max: 800px;
+  --page-max: 880px;
+  --sidebar-anchor-max: 880px;
   --page-pad: 2rem;
   --sidebar-w: 260px;
-  --sidebar-gap: 1rem;
-  --sidebar-top: 4.25rem;
+  --sidebar-gap: 3rem;
+  --sidebar-top: 7.5rem;
 }
 
 body.blog-wide {
@@ -87,7 +87,7 @@ body.blog-wide {
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
-  color: var(--text-muted);
+  color: var(--text-color);
   text-transform: lowercase;
 }
 
@@ -195,7 +195,7 @@ body.blog-wide {
 
 /* Header */
 header {
-  max-width: 800px;
+  max-width: 880px;
   margin: 0 auto;
   padding: 2rem 2rem 1rem;
 }
@@ -208,17 +208,17 @@ header {
 }
 
 header h1 {
-  font-size: 2.5rem;
-  font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 500;
   margin: 0;
   letter-spacing: -0.02em;
 }
 
 /* Main Content */
 main {
-  max-width: 800px;
+  max-width: 880px;
   margin: 0 auto;
-  padding: 0 2rem 4rem;
+  padding: 0 2rem 0;
 }
 
 /* Sections */
@@ -237,6 +237,8 @@ section {
 
 section:last-of-type {
   border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 /* Home: recent blog list */
@@ -264,7 +266,7 @@ section h3 {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text-muted);
+  color: var(--text-color);
   text-transform: lowercase;
 }
 
@@ -345,20 +347,39 @@ li {
 /* Projects Section */
 .project-item {
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
   margin-bottom: 2.5rem;
-  align-items: flex-start;
 }
 
 .project-year {
-  flex-shrink: 0;
-  width: 60px;
   color: var(--text-dim);
   font-size: 0.95rem;
-  padding-top: 2px;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
 }
 
 .project-content {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.project-media {
+  flex-shrink: 0;
+  width: 280px;
+  height: 160px;
+  border-radius: 0;
+  box-shadow: 8px 8px 24px rgba(0, 0, 0, 0.3);
+  object-fit: contain;
+  background-color: rgba(255, 255, 248, 0.9);
+  padding: 8px;
+}
+
+video.project-media {
+  padding: 2px;
+}
+
+.project-text {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -396,7 +417,7 @@ li {
   position: absolute;
   right: auto;
   top: 0;
-  left: 232px; /* 220px arrow + 12px gap */
+  left: 188px; /* 180px arrow + 8px gap */
   white-space: normal;
   overflow: visible;
   text-align: left;
@@ -410,7 +431,7 @@ li {
   top: 0.6rem; /* align with first line of text */
   transform: translateY(-50%);
   display: block;
-  width: 220px;
+  width: 180px;
   height: 2px;
   background: #000;
 }
@@ -449,7 +470,7 @@ li {
 }
 
 .project-annotation .annotation-arrow {
-  width: 220px;
+  width: 180px;
 }
 
 .project-annotation .annotation-arrow::before {
@@ -460,10 +481,10 @@ li {
   position: absolute;
   right: 0;
   top: 0;
-  left: 232px; /* 220px arrow + 12px gap */
+  left: 188px; /* 180px arrow + 8px gap */
   white-space: normal;
   overflow: visible;
-  text-align: right;
+  text-align: left;
   line-height: 1.2;
   word-break: break-word;
 }
