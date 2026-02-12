@@ -5,8 +5,8 @@ const sortedPosts = posts
   .filter((p) => p?.frontmatter?.title)
   .sort(
     (a, b) =>
-      new Date(b.frontmatter.date || 0).getTime() -
-      new Date(a.frontmatter.date || 0).getTime()
+      new Date(b.frontmatter.publish || b.frontmatter.updated || 0).getTime() -
+      new Date(a.frontmatter.publish || a.frontmatter.updated || 0).getTime()
   );
 
 const recentPosts = sortedPosts.slice(0, 6);
@@ -25,7 +25,7 @@ const currentPath = Astro.url?.pathname || '';
         <li class="sidebar-item">
           <a class:active={currentPath === post.url} href={post.url}>
             <span class="sidebar-link-title">{post.frontmatter.title}</span>
-            {post.frontmatter.date && <span class="sidebar-link-date">{post.frontmatter.date}</span>}
+            {post.frontmatter.publish && <span class="sidebar-link-date">{post.frontmatter.publish}</span>}
           </a>
         </li>
       ))}

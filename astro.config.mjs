@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import remarkMath from 'remark-math';
 import remarkObsidianCallout from 'remark-obsidian-callout';
+import remarkTableOfContents from './scripts/remark-toc.js';
+import rehypeSlug from 'rehype-slug';
 
 /**
  * Convert `remark-math` output nodes (`math-inline` / `math-display`) back into
@@ -98,8 +100,8 @@ export default defineConfig({
   integrations: [mdx()],
   markdown: {
     // Parse `$...$` and `$$...$$` as math so underscores don't become emphasis.
-    remarkPlugins: [remarkMath, remarkObsidianCallout],
-    // Convert math nodes back to delimiters for client-side MathJax rendering.
-    rehypePlugins: [rehypeMathToTexDelimiters],
+    remarkPlugins: [remarkMath, remarkObsidianCallout, remarkTableOfContents],
+    // Add IDs to headings for TOC links; convert math nodes back to delimiters for MathJax.
+    rehypePlugins: [rehypeSlug, rehypeMathToTexDelimiters],
   },
 });

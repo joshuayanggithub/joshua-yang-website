@@ -293,7 +293,7 @@ function upsertFrontmatter(src, fields) {
   const orderedKeys = [
     "layout",
     "title",
-    "date", // creation date for sorting
+    "publish",
     "created",
     "updated",
     "description",
@@ -403,14 +403,14 @@ function normalizeMarkdownForAstro(src) {
       continue;
     }
 
-    // If in numbered list, check if this is a continuation line (non-empty, starts with 1-2 spaces)
+    // If in numbered list, check if this is a continuation line (indented paragraph under list item)
     if (inNumberedList) {
       const leadingSpaces = line.match(/^(\s*)/)[1].length;
       const trimmed = line.trim();
-      // If line has some indent but not enough for proper list continuation (need 3+)
-      if (leadingSpaces > 0 && leadingSpaces < 3 && trimmed) {
-        // Re-indent to 3 spaces so remark treats it as list continuation
-        lines[i] = "   " + trimmed;
+      // Obsidian uses tab or 1-3 spaces for "content under" a list item. CommonMark needs 4+ spaces.
+      if (leadingSpaces > 0 && leadingSpaces < 4 && trimmed) {
+        // Re-indent to 4 spaces so remark treats it as list item continuation block
+        lines[i] = "    " + trimmed;
       }
     }
   }
@@ -519,7 +519,19 @@ function normalizeMarkdownForAstro(src) {
     }
   }
 
-  return lines.join("\n");
+  // Pass 7: LaTeX fixes for proper MathJax rendering
+  let text = lines.join("\n");
+  // Fix \mathbb{E}_\pi -> \mathbb{E}_{\pi} (subscript needs braces for correct parsing)
+  text = text.replace(/\\mathbb\{E\}_\\pi\b/g, "\\mathbb{E}_{\\pi}");
+  // Fix incomplete \underbrace{\sum_{t=0}^\infty \gamma^t \Pr_\pi(S_t=s)} to add _{d^\pi(s)}
+  text = text.replace(
+    /\\underbrace\{\\sum_\{t=0\}\^\\infty \\gamma\^t \\Pr_\\pi\(S_t=s\)\}(?!_)/g,
+    "\\underbrace{\\sum_{t=0}^\\infty \\gamma^t \\Pr_\\pi(S_t=s)}_{d^\\pi(s)}"
+  );
+  // Ensure display math $$ with leading whitespace (inside list items) has blank line before
+  text = text.replace(/(\S)\n(\s+)\$\$/g, "$1\n\n$$$$");
+
+  return text;
 }
 
 let mdFiles = readFilesRecursive(vaultDir);
@@ -574,13 +586,17 @@ for (const file of mdFiles) {
     const st = fs.statSync(file);
     const created = formatDate(st.birthtime || st.ctime);
     const updated = formatDate(st.mtime);
-    src = upsertFrontmatter(src, {
+    const fmMatch = src.match(/^---\n([\s\S]*?)\n---/);
+    const hasPublish = fmMatch && /^publish\s*:/m.test(fmMatch[1]);
+    const publish = hasPublish ? undefined : formatDate(new Date()); // first publication = today when running script (preserve if already set)
+    const fields = {
       layout: "../../layouts/BlogPost.astro",
       title: `"${title.replace(/\"/g, '\\"')}"`,
-      date: `"${created || updated}"`,
       created: `"${created || updated}"`,
       updated: `"${updated}"`,
-    });
+    };
+    if (publish) fields.publish = `"${publish}"`;
+    src = upsertFrontmatter(src, fields);
   }
 
   // Convert Obsidian embeds for images (optional)

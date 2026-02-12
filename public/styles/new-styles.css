@@ -8,6 +8,7 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 :root {
@@ -44,6 +45,7 @@ body {
   padding: 0;
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -52,9 +54,9 @@ body {
   --page-max: 880px;
   --sidebar-anchor-max: 880px;
   --page-pad: 2rem;
-  --sidebar-w: 260px;
-  --sidebar-gap: 3rem;
-  --sidebar-top: 7.5rem;
+  --sidebar-w: 300px;
+  --sidebar-gap: 4rem;
+  --sidebar-top: 2rem;
 }
 
 body.blog-wide {
@@ -71,9 +73,18 @@ body.blog-wide {
   .site-sidebar {
     position: fixed;
     top: var(--sidebar-top);
-    left: max(0.5rem, calc((100vw - var(--sidebar-anchor-max)) / 2 - var(--sidebar-w) - var(--sidebar-gap)));
+    left: max(var(--page-pad), calc((100vw - var(--sidebar-anchor-max)) / 2 - var(--sidebar-w) - var(--sidebar-gap)));
     max-height: calc(100vh - (var(--sidebar-top) * 2));
     overflow: auto;
+    padding-left: 0.5rem;
+  }
+}
+
+/* Tablet / lower resolution: sidebar in flow, add horizontal margin from screen edges */
+@media screen and (max-width: 1099px) {
+  .site-sidebar {
+    margin-left: var(--page-pad);
+    margin-right: var(--page-pad);
   }
 }
 
@@ -94,7 +105,7 @@ body.blog-wide {
 .sidebar-note {
   margin: -0.25rem 0 0.75rem;
   color: var(--text-dim);
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   line-height: 1.25;
 }
 
@@ -118,9 +129,9 @@ body.blog-wide {
 .sidebar-link-title {
   flex: 1;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+  font-size: 0.9rem;
 }
 
 .sidebar-link-date {
@@ -128,6 +139,7 @@ body.blog-wide {
   font-size: 0.8rem;
   margin-left: 0.5rem;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .sidebar-item-muted a {
@@ -135,9 +147,9 @@ body.blog-wide {
 }
 
 .sidebar-item a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
   color: rgb(68, 119, 170);
 }
 
@@ -205,6 +217,8 @@ header {
   font-style: italic;
   color: var(--text-dim);
   margin-bottom: 0.5rem;
+  margin-top: 0;
+  line-height: 1.2;
 }
 
 header h1 {
@@ -337,6 +351,33 @@ li {
   color: var(--text-secondary);
 }
 
+/* Blog post lists: restore bullets/numbers (override global list-style: none) */
+.blog-post ul {
+  list-style-type: disc !important;
+  list-style-position: outside !important;
+  padding-left: 1.75rem !important;
+  margin: 0.5rem 0 0.75rem !important;
+}
+
+.blog-post ul ul {
+  list-style-type: circle !important;
+}
+
+.blog-post ul ul ul {
+  list-style-type: square !important;
+}
+
+.blog-post ol {
+  list-style-type: decimal !important;
+  list-style-position: outside !important;
+  padding-left: 1.75rem !important;
+  margin: 0.5rem 0 0.75rem !important;
+}
+
+.blog-post li {
+  padding-left: 0.25rem;
+}
+
 /* Experience Section */
 #experience ul li::before {
   content: "• ";
@@ -417,7 +458,7 @@ video.project-media {
   position: absolute;
   right: auto;
   top: 0;
-  left: 188px; /* 180px arrow + 8px gap */
+  left: 108px; /* 100px arrow + 8px gap */
   white-space: normal;
   overflow: visible;
   text-align: left;
@@ -431,7 +472,7 @@ video.project-media {
   top: 0.6rem; /* align with first line of text */
   transform: translateY(-50%);
   display: block;
-  width: 180px;
+  width: 100px;
   height: 2px;
   background: #000;
 }
@@ -442,7 +483,7 @@ video.project-media {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  border: 6px solid transparent;
+  border: 5px solid transparent;
   border-right-color: #000;
   border-left: none;
 }
@@ -470,7 +511,7 @@ video.project-media {
 }
 
 .project-annotation .annotation-arrow {
-  width: 180px;
+  width: 100px;
 }
 
 .project-annotation .annotation-arrow::before {
@@ -481,7 +522,7 @@ video.project-media {
   position: absolute;
   right: 0;
   top: 0;
-  left: 188px; /* 180px arrow + 8px gap */
+  left: 108px; /* 100px arrow + 8px gap */
   white-space: normal;
   overflow: visible;
   text-align: left;
@@ -613,7 +654,7 @@ video.project-media {
 
 /* Footer */
 footer {
-  max-width: 680px;
+  max-width: 880px;
   margin: 0 auto;
   padding: 2rem;
   border-top: 1px solid var(--border-color);
@@ -631,12 +672,15 @@ body.blog-wide footer {
   max-width: 1040px;
 }
 
-/* Blog pages: shift content right so the fixed sidebar stays in the same place as the homepage */
+/* Pages with sidebar: shift content right so it never overlaps the fixed sidebar */
 @media screen and (min-width: 1100px) {
-  body.blog-wide.with-sidebar header,
-  body.blog-wide.with-sidebar main,
-  body.blog-wide.with-sidebar footer {
-    margin-left: calc((100vw - var(--sidebar-anchor-max)) / 2);
+  body.with-sidebar header,
+  body.with-sidebar main,
+  body.with-sidebar footer {
+    margin-left: max(
+      calc((100vw - var(--sidebar-anchor-max)) / 2),
+      var(--page-pad) + var(--sidebar-w) + var(--sidebar-gap)
+    );
     margin-right: auto;
   }
 }
@@ -658,24 +702,56 @@ footer p {
 
 /* Mobile Responsiveness */
 @media screen and (max-width: 768px) {
+  :root {
+    --page-pad: 1rem;
+  }
+
   .site-sidebar {
     position: static;
-    width: auto;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 1rem 1.5rem 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .site-sidebar .sidebar-section {
+    padding-bottom: 0.5rem;
+  }
+
+  .site-sidebar .sidebar-section + .sidebar-section {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top-color: var(--border-color);
+  }
+
+  .site-sidebar .sidebar-list {
+    gap: 0.15rem;
+  }
+
+  .site-sidebar .sidebar-item a {
+    padding: 0.25rem 0;
+  }
+
+  .connect-list .sidebar-item a {
+    padding: 0.25rem 0;
   }
 
   header {
-    padding: 2rem 1.5rem 1.5rem;
+    padding: 1.5rem 1rem 1rem;
+    max-width: 100%;
   }
 
   header h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.3;
   }
 
   main {
-    padding: 0 1.5rem 3rem;
+    padding: 0 1rem 2rem;
+    max-width: 100%;
   }
 
   .project-item {
@@ -687,36 +763,167 @@ footer p {
     width: auto;
   }
 
-  .contact-links {
-    gap: 1.5rem;
+  .project-content {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .project-media {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 140px;
+    max-height: 200px;
+    object-fit: contain;
+  }
+
+  .project-media img,
+  .project-media video {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
   }
 
   section {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
   }
 
   .section-annotation,
   .project-annotation {
     display: none;
   }
+
+  footer {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+    margin-top: 2rem;
+  }
+
+  body.with-sidebar header,
+  body.with-sidebar main,
+  body.with-sidebar footer {
+    margin-left: 0;
+  }
+
+  body.blog-wide header,
+  body.blog-wide main,
+  body.blog-wide footer {
+    max-width: 100%;
+  }
+
+  .blog-post {
+    padding: 0 0 3rem;
+    overflow-wrap: break-word;
+  }
+
+  /* Images: override inline max-width styles on mobile */
+  .blog-post img {
+    max-width: 100% !important;
+    height: auto;
+  }
+
+  .blog-post pre {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .post-meta {
+    flex-wrap: wrap;
+    gap: 0.15rem;
+  }
+
+  /* Math overflow on mobile: allow horizontal scroll for wide equations */
+  .blog-post .tex2jax_process,
+  .blog-post mjx-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Ensure display math blocks don't overflow */
+  .blog-post div.tex2jax_process {
+    display: block;
+    padding: 0.25rem 0;
+  }
+
+  /* TOC mobile: collapsible */
+  .post-toc {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .toc-item {
+    margin-bottom: 0.4rem;
+  }
+
+  .toc-item .toc-link {
+    font-size: 0.85rem;
+  }
+
+  /* Callouts on mobile */
+  .blog-post blockquote[data-callout] {
+    margin: 1rem 0;
+  }
+
+  .blog-post blockquote[data-callout] .callout-content {
+    padding: 0.5rem 0.75rem 0.25rem;
+  }
+
+  .blog-post blockquote[data-callout] .callout-title {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  /* Figures on mobile */
+  .obsidian-figure {
+    margin: 1.25rem auto;
+  }
+
+  .obsidian-figure img {
+    max-width: 100% !important;
+  }
 }
 
 @media screen and (max-width: 480px) {
+  html {
+    font-size: 15px;
+  }
+
+  :root {
+    --page-pad: 0.75rem;
+  }
+
   header h1 {
-    font-size: 1.75rem;
+    font-size: 1.3rem;
+    line-height: 1.3;
   }
 
   main {
-    padding: 0 1rem 2rem;
+    padding: 0 0.75rem 1.5rem;
   }
 
   header {
-    padding: 1.5rem 1rem 1rem;
+    padding: 1.25rem 0.75rem 0.75rem;
+  }
+
+  .site-sidebar {
+    padding: 1rem 0.75rem;
+  }
+
+  .site-sidebar .sidebar-list {
+    gap: 0.1rem;
+  }
+
+  .site-sidebar .sidebar-item a {
+    padding: 0.2rem 0;
   }
 
   .contact-links {
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.35rem;
   }
 
   .contact-links a .icon {
@@ -733,10 +940,92 @@ footer p {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    padding: 1.25rem 0.75rem;
   }
 
   #map-container {
     margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .map-widget {
+    max-width: 100%;
+  }
+
+  .blog-post {
+    font-size: 0.95rem;
+  }
+
+  .blog-post ol,
+  .blog-post ul {
+    padding-left: 1.25rem;
+  }
+
+  .blog-post pre,
+  .blog-post code {
+    overflow-x: auto;
+    max-width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .post-list .post-title {
+    font-size: 0.95rem;
+    word-wrap: break-word;
+  }
+
+  .post-item {
+    margin-bottom: 1.25rem;
+  }
+
+  .post-toc {
+    padding: 0.75rem 1rem;
+  }
+
+  .toc-title {
+    font-size: 0.7rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .toc-item {
+    margin-bottom: 0.3rem;
+  }
+
+  .toc-item .toc-link {
+    font-size: 0.8rem;
+  }
+
+  .toc-item .toc-number {
+    font-size: 0.8rem;
+  }
+
+  .obsidian-figure figcaption {
+    max-width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .sidebar-link-title {
+    word-break: break-word;
+  }
+
+  /* Tighter blog heading spacing on small screens */
+  .blog-post h1 {
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+  }
+
+  .blog-post h2 {
+    font-size: 1.15rem;
+    margin-top: 1.5rem;
+  }
+
+  .blog-post h3 {
+    font-size: 1.05rem;
+    margin-top: 1.25rem;
+  }
+
+  .blog-post blockquote[data-callout] ul {
+    padding-left: 1.25rem !important;
+    margin: 0.35rem 0.5rem 0.5rem !important;
   }
 }
 

@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/BlogPost.astro
 title: "VAE - Variational Auto Encoder"
-date: "2025-10-17"
+publish: "2025-12-30"
 created: "2025-10-17"
 updated: "2025-12-31"
 ---

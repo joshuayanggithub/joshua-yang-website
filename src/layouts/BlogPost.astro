@@ -2,26 +2,66 @@
 import BaseLayout from './BaseLayout.astro';
 
 const { frontmatter } = Astro.props;
+
+// Compute section numbers from heading depth sequence
+function computeSectionNumbers(toc: { depth: number; title: string; href: string }[]) {
+  const counters = [0, 0, 0, 0, 0, 0];
+  return toc.map((item) => {
+    const d = item.depth;
+    // Reset deeper levels
+    for (let i = d; i < 6; i++) counters[i] = 0;
+    counters[d - 1]++;
+    // Build number: filter out zero-level gaps (e.g. h1->h3 gives "3.1" not "3.0.1")
+    const numParts = counters.slice(0, d).filter((n) => n > 0);
+    return { ...item, sectionNumber: numParts.join(".") };
+  });
+}
+
+const numberedToc = frontmatter.tableOfContents
+  ? computeSectionNumbers(frontmatter.tableOfContents)
+  : [];
 ---
 
 <BaseLayout title={frontmatter.title + " | Joshua Yang"} bodyClass="blog-wide with-sidebar" showSidebar={true}>
   <header>
-    <p class="back-link"><a href="/">← back</a></p>
+    <p class="last-updated"><a href="/">← back</a></p>
     <h1>{frontmatter.title}</h1>
     <div class="post-meta">
-      <span class="post-date">created: {frontmatter.created ?? frontmatter.date}</span>
-      {frontmatter.updated && <span class="post-updated">last updated: {frontmatter.updated}</span>}
+      <span class="post-date">published {frontmatter.publish}</span>
+      <span class="post-meta-sep">·</span>
+      <span class="post-date">created {frontmatter.created}</span>
+      {frontmatter.updated && (
+        <>
+          <span class="post-meta-sep">·</span>
+          <span class="post-updated">updated {frontmatter.updated}</span>
+        </>
+      )}
     </div>
   </header>
 
   <main>
+    {numberedToc.length > 0 && (
+      <nav class="post-toc" aria-label="Table of contents">
+        <details class="toc-details" open>
+          <summary class="toc-title">Table of Contents</summary>
+          <div class="toc-list">
+            {numberedToc.map((item) => (
+              <div class="toc-item" style={`--depth: ${item.depth}`}>
+                <span class="toc-number">{item.sectionNumber}.</span>
+                <a href={item.href} class="toc-link">{item.title}</a>
+              </div>
+            ))}
+          </div>
+        </details>
+      </nav>
+    )}
     <article class="blog-post">
       <slot />
     </article>
   </main>
 
   <footer>
-    <p>© 2025 Joshua Yang</p>
+    <p>© 2026 Joshua Yang</p>
   </footer>
 </BaseLayout>
 
@@ -29,20 +69,27 @@ const { frontmatter } = Astro.props;
   .post-meta {
     margin-top: 0.5rem;
     display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    align-items: baseline;
+  }
+
+  .post-meta-sep {
+    color: var(--text-dim, #888);
+    font-size: 0.75rem;
+    user-select: none;
   }
 
   .post-date,
   .post-updated {
     color: #888;
-    font-size: 0.9rem;
-    margin-top: 0;
+    font-size: 0.75rem;
+    margin: 0;
   }
 
-  .back-link a {
-    font-size: 1.05rem;
+  .last-updated a {
+    font-size: inherit;
   }
   
   .blog-post {
@@ -52,8 +99,23 @@ const { frontmatter } = Astro.props;
     line-height: 1.7;
   }
   
+  .blog-post :global(h1) {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
   .blog-post :global(h2) {
     margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-post :global(h3) {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-post :global(h4) {
+    margin-top: 1.25rem;
     margin-bottom: 0.5rem;
   }
   
@@ -62,6 +124,39 @@ const { frontmatter } = Astro.props;
     padding: 1rem;
     border-radius: 4px;
     overflow-x: auto;
+  }
+
+  /* List indentation (Obsidian-style) - override global list-style: none */
+  .blog-post :global(ol) {
+    list-style-type: decimal;
+    list-style-position: outside;
+    padding-left: 1.75rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .blog-post :global(ul) {
+    list-style-type: disc;
+    list-style-position: outside;
+    padding-left: 1.75rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .blog-post :global(li) {
+    margin-bottom: 0.25rem;
+    padding-left: 0.25rem;
+  }
+
+  .blog-post :global(li > ol),
+  .blog-post :global(li > ul) {
+    margin-top: 0.25rem;
+  }
+
+  .blog-post :global(ul ul) {
+    list-style-type: circle;
+  }
+
+  .blog-post :global(ul ul ul) {
+    list-style-type: square;
   }
   
   .blog-post :global(code) {
@@ -220,5 +315,93 @@ const { frontmatter } = Astro.props;
   .blog-post :global(blockquote[data-callout="quote"] .callout-title-icon),
   .blog-post :global(blockquote[data-callout="cite"] .callout-title-icon) {
     color: #9e9e9e;
+  }
+
+  /* Table of contents - numbered, transparent, no rounded corners */
+  .post-toc {
+    margin-bottom: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(68, 119, 170, 0.06);
+    border: none;
+    border-left: 4px solid rgb(68, 119, 170);
+  }
+
+  .toc-details {
+    margin: 0;
+  }
+
+  .toc-details > summary {
+    list-style: none;
+  }
+
+  .toc-details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .toc-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim, #64748b);
+    margin: 0 0 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .toc-title::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--text-dim, #64748b);
+    transition: transform 0.2s ease;
+  }
+
+  .toc-details:not([open]) .toc-title::after {
+    transform: rotate(-90deg);
+  }
+
+  .toc-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-item {
+    margin-bottom: 0.5rem;
+    padding-left: calc((var(--depth, 2) - 1) * 1.25rem);
+    line-height: 1.5;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+
+  .toc-number {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color, #1a1a1a);
+    flex-shrink: 0;
+  }
+
+  .toc-link {
+    font-size: 0.9rem;
+    color: rgb(68, 119, 170);
+    text-decoration: none;
+  }
+
+  .toc-link:hover {
+    color: #7eb3d8;
+  }
+
+  .toc-item[style*="--depth: 1"] .toc-link {
+    font-weight: 700;
+  }
+
+  .toc-item[style*="--depth: 1"] .toc-number {
+    font-weight: 700;
   }
 </style>

@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/BlogPost.astro
 title: "DDPM - Denoising Diffusion Probabilistic Models"
-date: "2026-01-01"
-created: "2026-01-01"
+publish: "2026-01-01"
+created: "2025-12-31"
 updated: "2026-01-01"
 ---
 
