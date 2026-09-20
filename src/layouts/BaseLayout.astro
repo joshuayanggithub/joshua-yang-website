@@ -17,6 +17,11 @@ const { title = "Joshua Yang", bodyClass, showSidebar = false } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <link rel="stylesheet" href="/styles/new-styles.css" />
+    <!-- pi.website-inspired typography pass; remove this link to revert -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Source+Sans+3:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="/styles/pi-theme.css" />
     <link rel="icon" type="image/svg+xml" href="/media/images/Icons/favicon.svg" />
     <link rel="alternate icon" href="/media/images/Icons/favicon.ico" />
   </head>

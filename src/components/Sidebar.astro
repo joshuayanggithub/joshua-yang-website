@@ -23,14 +23,14 @@ const currentPath = Astro.url?.pathname || '';
     <ul class="sidebar-list">
       {recentPosts.map((post) => (
         <li class="sidebar-item">
-          <a class:active={currentPath === post.url} href={post.url}>
+          <a class={currentPath === post.url ? 'active' : undefined} href={post.url}>
             <span class="sidebar-link-title">{post.frontmatter.title}</span>
             {post.frontmatter.publish && <span class="sidebar-link-date">{post.frontmatter.publish}</span>}
           </a>
         </li>
       ))}
       <li class="sidebar-item sidebar-item-muted">
-        <a class:active={currentPath === '/blog/'} href="/blog/">all posts →</a>
+        <a class={currentPath === '/blog/' ? 'active' : undefined} href="/blog/">all posts →</a>
       </li>
     </ul>
   </nav>

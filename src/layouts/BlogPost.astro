@@ -1,7 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import GraphView from '../components/GraphView.astro';
 
 const { frontmatter } = Astro.props;
+
+const currentSlug = Astro.url.pathname.replace(/^\/blog\//, "").replace(/\/$/, "");
 
 // Compute section numbers from heading depth sequence
 function computeSectionNumbers(toc: { depth: number; title: string; href: string }[]) {
@@ -40,6 +43,7 @@ const numberedToc = frontmatter.tableOfContents
   </header>
 
   <main>
+    <GraphView mode="local" currentSlug={currentSlug} />
     {numberedToc.length > 0 && (
       <nav class="post-toc" aria-label="Table of contents">
         <details class="toc-details" open>

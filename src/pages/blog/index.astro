@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GraphView from '../../components/GraphView.astro';
 
 const posts = await Astro.glob('../blog/*.{md,mdx}');
 const sortedPosts = posts.sort((a, b) => 
@@ -14,6 +15,7 @@ const sortedPosts = posts.sort((a, b) =>
   </header>
 
   <main>
+    <GraphView mode="global" />
     <section id="blog-list">
       {sortedPosts.length === 0 ? (
         <p>No posts yet. Check back soon!</p>

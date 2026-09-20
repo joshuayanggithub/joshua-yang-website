@@ -93,6 +93,29 @@ function initEmailScramble() {
   });
 }
 
+/**
+ * Projects section has two views: "selected" (only .project-item.is-selected)
+ * and "all". The section starts with class `show-selected` so there is no flash
+ * of every project before this runs.
+ */
+function initProjectFilter() {
+  const section = document.getElementById('projects');
+  const buttons = document.querySelectorAll('.project-filter');
+  if (!section || buttons.length === 0) return;
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const selectedOnly = button.dataset.filter === 'selected';
+      section.classList.toggle('show-selected', selectedOnly);
+      buttons.forEach((other) => {
+        const isActive = other === button;
+        other.classList.toggle('is-active', isActive);
+        other.setAttribute('aria-selected', String(isActive));
+      });
+    });
+  });
+}
+
 // Mouse Trailer Light Effect
 // This creates a light that follows the cursor around the page
 
@@ -105,6 +128,9 @@ window.addEventListener("load", function() {
   
   // Initialize email scramble
   initEmailScramble();
+
+  // Projects: selected / all filter
+  initProjectFilter();
   
   const mouseTrailer = document.querySelector("#mouse-trailer");
 
@@ -114,17 +140,8 @@ window.addEventListener("load", function() {
       const x = event.clientX;
       const y = event.clientY;
 
-      // Animate the mouse trailer to follow cursor with smooth delay
-      mouseTrailer.animate(
-        {
-          left: `${x}px`,
-          top: `${y}px`,
-        },
-        { 
-          duration: 1400, 
-          fill: "forwards" 
-        }
-      );
+      // Follow the cursor with a very short ease: responsive, but not rigidly pinned
+      mouseTrailer.animate({ left: `${x}px`, top: `${y}px` }, { duration: 140, fill: "forwards" });
     });
   }
 

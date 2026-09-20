@@ -1,0 +1,615 @@
+/*
+ * pi-theme: a pass over new-styles.css borrowing the typography and post
+ * treatment of pi.website (Physical Intelligence), mixed with this site's own
+ * palette and details.
+ *
+ * From pi.website: monospace UI text at 14px/20px, a serif display face for the
+ * name and post titles, muted #686868 secondary text, and index rows drawn as
+ * 1px boxes on a left rail with a small square bullet, tinting on hover.
+ * Kept from this site: the warm #fffff8 background, the blue links, the red
+ * highlight, the margin annotations, and the sans-serif body for long posts
+ * (monospace is hard work over a page of prose and math).
+ *
+ * Loaded after new-styles.css in BaseLayout.astro — remove that one <link> to
+ * go back to the original look.
+ */
+
+:root {
+  --pi-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --pi-serif: "Newsreader", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --pi-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --pi-muted: #686868; /* pi.website secondary text */
+  --pi-rule: #000000; /* pi boxes: 1px solid black */
+  --pi-surface: #ffffff; /* pi boxes: white on the page colour */
+  --pi-hover: #f1f0e6; /* pi row hover tint */
+  --pi-bullet: #111827; /* pi bullet: gray-900 */
+  --pi-shadow: 3px 3px 0px #000; /* pi boxed row */
+  --pi-shadow-hover: 5px 5px 0px #000;
+
+  /* pi.website page colours, overriding new-styles.css tokens */
+  --bg-color: #f5f4ef;
+  --text-color: #000000;
+  --text-secondary: #000000;
+  --text-tertiary: #1a1a1a;
+  --text-muted: #686868;
+  --text-dim: #686868;
+  --border-color: rgba(0, 0, 0, 0.12);
+  --border-subtle: rgba(0, 0, 0, 0.18);
+  --link-border: rgba(0, 0, 0, 0.45);
+}
+
+/* pi links: black, underlined (the red highlight spans stay as they are) */
+header a,
+main a:not(.project-title):not(.post-title),
+footer a,
+.blog-post a {
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  border-bottom: none;
+}
+
+.site-sidebar a {
+  color: #000;
+  text-decoration: none;
+}
+
+.site-sidebar a:hover {
+  text-decoration: underline;
+}
+
+/* ---- Typography ---- */
+body {
+  font-family: var(--pi-mono);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/*
+ * Article prose, matching pi.website's research pages: they are not monospace —
+ * Source Sans 3 at 18px/29.25px in a 768px column, with serif headings.
+ */
+.blog-post {
+  font-family: "Source Sans 3", var(--pi-sans);
+  font-size: 18px;
+  line-height: 1.625;
+}
+
+/*
+ * pi keeps the whole page in one narrow left column (768px of text), rather than
+ * a wide shell with a narrow article inside it. Match that on blog pages: 832px
+ * box = 768px of text inside main's 2rem padding. Two classes + an element beats
+ * new-styles.css's `body.blog-wide header, …` and BlogPost.astro's scoped rule.
+ */
+body.blog-wide.with-sidebar header,
+body.blog-wide.with-sidebar main,
+body.blog-wide.with-sidebar footer {
+  max-width: 832px;
+}
+
+body.blog-wide main article.blog-post {
+  max-width: none;
+  margin-left: 0;
+}
+
+/* pi article headings: serif, regular weight */
+.blog-post h1 { font-size: 2rem; line-height: 1.25; }
+.blog-post h2 { font-size: 1.5rem; line-height: 1.25; }
+.blog-post h3 { font-size: 1.25rem; line-height: 1.3; }
+.blog-post h1,
+.blog-post h2,
+.blog-post h3,
+.blog-post h4 {
+  font-weight: 400;
+}
+
+/* post title: pi sets its article h1 much larger than the wordmark */
+body.blog-wide header h1 {
+  font-size: 2.6rem;
+  line-height: 1.15;
+}
+
+header h1 {
+  font-family: var(--pi-serif);
+  font-weight: 400;
+  font-size: 1.9rem;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+.blog-post h1,
+.blog-post h2,
+.blog-post h3,
+.blog-post h4 {
+  font-family: var(--pi-serif);
+  letter-spacing: 0;
+}
+
+/* Section headings: mono, quiet, like pi's small labels */
+main > section > h3,
+.sidebar-title {
+  font-family: var(--pi-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.last-updated,
+.post-meta,
+.post-date,
+.post-updated,
+.project-year,
+footer p,
+.annotation-text,
+.sidebar-note,
+.sidebar-link-date {
+  font-family: var(--pi-mono);
+  color: var(--pi-muted);
+}
+
+/* ---- Index rows (blog list) — pi's boxed row on a bullet rail ---- */
+#blog-list .post-list {
+  margin-left: 0; /* pi puts the offset on each row (ml-6), not the list */
+}
+
+#blog-list .post-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 6px; /* pi boxed rows: gap-2, inner row gap-1.5 */
+  align-items: baseline;
+  margin-left: 24px; /* ml-6 */
+  margin-bottom: 0.5rem;
+  padding: 8px 12px;
+  background: var(--pi-surface);
+  border: 1px solid var(--pi-rule);
+  box-shadow: var(--pi-shadow);
+  transition: box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+#blog-list .post-item:hover {
+  box-shadow: var(--pi-shadow-hover);
+}
+
+/* 7px square bullet on the rail, as on pi.website */
+#blog-list .post-item::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 7px; /* pi: top-[7px] */
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--pi-bullet);
+  outline: 2px solid var(--bg-color);
+}
+
+/* pi: text-xs truncate font-semibold leading-5 */
+#blog-list .post-item .post-title {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+  font-family: var(--pi-mono);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* pi: text-xs text-muted-foreground shrink-0 ml-1 */
+#blog-list .post-item .post-date {
+  grid-column: 2;
+  grid-row: 1;
+  margin-left: 4px;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--pi-muted);
+  white-space: nowrap;
+}
+
+#blog-list .post-item .post-description {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  font-family: var(--pi-mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--pi-muted);
+}
+
+/* ---- Projects — same row treatment, keeping the media thumbnails ---- */
+.project-filters {
+  font-family: var(--pi-mono);
+}
+
+.project-filter {
+  font-family: var(--pi-mono);
+  font-size: 12px;
+}
+
+#projects .project-item,
+#projects .project-item-wrapper .project-item {
+  position: relative;
+  margin-left: 24px;
+  margin-bottom: 0.75rem;
+  padding: 10px 12px;
+  /*
+   * pi.website's three tiers:
+   *   plain    no box, tints on hover            -> work outside "selected"
+   *   soft     hairline box, soft shadow on hover -> selected work        (.is-selected)
+   *   strong   black box, hard offset shadow      -> the flagship project (.is-featured)
+   * The transparent border keeps all three the same size.
+   */
+  background: transparent;
+  border: 1px solid transparent;
+  transition: box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#projects .project-item:hover {
+  background: var(--pi-hover); /* pi: hover:bg-background-hover */
+}
+
+/* soft box */
+#projects .project-item.is-selected {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: #d4d3cb;
+}
+
+#projects .project-item.is-selected:hover {
+  background: #ffffff;
+  border-color: #c0bdad;
+  box-shadow: 3px 3px 0px #c0bdad;
+}
+
+/* strong box */
+#projects .project-item.is-featured {
+  background: var(--pi-surface);
+  border-color: var(--pi-rule);
+  box-shadow: var(--pi-shadow);
+}
+
+#projects .project-item.is-featured:hover {
+  background: var(--pi-surface);
+  border-color: var(--pi-rule);
+  box-shadow: var(--pi-shadow-hover);
+}
+
+#projects .project-item::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 16px;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--pi-bullet);
+  outline: 2px solid var(--bg-color);
+}
+
+/* year sits top-right of the box, like pi's dates */
+#projects .project-item .project-year {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  margin: 0;
+  font-size: 12px;
+}
+
+#projects .project-title {
+  font-family: var(--pi-mono);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#projects .project-description {
+  font-family: var(--pi-mono);
+  font-size: 12px;
+  line-height: 17px;
+  color: var(--pi-muted);
+  padding-right: 4.5rem; /* clear the year */
+}
+
+#projects .project-links {
+  font-family: var(--pi-mono);
+  font-size: 12px;
+}
+
+#projects .project-media {
+  box-shadow: none;
+  border: 1px solid var(--pi-rule);
+  background: #fff;
+}
+
+/* ---- Sidebar ---- */
+.site-sidebar {
+  font-family: var(--pi-mono);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.sidebar-item a {
+  font-family: var(--pi-mono);
+  padding: 2px 4px;
+  margin-left: -4px;
+  transition: background-color 0.15s ease;
+}
+
+.sidebar-item a:hover {
+  background: var(--pi-hover);
+}
+
+.sidebar-link-title {
+  font-size: 12px;
+}
+
+.sidebar-link-date {
+  font-size: 11px;
+}
+
+.sidebar-note {
+  font-size: 11px;
+  line-height: 15px;
+}
+
+/* ---- Blog post page ---- */
+.post-toc,
+.toc-title,
+.toc-number,
+.toc-link {
+  font-family: var(--pi-mono);
+}
+
+nav.post-toc[aria-label="Table of contents"] {
+  background: var(--pi-surface);
+  border: 1px solid var(--pi-rule);
+  box-shadow: var(--pi-shadow);
+  padding: 12px 14px;
+}
+
+nav.post-toc[aria-label="Table of contents"] .toc-link {
+  color: #000;
+  text-decoration: none;
+}
+
+nav.post-toc[aria-label="Table of contents"] .toc-link:hover {
+  text-decoration: underline;
+}
+
+.obsidian-figure figcaption {
+  font-family: var(--pi-mono);
+  color: var(--pi-muted);
+}
+
+/* pi spaces its rows 16px apart */
+#blog-list .post-item {
+  margin-bottom: 16px;
+}
+
+/*
+ * The local/global graph panel (src/components/GraphView.astro) is styled by
+ * Astro's scoped CSS, so match on the component's data attribute to outrank it
+ * and give it the same white box + hard shadow as the post rows.
+ */
+div.graph-view[data-graph-id] {
+  background: var(--pi-surface);
+  border: 1px solid var(--pi-rule);
+  border-left: 1px solid var(--pi-rule);
+  box-shadow: var(--pi-shadow);
+  padding: 12px 14px;
+}
+
+div.graph-view[data-graph-id] .graph-view-title {
+  font-family: var(--pi-mono);
+  color: var(--pi-muted);
+}
+
+/* filter tabs read like pi's underlined nav */
+.project-filter.is-active {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  border-bottom: none;
+}
+
+/*
+ * ---- Sidebar post list: pi.website's timeline, component for component ----
+ *
+ * pi markup (homepage): a flex column with `border-l border-gray-300 py-4
+ * space-y-4`, gradient fades top and bottom of the rail, and rows `ml-6 px-3
+ * py-2` whose 7px `bg-gray-900 rounded-sm` bullet sits at `-left-[40px]
+ * top-[7px]` with a 2px outline in the page colour, centred on the rail.
+ * Row variants, all reproduced below:
+ *   strong  bg-white, border-black, shadow-[3px_3px_0px_#000] → 5px on hover
+ *   soft    bg-white/60, border-[#D4D3CB] → hover border-[#C0BDAD],
+ *           shadow-[3px_3px_0px_#C0BDAD], bg-white
+ *   plain   no box, hover:bg-background-hover
+ * Title is `text-xs truncate font-semibold leading-5`, date `text-xs
+ * text-muted-foreground shrink-0 ml-1`, the two on one baseline row.
+ */
+.site-sidebar nav:has(.sidebar-link-title) {
+  padding-left: 8px; /* pi: the list's wrapper is pl-2 */
+}
+
+.site-sidebar .sidebar-list:has(.sidebar-link-title) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px; /* pi uses 16px (space-y-4); tighter suits the shorter rows here */
+  padding: 14px 0;
+  border-left: 1px solid #d1d5db; /* border-gray-300 */
+}
+
+/* pi fades the rail out at both ends (before:/after: h-6 w-px gradients) */
+.site-sidebar .sidebar-list:has(.sidebar-link-title)::before,
+.site-sidebar .sidebar-list:has(.sidebar-link-title)::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  width: 1px;
+  height: 24px;
+}
+
+.site-sidebar .sidebar-list:has(.sidebar-link-title)::before {
+  top: 0;
+  background: linear-gradient(to top, transparent, var(--bg-color));
+}
+
+.site-sidebar .sidebar-list:has(.sidebar-link-title)::after {
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent, var(--bg-color));
+}
+
+.site-sidebar .sidebar-list:has(.sidebar-link-title) .sidebar-item {
+  margin: 0;
+}
+
+/*
+ * row: pi puts title and date on one line, but its rows are 543px wide and this
+ * column is 300px, which left room for about two words. Here the date sits under
+ * the title (where pi puts its description line) and the title may wrap to two
+ * lines; the rail offset and padding are tightened to win back width.
+ */
+.site-sidebar .sidebar-item a:has(.sidebar-link-title) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  width: auto; /* new-styles.css sets width:100%, which overflows past the rail offset */
+  margin: 0 0 0 18px;
+  padding: 7px 10px;
+  text-decoration: none;
+  transition: box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* bullet: 7px square centred on the rail, outlined in the page colour */
+.site-sidebar .sidebar-item a:has(.sidebar-link-title)::before {
+  content: "";
+  position: absolute;
+  left: -22px; /* rail is 18px left of the box; centre the 7px square on it */
+  top: 12px;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: #111827; /* bg-gray-900 */
+  outline: 2px solid var(--bg-color);
+}
+
+/* soft box — pi's non-flagship posts */
+.site-sidebar .sidebar-item a:has(.sidebar-link-title) {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid #d4d3cb;
+}
+
+.site-sidebar .sidebar-item a:has(.sidebar-link-title):hover {
+  background: #ffffff;
+  border-color: #c0bdad;
+  box-shadow: 3px 3px 0px #c0bdad;
+  text-decoration: none; /* pi's rows don't underline on hover */
+}
+
+/* strong box — pi's flagship rows; used here for the post you're reading */
+.site-sidebar .sidebar-item a.active:has(.sidebar-link-title) {
+  background: #ffffff;
+  border-color: #000000;
+  box-shadow: 3px 3px 0px #000;
+}
+
+.site-sidebar .sidebar-item a.active:has(.sidebar-link-title):hover {
+  background: #ffffff;
+  border-color: #000000;
+  box-shadow: 5px 5px 0px #000;
+}
+
+/* title: pi's text-xs font-semibold, but wrapping to two lines instead of truncating to one */
+.site-sidebar .sidebar-link-title {
+  flex: none;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* date: text-xs text-muted-foreground, on its own line under the title */
+.site-sidebar .sidebar-link-date {
+  flex: none;
+  margin-left: 0;
+  font-size: 11px;
+  font-weight: 400; /* the active row bolds its link; the date stays regular */
+  line-height: 14px;
+  color: var(--pi-muted);
+  white-space: nowrap;
+}
+
+/* plain variant — pi's research rows; here, "all posts →" */
+.site-sidebar .sidebar-item-muted a {
+  display: block;
+  width: auto;
+  margin: 0 0 0 18px;
+  padding: 7px 10px;
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-sidebar .sidebar-item-muted a:hover {
+  background: var(--pi-hover); /* hover:bg-background-hover */
+  text-decoration: none;
+}
+
+/* ---- Header nav, as on pi.website: serif wordmark left, nav links right ---- */
+.site-nav {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 1.5rem;
+}
+
+.site-nav-wordmark {
+  font-family: var(--pi-serif);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: #000;
+  text-decoration: none;
+}
+
+.site-nav-links {
+  display: flex;
+  gap: 16px;
+}
+
+.site-nav-links a {
+  font-family: var(--pi-mono);
+  font-size: 14px;
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.site-nav-links a.active {
+  font-weight: 600;
+}
+
+/* blog rows: keep the summary to two lines, like pi's descriptions */
+#blog-list .post-item .post-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* research questions leading a project description */
+.project-questions {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}

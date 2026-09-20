@@ -26,7 +26,7 @@ $$
 >   - Mean: $\mu_t = \sqrt{1 - \beta_t} x_{t-1}$ of each pixel
 >   - Covariance: $\Sigma_t = \beta_t I$ (where $I = \mathbb{R}^{d \times d}$  is the identity matrix) 
 >     - What this means is that each *individual* pixel (with variance at $\Sigma_{p,p} = \beta_{t}$) is independently distributed of each other since off-diagonal entries $\Sigma_{p,q} = 0$.
-> - Using the reparameterization trick from VAEs, this means $x = \mu + \sigma \odot \epsilon,\ \epsilon \sim \mathcal{N}(0, I),\ (\epsilon \in \mathbb{R}^d)$
+> - Using the reparameterization trick from [[VAE - Variational Auto Encoder|VAEs]], this means $x = \mu + \sigma \odot \epsilon,\ \epsilon \sim \mathcal{N}(0, I),\ (\epsilon \in \mathbb{R}^d)$
 
  $\beta_t \in [0, 1]$ is a constant given from our **noise scheduler**, $(\beta_1, \beta_2, \dots, \beta_T)$ specifying the variance (noise intensity) added each time step. One interesting question one might have is why include the $\sqrt{1 - \beta_{t} }$ coefficient for mean. According to the reparameterization trick, since $x_{t} = \sqrt{ 1-\beta_{t} } x_{t-1} + \sqrt{\beta_{t}} \epsilon$, and because $x_{t-1}$ and $\epsilon$ are sampled from *independent gaussians* we can state
 
