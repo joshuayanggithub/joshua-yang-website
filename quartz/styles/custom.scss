@@ -1,0 +1,88 @@
+@use "./variables.scss" as *;
+
+// put your custom CSS here!
+
+// Match joshuayang.com's minimalist reading-column width and link treatment.
+article {
+  max-width: 680px;
+}
+
+a:not(.internal) {
+  text-decoration: none;
+  border-bottom: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+}
+
+.page-title {
+  font-weight: 400;
+}
+
+// Mouse trailer light effect (ported from joshuayang.com's new-script.js / new-styles.css)
+#mouse-trailer {
+  position: fixed;
+  background-color: white;
+  z-index: 2000;
+  height: 120px;
+  width: 120px;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: linear-gradient(to right, transparent, rgb(140, 185, 255), rgb(170, 205, 255));
+  opacity: 0.4;
+  filter: blur(30px);
+  animation: blob-distort 20s infinite;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes blob-distort {
+  0% {
+    rotate: 0deg;
+  }
+  60% {
+    scale: 1 1.1;
+  }
+  100% {
+    rotate: 359deg;
+  }
+}
+
+// Table of contents: approximate the site's indentation + hover treatment.
+// Note: true auto-numbering (e.g. "3.1", "3.2") like the production site's
+// custom remark-toc.js plugin is NOT replicated here — Quartz's
+// @quartz-community/table-of-contents ships as a compiled package with no
+// numbering option exposed, so this is a visual approximation (indentation,
+// spacing, hover color) rather than a like-for-like numbered TOC.
+.toc {
+  a {
+    color: var(--darkgray);
+    font-weight: 400;
+
+    &:hover {
+      color: var(--secondary);
+    }
+  }
+}
+
+// Section dividers to match the site's subtle horizontal rules between sections
+article > section,
+.popover article > section {
+  border-bottom: 1px solid var(--lightgray);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+

@@ -1,43 +1,39 @@
-# Astro Starter Kit: Minimal
+# joshuayang.org
+
+My personal site and blog. Posts are written in [Obsidian](https://obsidian.md) and published with
+[Quartz 5](https://quartz.jzhao.xyz), themed after [pi.website](https://www.pi.website/).
+
+## How it fits together
+
+| Path | What it is |
+|---|---|
+| `content/` | The published notes, copied from my Obsidian vault by `scripts/sync-vault.py`. Don't edit here; edit in the vault and re-sync. |
+| `quartz/components/frames/JoshuaBlogFrame.tsx` | The page layout: sidebar, header, article, and Quartz's graph + table of contents on the right. |
+| `quartz/components/frames/JoshuaHome.tsx` | The homepage. Projects are a data list (`PROJECTS`) at the top of the file. |
+| `quartz/plugins/transformers/joshuaSite.ts` | Markdown handling: display-math normalisation, MathJax output, Obsidian image embeds as captioned figures, unpublished wikilinks as plain text, post summaries. |
+| `quartz/static/site/` | Stylesheets (`new-styles.css`, `pi-theme.css`, `quartz-bridge.css`), `new-script.js`, icons and demo media. |
+| `quartz.config.yaml` | Quartz configuration: which plugins are on, the graph options, the domain. |
+| `netlify.toml` | Build settings, plus redirects from the old `/blog/<slug>/` URLs. |
+| `scripts/video/` | Renders the cloth-folding simulation montage from USD trajectories. |
+
+## Publishing a post
+
+1. Write the note in the vault.
+2. Add it to `POSTS` in `scripts/sync-vault.py` with its title and dates. Notes it embeds (`![[Note]]`)
+   and their images are pulled in automatically.
+3. `python3 scripts/sync-vault.py`
+4. Preview: `node ./quartz/bootstrap-cli.mjs build --serve`
+5. Commit and push to `main`; Netlify builds and deploys.
+
+Wikilinks to notes that aren't published render as plain text rather than broken links.
+
+## Local setup
+
+Needs Node 22+.
 
 ```sh
-npm create astro@latest -- --template minimal
+npm ci
+node ./quartz/bootstrap-cli.mjs build --serve   # http://localhost:8080
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The previous Astro version of the site is preserved on the `astro-archive` branch.
