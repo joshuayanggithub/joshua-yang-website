@@ -114,6 +114,8 @@ plugins:
     enabled: false
   - source: "@quartz-community/alias-redirects"
     enabled: true
+    options:
+      enableCaseRedirects: false
   - source: "@quartz-community/content-index"
     enabled: true
     options:
