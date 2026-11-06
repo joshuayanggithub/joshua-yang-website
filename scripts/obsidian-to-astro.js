@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /*
 Simple converter: Obsidian vault -> Astro blog posts
-- Converts [[wikilinks]] -> Markdown links to /blog/slug
+- Leaves [[wikilinks]] untouched -> resolved natively at render time by
+  scripts/remark-wikilinks.js (see astro.config.mjs)
 - Converts Obsidian embeds/images into centered <figure> blocks and copies attachments
 - Adds frontmatter with layout/title/date if missing
 
@@ -93,7 +94,6 @@ if (!fs.existsSync(vaultDir)) {
 }
 
 // Which conversions to perform (default = all)
-const doWikilinks = !convertList || convertList.includes("wikilinks");
 const doEmbeds = !convertList || convertList.includes("embeds");
 const doImages = !convertList || convertList.includes("images");
 const doFrontmatter = !convertList || convertList.includes("frontmatter");
@@ -648,19 +648,10 @@ for (const file of mdFiles) {
     });
   }
 
-  // Convert wikilinks [[Note]] or [[path/to/Note|alias]] (optional)
-  // Important: ignore Obsidian embeds ![[...]] so embeds don't get converted into blog links.
-  if (doWikilinks) {
-    src = src.replace(/(?<!!)\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (m, targetRaw, alias) => {
-      // support heading refs: [[Note#Some Heading|Alias]]
-      const [target, heading] = String(targetRaw).split("#");
-      const targetBasename = path.basename(target);
-      const text = alias || targetBasename;
-      // We don't use Obsidian wikilinks in Astro output; keep as plain text.
-      // If the link included a heading, include it as human-readable suffix.
-      return heading ? `${text} (${heading})` : text;
-    });
-  }
+  // Note: [[wikilinks]] are intentionally left untouched here — they are now
+  // resolved natively at render time by scripts/remark-wikilinks.js (wired into
+  // astro.config.mjs), so the converted output keeps real [[Note Title]] syntax
+  // instead of being flattened to plain text.
 
   // Normalize formatting for Astro markdown rendering (tabs, display math, sources URLs)
   src = normalizeMarkdownForAstro(src);

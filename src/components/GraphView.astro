@@ -1,0 +1,237 @@
+---
+/**
+ * GraphView: renders a small force-directed graph of blog posts connected by
+ * wikilinks. Supports two modes:
+ *   - global: every post + every wikilink edge (used on the blog index page)
+ *   - local: a single post + only its direct neighbors (used on post pages)
+ *
+ * Layout is a minimal hand-rolled force simulation (spring edges + node
+ * repulsion), run client-side in vanilla JS — no d3/force-graph dependency,
+ * consistent with the rest of this site's vanilla-JS approach. For the small
+ * graphs here (a personal blog's post count), this is more than sufficient.
+ */
+import { buildGraphIndex, buildLocalGraph } from "../../scripts/build-graph-index.js";
+
+export interface Props {
+  mode: "global" | "local";
+  currentSlug?: string;
+}
+
+const { mode, currentSlug } = Astro.props;
+
+const posts = await Astro.glob("../pages/blog/*.{md,mdx}");
+const fullGraph = buildGraphIndex(posts);
+const graph =
+  mode === "local" && currentSlug ? buildLocalGraph(fullGraph, currentSlug) : fullGraph;
+
+const graphId = `graph-${mode}-${currentSlug || "all"}`;
+---
+
+{graph.nodes.length > 0 && (
+  <div class={`graph-view graph-view--${mode}`} data-graph-id={graphId}>
+    <div class="graph-view-title">{mode === "local" ? "Local Graph" : "Graph View"}</div>
+    <svg
+      class="graph-svg"
+      data-graph={JSON.stringify(graph)}
+      data-current={currentSlug || ""}
+      viewBox={mode === "local" ? "0 0 240 130" : "0 0 320 200"}
+      preserveAspectRatio="xMidYMid meet"
+      role="img"
+      aria-label={mode === "local" ? "Local graph of this post's connections" : "Graph of all blog posts and their wikilinks"}
+    ></svg>
+  </div>
+)}
+
+<style>
+  .graph-view {
+    margin-bottom: 1.5rem;
+    padding: 0.85rem 1rem;
+    background: rgba(68, 119, 170, 0.06);
+    border: none;
+    border-left: 4px solid rgb(68, 119, 170);
+    max-width: 260px;
+  }
+
+  .graph-view--global {
+    max-width: 400px;
+  }
+
+  .graph-view-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim, #64748b);
+    margin: 0 0 0.5rem;
+  }
+
+  .graph-svg {
+    width: 100%;
+    height: 130px;
+    display: block;
+    overflow: visible;
+  }
+
+  :global(.graph-node-circle) {
+    fill: rgb(68, 119, 170);
+    stroke: var(--bg-color, #fffff8);
+    stroke-width: 2px;
+    cursor: pointer;
+    transition: fill 0.2s ease;
+  }
+
+  :global(.graph-node-circle.is-current) {
+    fill: #7eb3d8;
+    r: 6;
+  }
+
+  :global(.graph-node-circle:hover) {
+    fill: #7eb3d8;
+  }
+
+  :global(.graph-edge) {
+    stroke: var(--border-color, rgba(0, 0, 0, 0.15));
+    stroke-width: 1px;
+  }
+
+  :global(.graph-node-label) {
+    font-size: 6px;
+    fill: var(--text-muted, #666);
+    pointer-events: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+</style>
+
+<script>
+  // Minimal force-directed layout: spring attraction along edges + repulsion
+  // between all node pairs, run for a fixed number of iterations (no need for
+  // continuous animation on a graph this small — settle once, then render).
+  function layoutGraph(nodes, edges, width, height) {
+    const positions = new Map();
+    const initialRadius = Math.min(width, height) * 0.32;
+    nodes.forEach((n, i) => {
+      const angle = (i / Math.max(nodes.length, 1)) * Math.PI * 2;
+      // Small jitter so 2-node graphs (angle 0 vs PI, i.e. perfectly opposite)
+      // still settle predictably rather than exactly overlapping the center line.
+      const jitter = (i % 2 === 0 ? 1 : -1) * 6;
+      positions.set(n.id, {
+        x: width / 2 + Math.cos(angle) * initialRadius + jitter,
+        y: height / 2 + Math.sin(angle) * initialRadius + jitter,
+        vx: 0,
+        vy: 0,
+      });
+    });
+
+    const REPULSION = 6000;
+    const SPRING = 0.015;
+    const SPRING_LENGTH = Math.min(width, height) * 0.35;
+    const DAMPING = 0.82;
+    const ITERATIONS = 300;
+    const PADDING = 18;
+
+    for (let iter = 0; iter < ITERATIONS; iter++) {
+      // Repulsion between every pair
+      for (const a of nodes) {
+        const pa = positions.get(a.id);
+        for (const b of nodes) {
+          if (a.id === b.id) continue;
+          const pb = positions.get(b.id);
+          const dx = pa.x - pb.x;
+          const dy = pa.y - pb.y;
+          const distSq = Math.max(dx * dx + dy * dy, 1);
+          const force = REPULSION / distSq;
+          const dist = Math.sqrt(distSq);
+          pa.vx += (dx / dist) * force;
+          pa.vy += (dy / dist) * force;
+        }
+      }
+
+      // Spring attraction along edges, targeting a preferred edge length
+      // rather than pure Hooke's law to zero, so connected nodes settle at a
+      // readable distance instead of collapsing together.
+      for (const edge of edges) {
+        const pa = positions.get(edge.source);
+        const pb = positions.get(edge.target);
+        if (!pa || !pb) continue;
+        const dx = pb.x - pa.x;
+        const dy = pb.y - pa.y;
+        const dist = Math.max(Math.sqrt(dx * dx + dy * dy), 1);
+        const displacement = dist - SPRING_LENGTH;
+        const fx = (dx / dist) * displacement * SPRING;
+        const fy = (dy / dist) * displacement * SPRING;
+        pa.vx += fx;
+        pa.vy += fy;
+        pb.vx -= fx;
+        pb.vy -= fy;
+      }
+
+      // Integrate + damping + keep within bounds
+      for (const n of nodes) {
+        const p = positions.get(n.id);
+        p.vx *= DAMPING;
+        p.vy *= DAMPING;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.x = Math.max(PADDING, Math.min(width - PADDING, p.x));
+        p.y = Math.max(PADDING, Math.min(height - PADDING, p.y));
+      }
+    }
+
+    return positions;
+  }
+
+  function renderGraph(svg) {
+    const data = JSON.parse(svg.dataset.graph || '{"nodes":[],"edges":[]}');
+    const currentSlug = svg.dataset.current || "";
+    const viewBox = (svg.getAttribute("viewBox") || "0 0 240 130").split(" ").map(Number);
+    const width = viewBox[2] || 240;
+    const height = viewBox[3] || 130;
+
+    if (data.nodes.length === 0) return;
+
+    const positions = layoutGraph(data.nodes, data.edges, width, height);
+
+    const ns = "http://www.w3.org/2000/svg";
+    svg.innerHTML = "";
+
+    // Edges first (so nodes render on top)
+    for (const edge of data.edges) {
+      const pa = positions.get(edge.source);
+      const pb = positions.get(edge.target);
+      if (!pa || !pb) continue;
+      const line = document.createElementNS(ns, "line");
+      line.setAttribute("class", "graph-edge");
+      line.setAttribute("x1", String(pa.x));
+      line.setAttribute("y1", String(pa.y));
+      line.setAttribute("x2", String(pb.x));
+      line.setAttribute("y2", String(pb.y));
+      svg.appendChild(line);
+    }
+
+    // Nodes + labels
+    for (const node of data.nodes) {
+      const p = positions.get(node.id);
+      if (!p) continue;
+      const isCurrent = node.id === currentSlug;
+
+      const circle = document.createElementNS(ns, "circle");
+      circle.setAttribute("class", "graph-node-circle" + (isCurrent ? " is-current" : ""));
+      circle.setAttribute("cx", String(p.x));
+      circle.setAttribute("cy", String(p.y));
+      circle.setAttribute("r", isCurrent ? "6" : "4");
+      circle.addEventListener("click", () => {
+        if (node.url) window.location.href = node.url;
+      });
+      svg.appendChild(circle);
+
+      const label = document.createElementNS(ns, "text");
+      label.setAttribute("class", "graph-node-label");
+      label.setAttribute("x", String(p.x + (isCurrent ? 10 : 8)));
+      label.setAttribute("y", String(p.y + 3));
+      label.textContent = node.title.length > 20 ? node.title.slice(0, 18) + "…" : node.title;
+      svg.appendChild(label);
+    }
+  }
+
+  document.querySelectorAll(".graph-svg").forEach((svg) => renderGraph(svg));
+</script>

@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import remarkMath from 'remark-math';
 import remarkObsidianCallout from 'remark-obsidian-callout';
+import remarkWikilinks from './scripts/remark-wikilinks.js';
 import remarkTableOfContents from './scripts/remark-toc.js';
 import rehypeSlug from 'rehype-slug';
 
@@ -100,7 +101,8 @@ export default defineConfig({
   integrations: [mdx()],
   markdown: {
     // Parse `$...$` and `$$...$$` as math so underscores don't become emphasis.
-    remarkPlugins: [remarkMath, remarkObsidianCallout, remarkTableOfContents],
+    // Wikilinks run before TOC extraction so resolved link text doesn't affect heading parsing.
+    remarkPlugins: [remarkMath, remarkObsidianCallout, remarkWikilinks, remarkTableOfContents],
     // Add IDs to headings for TOC links; convert math nodes back to delimiters for MathJax.
     rehypePlugins: [rehypeSlug, rehypeMathToTexDelimiters],
   },
