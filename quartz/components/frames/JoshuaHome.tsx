@@ -67,7 +67,7 @@ const PROJECTS: Project[] = [
         </span>
         Built a real2sim pipeline in <Ext href="https://github.com/newton-physics/newton">NVIDIA Newton</Ext>,
         with domain randomization (varying cloth meshes, physics engine solvers, and the cloth's stiffness,
-        damping and particle size, etc.) to generate ~10K{" "}
+        damping and particle size, etc.) to generate ~3K{" "}
         <Ext href="https://arxiv.org/abs/2210.09347">heuristic-based</Ext> cloth-folding demonstrations for
         downstream policies: imitation-learning paradigms like diffusion policy, or post-training foundation
         models. Also explored a real2sim2real pipeline by developing hardware drivers and infrastructure for
