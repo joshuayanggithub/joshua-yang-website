@@ -1,3 +1,25 @@
+# joshuayang.org — built with Quartz (https://quartz.jzhao.xyz), themed to match the old Astro site.
 [build]
-  command = "npm run build"
-  publish = "dist"
+  # invoked directly rather than via `npx quartz`, which adds nothing here
+  command = "node ./quartz/bootstrap-cli.mjs build"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "22"   # Quartz 5 requires Node >= 22
+
+# The Astro site served posts at /blog/<slug>/; Quartz serves each note at its vault path.
+# Keep the old public URLs working.
+[[redirects]]
+  from = "/blog/ddpm-denoising-diffusion-probabilistic-models/*"
+  to = "/deep-learning/ddpm---denoising-diffusion-probabilistic-models"
+  status = 301
+
+[[redirects]]
+  from = "/blog/vae-variational-auto-encoder/*"
+  to = "/deep-learning/vae---variational-auto-encoder"
+  status = 301
+
+[[redirects]]
+  from = "/blog/policy-optimization-methods-in-reinforcement-learning/*"
+  to = "/deep-learning/policy-optimization-methods-in-reinforcement-learning"
+  status = 301

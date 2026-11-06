@@ -1,0 +1,208 @@
+/*
+ * Bridge between Quartz output and joshua-yang-website's stylesheets.
+ * The center column is styled only by styles/new-styles.css + _astro/*.css
+ * (unchanged). This file covers what Quartz adds: its theme variables (read by
+ * the Explorer / Graph / TOC component styles and the graph script), the right
+ * rail layout, transclusions and unpublished wikilinks.
+ */
+
+/* Quartz theme variables, mapped to the pi.website palette used by pi-theme.css.
+   Read by the Explorer / Graph / TOC component styles and the graph script. */
+:root {
+  --light: #f5f4ef; /* page colour: graph canvas + node stroke */
+  --lightgray: #e8e8e0; /* graph edges, hairlines */
+  --gray: #999999; /* graph nodes */
+  --darkgray: #2a2a2a;
+  --dark: #1a1a1a; /* graph labels, TOC text */
+  --secondary: rgb(68, 119, 170); /* current node, active items */
+  --tertiary: #7eb3d8;
+  --highlight: rgba(0, 0, 0, 0.05);
+  --textHighlight: #fff23688;
+  --bodyFont: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --headerFont: var(--bodyFont);
+  --codeFont: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Quartz base.scss visibility helpers (breakpoint: mobile < 800px) */
+@media all and (max-width: 800px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+@media all and (min-width: 801px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+/* ---- Right rail (Graph, Table of Contents) ---- */
+body.quartz-rails {
+  --right-w: 280px;
+  --right-gap: 3rem;
+}
+
+.quartz-right {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: 0.95rem;
+}
+
+/* Panel headings stay as Quartz draws them (the pi box treatment is only for
+   the site's own content: index rows, project cards, transclusions). */
+.quartz-right h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--text-color, #1a1a1a);
+}
+
+/* Desktop: pin the rail right of the content column, mirroring the fixed left sidebar */
+@media screen and (min-width: 1300px) {
+  body.quartz-rails {
+    --content-left: max(
+      calc((100vw - var(--sidebar-anchor-max)) / 2),
+      calc(var(--page-pad) + var(--sidebar-w) + var(--sidebar-gap))
+    );
+    --content-w: min(
+      832px,
+      calc(100vw - var(--content-left) - var(--right-w) - var(--right-gap) - var(--page-pad))
+    );
+  }
+
+  /* pi-theme.css caps blog pages at 832px; here the column also has to leave room
+     for the right rail, so this (more specific) rule owns the width. */
+  body.quartz-rails.blog-wide.with-sidebar header,
+  body.quartz-rails.blog-wide.with-sidebar main,
+  body.quartz-rails.blog-wide.with-sidebar footer {
+    box-sizing: border-box;
+    max-width: var(--content-w);
+  }
+
+  body.quartz-rails .quartz-right {
+    position: fixed;
+    top: var(--sidebar-top);
+    left: calc(var(--content-left) + var(--content-w) + var(--right-gap));
+    width: var(--right-w);
+    max-height: calc(100vh - (var(--sidebar-top) * 2));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+/* Narrower screens: the rail follows the article, aligned with the content column */
+@media screen and (max-width: 1299px) {
+  .quartz-right {
+    max-width: 1040px;
+    margin: 3rem auto 0;
+    padding: 0 2rem;
+  }
+}
+@media screen and (min-width: 1100px) and (max-width: 1299px) {
+  body.with-sidebar .quartz-right {
+    margin-left: max(
+      calc((100vw - var(--sidebar-anchor-max)) / 2),
+      calc(var(--page-pad) + var(--sidebar-w) + var(--sidebar-gap))
+    );
+    margin-right: auto;
+  }
+}
+@media screen and (max-width: 768px) {
+  .quartz-right {
+    padding: 0 1rem;
+  }
+}
+
+/*
+ * Quartz ships component styles inside `@layer quartz-base`, and any unlayered
+ * rule beats a layered one. new-styles.css is unlayered and starts with
+ * `* { margin: 0; padding: 0 }`, `ul { … }`, `li { margin-bottom: .5rem }` and a
+ * global `a` colour, which flatten the TOC and Graph. Re-declare the affected
+ * rules (values from the component CSS and quartz/styles/base.scss), unlayered
+ * and scoped to the right rail, so they render as on a stock Quartz page.
+ */
+.quartz-right li {
+  margin-bottom: 0;
+  line-height: 1.6rem;
+}
+
+.quartz-right .toc a {
+  font-weight: 600; /* base.scss: a { font-weight: $semiBoldWeight } */
+  text-decoration: none;
+}
+
+.quartz-right button.toc-header .fold {
+  margin-left: 0.5rem;
+}
+
+.quartz-right ul.overflow > li.overflow-end {
+  height: 0.5rem;
+  margin: 0;
+}
+
+.quartz-right ul.toc-content.overflow {
+  margin: 0.5rem 0;
+}
+
+.quartz-right ul.toc-content.overflow > li > a {
+  color: var(--dark);
+}
+
+.quartz-right ul.toc-content.overflow .depth-1 { padding-left: 1rem; }
+.quartz-right ul.toc-content.overflow .depth-2 { padding-left: 2rem; }
+.quartz-right ul.toc-content.overflow .depth-3 { padding-left: 3rem; }
+.quartz-right ul.toc-content.overflow .depth-4 { padding-left: 4rem; }
+.quartz-right ul.toc-content.overflow .depth-5 { padding-left: 5rem; }
+.quartz-right ul.toc-content.overflow .depth-6 { padding-left: 6rem; }
+
+.quartz-right .graph > .graph-outer {
+  margin: 0.5em 0;
+}
+
+.quartz-right .graph > .graph-outer > .global-graph-icon {
+  margin: 0.3rem;
+  padding: 0.2rem;
+}
+
+/* ---- Transcluded notes (![[Note]]) ---- */
+.blog-post p:empty {
+  display: none;
+}
+
+.blog-post blockquote.transclude {
+  margin: 1.5rem 0;
+  padding: 0.5rem 1.25rem 0.9rem;
+  border: 1px solid #000;
+  background: #ffffff;
+  box-shadow: 3px 3px 0px #000;
+}
+
+/* A long embedded note with its own sections (a post assembled from notes, like Policy
+   Optimization) reads as part of the article, not as a boxed aside. Short embeds keep the box. */
+.blog-post blockquote.transclude:has(h2, h3) {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.blog-post blockquote.transclude:has(h2, h3) > a.transclude-src {
+  display: none;
+}
+
+.blog-post blockquote.transclude > h1:first-child {
+  font-size: 1.35rem;
+  margin-top: 0.75rem;
+}
+
+.blog-post blockquote.transclude a.transclude-src {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--bodyFont);
+  font-size: 12px;
+  color: #686868;
+  text-align: right;
+}
